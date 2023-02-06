@@ -1,0 +1,41 @@
+{#підключаємо папку зі статичними файлами, є ще дод. налаштування у головні файли settings та urls.py додати static ! прочитати інструкцію#}
+{# документація https://docs.djangoproject.com/en/4.1/howto/static-files/#}
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {#    підключаємо bootstrap#}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    {#    підключаємо fontawesome для іконок#}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.1/css/all.css">
+    {#    підключаємо файл main.css#}
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    <aside>
+        <img src="{% static 'main/img/analitics.jpg' %}" alt="logo">
+        <h3> Navigation </h3>
+        <ul>
+            <a href="{% url 'home' %}">      <li> <i class="fa-sharp fa-solid fa-house-chimney"></i> Home </li></a>
+            <a href="{% url 'expenses' %}">  <li> <i class="fa-regular fa-credit-card">  </i> Operation with expenses
+            </li></a>
+            <a href="{% url 'investments' %}"><li> <i class="fa-regular fa-money-bill-1"> </i> Operation with
+                investmens </li></a>
+            <a href=""><li> <i class="fa-solid fa-chart-line">     </i> Analitics                 </li></a>
+            <a href=""><li> <i class="fa-solid fa-flag">           </i> Base report               </li></a>
+        </ul>
+
+    </aside>
+    {% block content %}
+    {% endblock %}
+
+{#    {% include 'main/test.html' %} - підключення окремого файлу#}
+
+</body>
+</html>
