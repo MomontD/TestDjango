@@ -19,16 +19,16 @@
 </head>
 <body>
     <aside>
-        <img src="{% static 'main/img/analitics.jpg' %}" alt="logo">
+        <img src="{% static 'main/img/search.jpg' %}" alt="logo">
         <h3> Navigation </h3>
         <ul>
             <a href="{% url 'home' %}">      <li> <i class="fa-sharp fa-solid fa-house-chimney"></i> Home </li></a>
             <a href="{% url 'expenses' %}">  <li> <i class="fa-regular fa-credit-card">  </i> Operation with expenses
             </li></a>
             <a href="{% url 'investments' %}"><li> <i class="fa-regular fa-money-bill-1"> </i> Operation with
-                investmens </li></a>
-            <a href=""><li> <i class="fa-solid fa-chart-line">     </i> Analitics                 </li></a>
-            <a href=""><li> <i class="fa-solid fa-flag">           </i> Base report               </li></a>
+                investmens </li> </a>
+            <a href="{% url 'analitics' %}"><li> <i class="fa-solid fa-chart-line"> </i> Analitics   </li></a>
+            <a href="{% url 'basereport' %}"><li> <i class="fa-solid fa-flag">       </i> Base report </li></a>
         </ul>
 
     </aside>
