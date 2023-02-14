@@ -15,12 +15,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.1/css/all.css">
     {#    підключаємо файл home.css#}
     <link rel="stylesheet" href="{% static 'main/css/home.css' %}">
-    <link rel="stylesheet" href="{% static 'main/css/operations.css' %}">
+    <link rel="stylesheet" href="{% static 'operations/css/operations.css' %}">
     <title>{% block title %} {% endblock %}</title>
 </head>
 <body>
     <aside>
-        <img src="{% static 'main/img/blue_analytics.png' %}" alt="logo">
+        <img src="{% static 'main/img/black_analitics.png' %}" alt="logo">
         <h3> Navigation </h3>
         <ul>
             <a href="{% url 'home' %}">      <li> <i class="fa-sharp fa-solid fa-house-chimney"></i> Home </li></a>
@@ -28,7 +28,7 @@
 {#            </li></a>#}
 {#            <a href="{% url 'investments' %}"><li> <i class="fa-regular fa-money-bill-1"> </i> Operation with#}
 {#                investmens </li> </a>#}
-            <a href="{% url 'operations' %}"> <li> <i class="fa-regular fa-money-bill-1"> </i> Operation   </li></a>
+            <a href="{% url 'operations' %}"> <li> <i class="fa-regular fa-money-bill-1"> </i> Operations  </li></a>
             <a href="{% url 'analitics' %}">  <li> <i class="fa-solid fa-chart-line">     </i> Analitics   </li></a>
             <a href="{% url 'basereport' %}"> <li> <i class="fa-solid fa-flag">           </i> Base report </li></a>
         </ul>

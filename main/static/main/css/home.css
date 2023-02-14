@@ -30,7 +30,7 @@ aside ul li {
 }
 
 aside ul li:hover, ul a {      /*стилізуємо меню*/
-    color : dodgerblue;            /*колір тексту принаведені мишки*/
+    color : #0d6efd;            /*колір тексту принаведені мишки*/
     text-decoration: none;     /*забираємо підкреслення з тегу <а>*/
     transform: scale(1.05);    /*збільшуємо текст при наведені на 5%*/
 }

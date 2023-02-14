@@ -6,5 +6,6 @@ from django.conf.urls.static import static   # необхідно для пап�
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('main.urls'))
+    path('',include('main.urls')),
+    path('operations/',include('operations.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) # необхідно для папки static
