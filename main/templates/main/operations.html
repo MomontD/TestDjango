@@ -1,0 +1,32 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Investments {% endblock %}
+
+{% block content %}
+    <div class="title">
+        <h1><b> OPERATION MENU </b></h1>
+    </div>
+
+    <div class="blockoperations">
+        <div class="Bonds">
+            <h3><b> Government Bonds </b></h3>
+            <button type="button" class="btn btn-primary btn-lg"> ADD new Bonds </button>
+            <button type="button" class="btn btn-primary btn-lg"> Show Bonds    </button>
+        </div>
+        <div class="Deposit">
+            <h3><b> Deposit </b></h3>
+            <button type="button" class="btn btn-primary btn-lg"> ADD new Deposit </button>
+            <button type="button" class="btn btn-primary btn-lg"> Show Deposit    </button>
+        </div>
+        <div class="Loan">
+            <h3><b> Loan </b></h3>
+            <button type="button" class="btn btn-primary btn-lg"> ADD new Loan </button>
+            <button type="button" class="btn btn-primary btn-lg"> Show Loan    </button>
+        </div>
+        <div class="Expenses">
+            <h3><b> Expenses </b></h3>
+            <button type="button" class="btn btn-primary btn-lg"> ADD  Expenses </button>
+            <button type="button" class="btn btn-primary btn-lg"> Show Expenses </button>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+.title
+{
+    text-align: center;
+    padding: 10px;
+}
+
+.blockoperations {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.Bonds {
+    margin-top: 40px;
+    padding: 20px;
+    flex: 60%;
+}
+
+.Deposit {
+    padding: 20px;
+    flex: 60%;
+}
+
+.Loan {
+    padding: 20px;
+    flex: 60%;
+}
+
+.Expenses {
+    padding: 20px;
+    flex: 60%;
+}

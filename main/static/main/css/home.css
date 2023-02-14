@@ -14,7 +14,7 @@ aside {
 }
 
 aside img {            /*розмір картинки*/
-    width: 280px;
+    width: 290px;
 }
 
 aside h3 {             /*відступ заголовку Navigation*/
@@ -30,7 +30,7 @@ aside ul li {
 }
 
 aside ul li:hover, ul a {      /*стилізуємо меню*/
-    color : lawngreen;            /*колір тексту принаведені мишки*/
+    color : dodgerblue;            /*колір тексту принаведені мишки*/
     text-decoration: none;     /*забираємо підкреслення з тегу <а>*/
     transform: scale(1.05);    /*збільшуємо текст при наведені на 5%*/
 }
