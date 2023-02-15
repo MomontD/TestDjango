@@ -1,0 +1,51 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Investments {% endblock %}
+
+{% block content %}
+    <div class="title">
+        <h1><b> ADD Deposit </b></h1>
+    </div>
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            <h5> Name of Deposit </h5> {{ form.deposit_date   }} <br>
+            <h5> Sum of Deposit  </h5> {{ form.deposit_sum    }} <br>
+            <h5> Deposit rate    </h5> {{ form.deposit_rate   }} <br>
+            <h5> Deposit period  </h5> {{ form.deposit_period }} <br>
+            <h5> Start date of Deposit </h5> {{ form.start_date }} <br>
+            <h5> End date of Deposit   </h5> {{ form.end_date   }} <br>
+            <button type="submit" class="btn btn-primary btn-lg btn-block"> Add Deposit </button>
+        </form>
+    </div>
+
+{% endblock %}
+
+{#<form method="post">#}
+    {#            {% crsf_token %}#}
+{#    <div class="line_form">#}
+{#        <div><h4> Name of deposit   </h4></div>#}
+{#        <div>{{ form.deposit_date   }}</div>#}
+{#    </div><br>#}
+{#    <div class="line_form">#}
+{#        <div><h4> Add sum deposit   </h4></div>#}
+{#        <div>{{ form.deposit_sum    }}</div>#}
+{#    </div><br>#}
+{#    <div class="line_form">#}
+{#        <div><h4> Add rate deposit  </h4></div>#}
+{#        <div>{{ form.deposit_rate   }}</div>#}
+{#    </div><br>#}
+{#    <div class="line_form">#}
+{#        <div><h4> Add deposit period</h4></div>#}
+{#        <div>{{ form.deposit_period }}</div>#}
+{#    </div><br>#}
+{#    <div class="line_form">#}
+{#        <div><h4> Start date of deposit</h4></div>#}
+{#        <div>{{ form.start_date     }}</div>#}
+{#    </div><br>#}
+{#    <div class="line_form">#}
+{#        <div><h4> End date of deposit  </h4></div>#}
+{#        <div>{{ form.end_date       }}</div>#}
+{#    </div>#}
+{#    <button type="submit" class="btn btn-primary btn-lg"> Add Deposit    </button>#}
+{#</form>#}
