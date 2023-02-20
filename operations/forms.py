@@ -1,4 +1,5 @@
-from main.models import deposit,loan,expenses   #шмпортуємо всі моделі таблиць щоб повязати їх з флормами і БД
+from main.models import *
+# from main.models import deposit,loan,expenses   #шмпортуємо всі моделі таблиць щоб повязати їх з флормами і БД
 from django.forms import ModelForm,TextInput,DateInput
 
 class add_depositForm(ModelForm) :
@@ -6,7 +7,7 @@ class add_depositForm(ModelForm) :
         model  = deposit
         fields = ['deposit_date','deposit_sum','deposit_rate','deposit_period','start_date','end_date']
         widgets = {
-            "deposit_date" : DateInput(attrs = {
+            "deposit_date" : TextInput(attrs = {
                 'class'       : 'form-control' , #стиль від bootstrap
                 'placeholder' : 'Deposit name'
             }),
@@ -24,11 +25,11 @@ class add_depositForm(ModelForm) :
             }),
             "start_date" : DateInput(attrs = {
                 'class'       : 'form-control' , #стиль від bootstrap
-                'placeholder' : 'Deposit start date'
+                'placeholder' : 'Deposit start date (YYYY-MM-DD format)'
             }),
             "end_date" : DateInput(attrs = {
                 'class'       : 'form-control' , #стиль від bootstrap
-                'placeholder' : 'Deposit end date'
+                'placeholder' : 'Deposit end date (YYYY-MM-DD format)'
             })
         }
 
@@ -38,7 +39,7 @@ class add_loanForm(ModelForm) :
         model  = loan
         fields = ['debt_date','debt_sum','debt_rate','debt_period','start_date','end_date']
         widgets = {
-            "debt_date" : DateInput(attrs = {
+            "debt_date" : TextInput(attrs = {
                 'class'           : 'form-control' , #стиль від bootstrap
                 'placeholder'     : 'Loan name'
             }),
@@ -56,11 +57,11 @@ class add_loanForm(ModelForm) :
             }),
             "start_date" : DateInput(attrs = {
                 'class'       : 'form-control' , #стиль від bootstrap
-                'placeholder' : 'Loan start date'
+                'placeholder' : 'Loan start date (YYYY-MM-DD format)'
             }),
             "end_date"   : DateInput(attrs = {
                 'class'       : 'form-control' , #стиль від bootstrap
-                'placeholder' : 'Loan end date'
+                'placeholder' : 'Loan end date (YYYY-MM-DD format)'
             })
         }
 

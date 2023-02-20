@@ -1,3 +1,4 @@
+/*--- operations.html ---*/
 .title
 {
     text-align: center;
@@ -36,15 +37,43 @@ form {
     margin-top: 20px;
 }
 
-/*.line {*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    justify-content: flex-start;*/
-/*    padding: 20px;*/
-/*}*/
-
 .line_form {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
 }
+
+span {
+    color: red;
+}
+
+/* --- active_deposits.html---*/
+.active_deposit {
+    float : left;
+    /*width: auto;*/
+}
+
+/*Стилізація таблиці*/
+table {
+    table-layout: fixed;
+    margin-left: 10px;
+    margin-top: 20px;
+    width: auto;
+    border-collapse: collapse;
+    border: 3px solid blue;
+}
+td {
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.resolt_deposits_information {
+    float: left;
+    margin-top: 50px;
+    margin-left: 250px;
+    text-align: left;
+}
+
+/*.resolt_deposits_information > table > td {*/
+/*    text-align: left;*/
+/*}*/

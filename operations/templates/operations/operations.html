@@ -10,20 +10,25 @@
     <div class="blockoperations">
         <div class="Bonds">
             <h3><b> Government Bonds </b></h3>
-            <a href="{% url 'add_government' %}"><button type="button" class="btn btn-primary btn-lg"> ADD new Bonds
-            </button></a>
-            <button type="button" class="btn btn-primary btn-lg"> Show Bonds    </button>
+            <a href="{% url 'add_government' %}">
+                <button type="button" class="btn btn-primary btn-lg"> ADD new Bonds </button>
+            </a>
+            <button type="button" class="btn btn-primary btn-lg"> Show Bonds </button>
         </div>
         <div class="Deposit">
             <h3><b> Deposit </b></h3>
-            <a href="{% url 'add_deposit' %}"><button type="button" class="btn btn-primary btn-lg"> ADD new Deposit
-            </button></a>
-            <button type="button" class="btn btn-primary btn-lg"> Show Deposit    </button>
+            <a href="{% url 'add_deposit' %}">
+                <button type="button" class="btn btn-primary btn-lg"> ADD new Deposit </button>
+            </a>
+            <a href="{% url 'active_deposits' %}">
+                <button type="button" class="btn btn-primary btn-lg"> Show Deposit </button>
+            </a>
         </div>
         <div class="Loan">
             <h3><b> Loan </b></h3>
-            <a href="{% url 'add_loan' %}"><button type="button" class="btn btn-primary btn-lg"> ADD new Loan
-            </button></a>
+            <a href="{% url 'add_loan' %}">
+                <button type="button" class="btn btn-primary btn-lg"> ADD new Loan </button>
+            </a>
             <button type="button" class="btn btn-primary btn-lg"> Show Loan    </button>
         </div>
         <div class="Expenses">

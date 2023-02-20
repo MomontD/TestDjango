@@ -1,6 +1,6 @@
 {% extends 'main/layout.html' %}
 
-{% block title %} Investments {% endblock %}
+{% block title %} ADD Deposit {% endblock %}
 
 {% block content %}
     <div class="title">
@@ -15,6 +15,7 @@
             <h5> Deposit period  </h5> {{ form.deposit_period }} <br>
             <h5> Start date of Deposit </h5> {{ form.start_date }} <br>
             <h5> End date of Deposit   </h5> {{ form.end_date   }} <br>
+            <span> <h5>{{ error }}</h5></span> <br>
             <button type="submit" class="btn btn-primary btn-lg btn-block"> Add Deposit </button>
         </form>
     </div>

@@ -1,0 +1,87 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Active Deposit {% endblock %}
+
+{% block content %}
+    <div class="title">
+        <h1><b> Active Deposits </b></h1>
+    </div>
+    <div class="active_deposit">
+        <table class="information_about_deposits">
+            <tr>
+                <th>Назва депозиту</th>
+                <th>Сума депозиту</th>
+                <th>Відсоткова ставка</th>
+                <th>Період в міс.</th>
+                <th>Дата початку</th>
+                <th>Дата завершення</th>
+            </tr>
+            {% for el in deposit_data %}
+                <tr>
+                    <td>{{ el.deposit_date }}</td>
+                    <td>{{ el.deposit_sum  }} </td>
+                    <td>{{ el.deposit_rate }}</td>
+                    <td>{{ el.deposit_period }}</td>
+                    <td>{{ el.start_date }} </td>
+                    <td>{{ el.end_date }} </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="resolt_deposits_information">
+        <table>
+            <tr>
+                <td> Сума всіх депозитів : </td>
+                <td>  {{ calc_sum_all_deposits }}  </td>
+            </tr>
+            <tr>
+                <td> Середня ставка % : </td>
+                <td>  {{ average_rate_from_deposits }}  </td>
+            </tr>
+            <tr>
+                <td> Місячний дохід : </td>
+                <td>  {{ average_month_income }}  </td>
+            </tr>
+            <tr>
+                <td> Річний дохід : </td>
+                <td>  {{ 0 }}  </td>
+            </tr>
+            <tr>
+                <td> Загальний дохід : </td>
+                <td>  {{ income_from_deposits }}  </td>
+            </tr>
+        </table>
+    </div>
+
+
+{% endblock %}
+
+{#    <div class="deposit">#}
+{#        {% for el in deposit_data %}#}
+{#            <h6>Назва депозиту {{ el.deposit_date }}</h6>#}
+{#            <h6>Сума депозиту  {{ el.deposit_sum  }}</h6>#}
+{#            <h6>Відсоткова ставка {{ el.deposit_rate }}</h6>#}
+{#            <h6>Період в міс.   {{ el.deposit_period }}</h6>#}
+{#            <h6>Дата початку    {{ el.start_date }}</h6>#}
+{#            <h6>Дата завершення {{ el.end_date }}  </h6><br>#}
+{#        {% endfor %}#}
+{#    </div>#}
+
+{#<div class="name_of_table">#}
+{#    <p>Назва депозиту &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Сума депозиту Відсоткова ставка Період в міс. Дата початку&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Дата завершення#}
+{#    </p>#}
+{#</div>#}
+{#<div class="deposit">#}
+{#    <ul>#}
+{#        {% for el in deposit_data %}#}
+{#            <ul>{{ el.deposit_date }} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp#}
+{#                {{ el.deposit_sum  }} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp#}
+{#                {{ el.deposit_rate }} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp#}
+{#                {{ el.deposit_period }} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp#}
+{#                {{ el.start_date }} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp#}
+{#                {{ el.end_date }} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp#}
+{#            </ul> <br>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#</div>#}
+
