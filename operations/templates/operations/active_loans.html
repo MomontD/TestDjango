@@ -6,52 +6,56 @@
     <div class="title">
         <h1><b> Active Loans </b></h1>
     </div>
-    <div class="active_loans">
-        <table class="information_about_loans">
-            <tr>
-                <th>Назва позики </th>
-                <th>Сума  позики </th>
-                <th>Відсоткова ставка </th>
-                <th>Період в міс.     </th>
-                <th>Дата початку      </th>
-                <th>Дата завершення   </th>
-            </tr>
-            {% for el in deposit_data %}
+    {% if loans_data %}
+        <div class="active_loans">
+            <table class="information_about_loans">
                 <tr>
-                    <td>{{ el.deposit_date }}</td>
-                    <td>{{ el.deposit_sum  }} </td>
-                    <td>{{ el.deposit_rate }}</td>
-                    <td>{{ el.deposit_period }}</td>
-                    <td>{{ el.start_date }} </td>
-                    <td>{{ el.end_date }} </td>
+                    <th>Назва позики  </th>
+                    <th>Сума  позики  </th>
+                    <th>Валюта позики </th>
+                    <th>Відсоткова ставка </th>
+                    <th>Період в міс.     </th>
+                    <th>Дата початку      </th>
+                    <th>Дата завершення   </th>
                 </tr>
-            {% endfor %}
-        </table>
-    </div>
-    <div class="resolt_deposits_information">
-        <table>
-            <tr>
-                <td> Сума всіх депозитів : </td>
-                <td>  {{ calc_sum_all_deposits }}  </td>
-            </tr>
-            <tr>
-                <td> Середня ставка % : </td>
-                <td>  {{ average_rate_from_deposits }}  </td>
-            </tr>
-            <tr>
-                <td> Місячний дохід : </td>
-                <td>  {{ average_month_income }}  </td>
-            </tr>
-            <tr>
-                <td> Річний дохід : </td>
-                <td>  {{ 0 }}  </td>
-            </tr>
-            <tr>
-                <td> Загальний дохід : </td>
-                <td>  {{ income_from_deposits }}  </td>
-            </tr>
-        </table>
-    </div>
+                {% for el in loans_data_data %}
+                    <tr>
+                        <td>{{ el.name }}</td>
+                        <td>{{ el.sum  }} </td>
+                        <td>{{ el.currency }} </td>
+                        <td>{{ el.rate }}</td>
+                        <td>{{ el.period }}</td>
+                        <td>{{ el.start_date }} </td>
+                        <td>{{ el.end_date }} </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="resolt_deposits_information">
+            <table>
+                <tr>
+                    <td> Сума всіх депозитів : </td>
+                    <td>  {{ calc_sum_all_deposits }}  </td>
+                </tr>
+                <tr>
+                    <td> Середня ставка % : </td>
+                    <td>  {{ average_rate_from_deposits }}  </td>
+                </tr>
+                <tr>
+                    <td> Місячний дохід : </td>
+                    <td>  {{ average_month_income }}  </td>
+                </tr>
+                <tr>
+                    <td> Річний дохід : </td>
+                    <td>  {{ 0 }}  </td>
+                </tr>
+                <tr>
+                    <td> Загальний дохід : </td>
+                    <td>  {{ income_from_deposits }}  </td>
+                </tr>
+            </table>
+        </div>
+    {% endif %}
 
 
 {% endblock %}

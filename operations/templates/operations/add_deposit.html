@@ -9,12 +9,14 @@
     <div>
         <form method="post">
             {% csrf_token %}
-            <h5> Name of Deposit </h5> {{ form.deposit_date   }} <br>
-            <h5> Sum of Deposit  </h5> {{ form.deposit_sum    }} <br>
-            <h5> Deposit rate    </h5> {{ form.deposit_rate   }} <br>
-            <h5> Deposit period  </h5> {{ form.deposit_period }} <br>
-            <h5> Start date of Deposit </h5> {{ form.start_date }} <br>
-            <h5> End date of Deposit   </h5> {{ form.end_date   }} <br>
+            <h5> Name of Bank     {{ form.bank     }} </h5>
+            <h5> Name of Deposit  {{ form.name     }} </h5>
+            <h5> Sum of Deposit   {{ form.sum      }} </h5>
+            <h5> Deposit currency {{ form.currency }} </h5>
+            <h5> Deposit rate     {{ form.rate     }} </h5>
+            <h5> Deposit period   {{ form.period   }} </h5>
+            <h5> Start date of Deposit {{ form.start_date }} </h5>
+            <h5> End date of Deposit   {{ form.end_date   }} </h5>
             <span> <h5>{{ error }}</h5></span> <br>
             <button type="submit" class="btn btn-primary btn-lg btn-block"> Add Deposit </button>
         </form>

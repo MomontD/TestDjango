@@ -5,21 +5,28 @@ from django.forms import ModelForm,TextInput,DateInput
 class add_depositForm(ModelForm) :
     class Meta :
         model  = deposit
-        fields = ['deposit_date','deposit_sum','deposit_rate','deposit_period','start_date','end_date']
+        fields = ['bank','name','sum','currency','rate','period','start_date','end_date']
         widgets = {
-            "deposit_date" : TextInput(attrs = {
+            "bank" : TextInput(attrs = {
+                'class'       : 'form-control' , #стиль від bootstrap
+                'placeholder' : 'Bank name'}),
+            "name" : TextInput(attrs = {
                 'class'       : 'form-control' , #стиль від bootstrap
                 'placeholder' : 'Deposit name'
             }),
-            "deposit_sum" : TextInput(attrs = {
+            "sum" : TextInput(attrs = {
                 'class'       : 'form-control' , #стиль від bootstrap
                 'placeholder' : 'Add deposit sum'
             }),
-            "deposit_rate" : TextInput(attrs = {
+            "currency" : TextInput(attrs = {
+                'class'       : 'form-control' , #стиль від bootstrap
+                'placeholder' : 'Add deposit currency'
+            }),
+            "rate" : TextInput(attrs = {
                 'class'       : 'form-control' , #стиль від bootstrap
                 'placeholder' : 'Add deposit rate'
             }),
-            "deposit_period" : TextInput(attrs = {
+            "period" : TextInput(attrs = {
                 'class'       : 'form-control' , #стиль від bootstrap
                 'placeholder' : 'Add deposit period (in month)'
             }),
@@ -37,21 +44,25 @@ class add_depositForm(ModelForm) :
 class add_loanForm(ModelForm) :
     class Meta :
         model  = loan
-        fields = ['debt_date','debt_sum','debt_rate','debt_period','start_date','end_date']
+        fields = ['name','sum','currency','rate','period','start_date','end_date']
         widgets = {
-            "debt_date" : TextInput(attrs = {
+            "name" : TextInput(attrs = {
                 'class'           : 'form-control' , #стиль від bootstrap
                 'placeholder'     : 'Loan name'
             }),
-            "debt_sum" : TextInput(attrs = {
+            "sum" : TextInput(attrs = {
                 'class'       : 'form-control' , #стиль від bootstrap
                 'placeholder' : 'Add loan sum'
             }),
-            "debt_rate" : TextInput(attrs = {
+            "currency" : TextInput(attrs = {
+                'class'       : 'form-control' , #стиль від bootstrap
+                'placeholder' : 'Add loan currency'
+            }),
+            "rate" : TextInput(attrs = {
                 'class'       : 'form-control' , #стиль від bootstrap
                 'placeholder' : 'Add loan rate'
             }),
-            "debt_period" : TextInput(attrs = {
+            "period" : TextInput(attrs = {
                 'class'       : 'form-control' , #стиль від bootstrap
                 'placeholder' : 'Add loan period (in month)'
             }),

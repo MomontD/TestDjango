@@ -9,12 +9,13 @@
     <div>
         <form method="post">
             {% csrf_token %}
-            <h5> Name of Loan </h5> {{ form.debt_date   }} <br>
-            <h5> Sum of Loan  </h5> {{ form.debt_sum    }} <br>
-            <h5> Loan rate    </h5> {{ form.debt_rate   }} <br>
-            <h5> Loan period  </h5> {{ form.debt_period }} <br>
-            <h5> Start date of Loan </h5> {{ form.start_date }} <br>
-            <h5> End date of Loan   </h5> {{ form.end_date   }} <br>
+            <h5> Name of Loan  {{ form.name     }} </h5>
+            <h5> Sum of Loan   {{ form.sum      }} </h5>
+            <h5> Loan currency {{ form.currency }} </h5>
+            <h5> Loan rate     {{ form.rate     }} </h5>
+            <h5> Loan period   {{ form.period   }} </h5>
+            <h5> Start date of Loan {{ form.start_date }} </h5>
+            <h5> End date of Loan   {{ form.end_date   }} </h5>
             <span> <h5>{{ error }}</h5></span> <br>
             <button type="submit" class="btn btn-primary btn-lg btn-block"> Add Loan </button>
         </form>

@@ -9,8 +9,10 @@
     <div class="active_deposit">
         <table class="information_about_deposits">
             <tr>
+                <th>Назва Банку    </th>
                 <th>Назва депозиту </th>
                 <th>Сума депозиту  </th>
+                <th>Валюта         </th>
                 <th>Відсоткова ставка </th>
                 <th>Період в міс.     </th>
                 <th>Дата початку      </th>
@@ -18,10 +20,12 @@
             </tr>
             {% for el in deposit_data %}
                 <tr>
-                    <td>{{ el.deposit_date }}</td>
-                    <td>{{ el.deposit_sum  }} </td>
-                    <td>{{ el.deposit_rate }}</td>
-                    <td>{{ el.deposit_period }}</td>
+                    <td>{{ el.bank }}</td>
+                    <td>{{ el.name }}</td>
+                    <td>{{ el.sum  }} </td>
+                    <td>{{ el.currency  }} </td>
+                    <td>{{ el.rate }}</td>
+                    <td>{{ el.period }}</td>
                     <td>{{ el.start_date }} </td>
                     <td>{{ el.end_date }} </td>
                 </tr>
@@ -32,15 +36,15 @@
         <table>
             <tr>
                 <td> Сума всіх депозитів : </td>
-                <td>  {{ calc_sum_all_deposits }}  </td>
+                <td>  {{ calc_sum }}  </td>
             </tr>
             <tr>
                 <td> Середня ставка % : </td>
-                <td>  {{ average_rate_from_deposits }}  </td>
+                <td>  {{ average_rate }}  </td>
             </tr>
             <tr>
                 <td> Місячний дохід : </td>
-                <td>  {{ average_month_income }}  </td>
+                <td>  {{ monthly_profit }}  </td>
             </tr>
             <tr>
                 <td> Річний дохід : </td>
@@ -48,7 +52,7 @@
             </tr>
             <tr>
                 <td> Загальний дохід : </td>
-                <td>  {{ income_from_deposits }}  </td>
+                <td>  {{ total_profit }}  </td>
             </tr>
         </table>
     </div>
