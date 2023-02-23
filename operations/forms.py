@@ -1,8 +1,9 @@
 from main.models import *
 # from main.models import deposit,loan,expenses   #шмпортуємо всі моделі таблиць щоб повязати їх з флормами і БД
-from django.forms import ModelForm,TextInput,DateInput
+from django.forms import ModelForm,TextInput,DateInput,ChoiceField
 
 class add_depositForm(ModelForm) :
+
     class Meta :
         model  = deposit
         fields = ['bank','name','sum','currency','rate','period','start_date','end_date']
@@ -18,10 +19,10 @@ class add_depositForm(ModelForm) :
                 'class'       : 'form-control' , #стиль від bootstrap
                 'placeholder' : 'Add deposit sum'
             }),
-            "currency" : TextInput(attrs = {
-                'class'       : 'form-control' , #стиль від bootstrap
-                'placeholder' : 'Add deposit currency'
-            }),
+            # "currency" : ChoiceField(choices=select_currency,attrs = {
+            #     'class'       : 'form-control' , #стиль від bootstrap
+            #     'placeholder' : 'Add deposit currency',
+            #      }),
             "rate" : TextInput(attrs = {
                 'class'       : 'form-control' , #стиль від bootstrap
                 'placeholder' : 'Add deposit rate'
@@ -39,7 +40,9 @@ class add_depositForm(ModelForm) :
                 'placeholder' : 'Deposit end date (YYYY-MM-DD format)'
             })
         }
-
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['currency'].widget.attrs.update({'class':'form-control'})
 
 class add_loanForm(ModelForm) :
     class Meta :

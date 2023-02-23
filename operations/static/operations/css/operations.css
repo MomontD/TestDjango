@@ -46,34 +46,125 @@ form {
 span {
     color: red;
 }
-
-/* --- active_deposits.html---*/
-.active_deposit {
-    float : left;
-    /*width: auto;*/
+/*-----------------Кнопка ADD Deposit------------------------------------*/
+.btn-block {
+    width: 100%;
+}
+/*-----------------Блок з ьаблицями active_deposits та deposits_report--- */
+.block_information_about_deposits {
+    display: flex;
+    flex-direction: column;
+}
+.title_active_deposits {
+    margin-left: 10px;
 }
 
-/*Стилізація таблиці*/
-table {
+/*---------------"empty_deposits"----------------------------------------*/
+
+.block_empty_deposits {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+}
+.block_empty_deposits h5 {
+    text-align: center;
+    border : 2px solid #666666;
+    width : 1060px;
+    margin-top: 20px;
+    margin-left: 10px;
+    padding: 10px 10px;
+}
+.block_empty_deposits h3, .block_empty_deposits h4 {
+    margin-left: 10px;
+}
+
+/*---------------Стилізація таблиці "active_deposits"--------------------*/
+.table_active_deposits {
     table-layout: fixed;
     margin-left: 10px;
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-right: 10px;
     width: auto;
-    border-collapse: collapse;
-    border: 3px solid blue;
+    /*border-collapse: collapse;*/
+    border: 2px solid #666666;
 }
-td {
+.table_active_deposits td {
     text-align: center;
     letter-spacing: 1px;
 }
-
-.resolt_deposits_information {
-    float: left;
-    margin-top: 50px;
-    margin-left: 250px;
-    text-align: left;
+.table_active_deposits th {
+    text-align: center;
+    border: #666666;
+    border-bottom: 2px solid #666666;
 }
 
-/*.resolt_deposits_information > table > td {*/
-/*    text-align: left;*/
-/*}*/
+.table_active_deposits td:nth-child(1) {
+    width: 18%
+}
+.table_active_deposits td:nth-child(2) {
+    width: 18%
+}
+.table_active_deposits td:nth-child(3) {
+    width: 9%
+}
+.table_active_deposits td:nth-child(4) {
+    width: 7%
+}
+.table_active_deposits td:nth-child(5) {
+    width: 7%
+}
+.table_active_deposits td:nth-child(6) {
+    width: 10%
+}
+.table_active_deposits td:nth-child(7) {
+    width: 10%
+}
+.table_active_deposits td:nth-child(8) {
+    width: 11%
+}
+
+/*---------------deposits_report--------------------------------------*/
+.title_deposits_report {
+    margin-left: 10px;
+    margin-top: 40px;
+}
+.table_deposits_report {
+    table-layout: fixed;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    width: auto;
+    /*border-collapse: collapse;*/
+    border: 2px solid #666666;
+}
+.table_deposits_report td {
+    letter-spacing: 1px;
+}
+.table_deposits_report td:nth-child(1) {
+    width: 60%;
+    text-align: left;
+}
+.table_deposits_report td:nth-child(2) {
+    width: 40%;
+    text-align: center;
+}
+
+/*---------------deposits_in_archiv------------------------------------e*/
+.block_deposits_in_archive {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+}
+.block_deposits_in_archive h5 {
+    text-align: center;
+    border : 2px solid #666666;
+    width : 1060px;
+    margin-top: 20px;
+    margin-left: 10px;
+    padding: 10px 10px;
+}
+
+.block_deposits_in_archive h4, .block_deposits_in_archive h5 {
+    margin-left: 10px;
+}
+

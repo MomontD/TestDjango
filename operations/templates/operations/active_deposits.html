@@ -1,62 +1,84 @@
 {% extends 'main/layout.html' %}
 
-{% block title %} Active Deposit {% endblock %}
+{% block title %} Information about deposits {% endblock %}
 
 {% block content %}
     <div class="title">
-        <h1><b> Active Deposits </b></h1>
+        <h1><b> Information about deposits </b></h1>
     </div>
-    <div class="active_deposit">
-        <table class="information_about_deposits">
-            <tr>
-                <th>Назва Банку    </th>
-                <th>Назва депозиту </th>
-                <th>Сума депозиту  </th>
-                <th>Валюта         </th>
-                <th>Відсоткова ставка </th>
-                <th>Період в міс.     </th>
-                <th>Дата початку      </th>
-                <th>Дата завершення   </th>
-            </tr>
-            {% for el in deposit_data %}
-                <tr>
-                    <td>{{ el.bank }}</td>
-                    <td>{{ el.name }}</td>
-                    <td>{{ el.sum  }} </td>
-                    <td>{{ el.currency  }} </td>
-                    <td>{{ el.rate }}</td>
-                    <td>{{ el.period }}</td>
-                    <td>{{ el.start_date }} </td>
-                    <td>{{ el.end_date }} </td>
-                </tr>
-            {% endfor %}
-        </table>
-    </div>
-    <div class="resolt_deposits_information">
-        <table>
-            <tr>
-                <td> Сума всіх депозитів : </td>
-                <td>  {{ calc_sum }}  </td>
-            </tr>
-            <tr>
-                <td> Середня ставка % : </td>
-                <td>  {{ average_rate }}  </td>
-            </tr>
-            <tr>
-                <td> Місячний дохід : </td>
-                <td>  {{ monthly_profit }}  </td>
-            </tr>
-            <tr>
-                <td> Річний дохід : </td>
-                <td>  {{ 0 }}  </td>
-            </tr>
-            <tr>
-                <td> Загальний дохід : </td>
-                <td>  {{ total_profit }}  </td>
-            </tr>
-        </table>
-    </div>
+    {% if deposit_data %}<div class="block_information_about_deposits">
 
+        <div class="title_active_deposits">
+            <h4><b> Active deposits </b></h4>
+        </div>
+
+        <div class="block_active_deposits">
+            <table class="table_active_deposits">
+                <tr>
+                    <th scope="col">Назва Банку</th>
+                    <th scope="col">Назва депозиту</th>
+                    <th>Сума </th>
+                    <th>Валюта</th>
+                    <th>Cтавка %</th>
+                    <th>Період в міс.</th>
+                    <th>Дата початку</th>
+                    <th>Дата завершення</th>
+                </tr>
+                {% for el in deposit_data %}
+                    <tr>
+                        <td>{{ el.bank }}</td>
+                        <td>{{ el.name }}</td>
+                        <td>{{ el.sum }} </td>
+                        <td>{{ el.currency }} </td>
+                        <td>{{ el.rate }}</td>
+                        <td>{{ el.period }}</td>
+                        <td>{{ el.start_date }} </td>
+                        <td>{{ el.end_date }} </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="title_deposits_report">
+            <h4><b> Deposits report </b></h4>
+        </div>
+
+        <div class="block_deposits_report">
+            <table class="table_deposits_report">
+                <tr>
+                    <td> Сума всіх депозитів </td>
+                    <td>  {{ calc_sum }}  </td>
+                </tr>
+                <tr>
+                    <td> Середня ставка % </td>
+                    <td>  {{ average_rate }}  </td>
+                </tr>
+                <tr>
+                    <td> Місячний дохід </td>
+                    <td>  {{ monthly_profit }}  </td>
+                </tr>
+                <tr>
+                    <td> Річний дохід </td>
+                    <td>  {{ 0 }}  </td>
+                </tr>
+                <tr>
+                    <td> Загальний дохід </td>
+                    <td>  {{ total_profit }}  </td>
+                </tr>
+            </table>
+        </div>
+    {% else %}
+        <div class="block_empty_deposits">
+            <h4><b>Active deposits</b></h4>
+            <h5>You have no active deposits</h5>
+        </div>
+    {% endif %}
+
+        <div class="block_deposits_in_archive">
+            <h4><b>Deposits in archive</b></h4>
+            <h5>Archive is empty</h5>
+        </div>
+    </div>
 
 {% endblock %}
 
@@ -88,4 +110,3 @@
 {#        {% endfor %}#}
 {#    </ul>#}
 {#</div>#}
-

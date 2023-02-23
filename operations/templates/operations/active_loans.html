@@ -6,6 +6,15 @@
     <div class="title">
         <h1><b> Active Loans </b></h1>
     </div>
+
+{#        <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>#}
+        <select class="select">
+            <option value="1">UAH</option>
+            <option value="2">USD</option>
+            <option value="3">EUR</option>
+        </select>
+
+
     {% if loans_data %}
         <div class="active_loans">
             <table class="information_about_loans">
@@ -55,7 +64,10 @@
                 </tr>
             </table>
         </div>
+    {% else %}
+        <div> <h3> You have no active loans </h3></div>
     {% endif %}
+
 
 
 {% endblock %}

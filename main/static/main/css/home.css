@@ -1,11 +1,12 @@
 body {
-    background: #2c2c2c;
+    /*background: #2c2c2c;*/
+    background: linear-gradient(#00363a,#2c2c2c);
     color: white;
 }
 
 aside {
     float : left;            /*розташування блоку з ліва*/
-    background : #181818;    /*колір фону блоку*/
+    background : #243132FF;   /*колір фону блоку #181818*/
     width : 21%;             /*ширина блоку 20%*/
     padding: 1.5%;           /*відступи 2,5% зі всіх сторін*/
     height: 100vh;           /*висота блоку 100% висоти екрану*/
