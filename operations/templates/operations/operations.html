@@ -1,0 +1,57 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Investments {% endblock %}
+
+{% block content %}
+
+    <div class="title">
+        <h1><b> OPERATION MENU </b></h1>
+    </div>
+    <div class="blockoperations">
+        <div class="Bonds">
+            <h3><b> Government Bonds </b></h3>
+
+                <button type="button" class="btn btn-primary btn-lg btn-operations"
+                onclick="window.location.href = '{% url 'add_government' %}'"> ADD new Bonds </button>
+
+                <button type="button" class="btn btn-primary btn-lg btn-operations"> Show Bonds </button>
+        </div>
+        <div class="Deposit">
+            <h3><b> Deposit </b></h3>
+
+                <button type="button" class="btn btn-primary btn-lg btn-operations"
+                onclick="window.location.href = '{% url 'add_deposit' %}'"> ADD new Deposit </button>
+
+                <button type="button" class="btn btn-primary btn-lg btn-operations"
+                onclick="window.location.href = '{% url 'general_information_on_deposits' %}'"> Show Deposit </button>
+
+                <button type="button" class="btn btn-primary btn-lg btn-operations"
+                onclick="window.location.href ='{% url 'add_to_deposit' %}'"> ADD to Deposit </button>
+
+                <button type="button" class="btn btn-primary btn-lg btn-operations"
+                onclick="window.location.href ='{% url 'terminate_deposits' %}'"> Terminate Deposit </button>
+
+                <button type="button" class="btn btn-primary btn-lg btn-operations"
+                onclick="window.location.href ='{% url 'delete_deposits' %}'"> Delete Deposit </button>
+
+        </div>
+        <div class="Loan">
+            <h3><b> Loan </b></h3>
+
+                <button type="button" class="btn btn-primary btn-lg btn-operations"
+                onclick="window.location.href ='{% url 'add_loan' %}'"> ADD new Loan </button>
+
+                <button type="button" class="btn btn-primary btn-lg btn-operations"
+                onclick="window.location.href ='{% url 'general_information_on_loans' %}'"> Show Loans </button>
+
+                <button type="button" class="btn btn-primary btn-lg btn-operations"
+                onclick="window.location.href ='{% url 'delete_loans' %}'"> Delete Loan </button>
+
+        </div>
+        <div class="Expenses">
+            <h3><b> Expenses </b></h3>
+            <button type="button" class="btn btn-primary btn-lg btn-operations"> ADD  Expenses </button>
+            <button type="button" class="btn btn-primary btn-lg btn-operations"> Show Expenses </button>
+        </div>
+    </div>
+{% endblock %}

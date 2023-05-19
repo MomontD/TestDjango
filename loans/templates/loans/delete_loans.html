@@ -1,0 +1,151 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Information about loans {% endblock %}
+
+{% block content %}
+    <div class="title">
+        <h1><b> Information about loans </b></h1>
+    </div>
+    {% if active_loans %}
+        <div class="div_form_delete_deposits">
+            <form class="form_for_delete_deposits" method="POST">
+                {% csrf_token %}
+                <div class="block_information_about_deposits">
+
+                    <div class="title_delete_deposits">
+                        <h4><b> Active loans </b></h4>
+                    </div>
+
+                    <div class="block_deposits">
+                        <table class="table_for_delete_deposits">
+                            <tr>
+                                <th>Select</th>
+                                <th>Name of the loan</th>
+                                <th>Sum </th>
+                                <th>Currency</th>
+                                <th>Rate %</th>
+                                <th>Period in months</th>
+                                <th>Start date</th>
+                                <th>End date</th>
+                            </tr>
+                            {% for el in active_loans %}
+                                <tr>
+                                    <td>
+                                        <input class="form-check-input" type="checkbox" name="selected_loans" value={{ el.id }}>
+                                    </td>
+                                    <td>{{ el.name }}</td>
+                                    <td>{{ el.sum }} </td>
+                                    <td>{{ el.currency }} </td>
+                                    <td>{{ el.rate }}</td>
+                                    <td>{{ el.period }}</td>
+                                    <td>{{ el.start_date }} </td>
+                                    <td>{{ el.end_date }} </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                <div class="block_delete_deposits">
+                    <div class="div_msg_h5">
+                        <h5>For delete the selected loan(s), press button </h5>
+                    </div>
+                    <div class="block_delete_deposits_buttons">
+                        <button type="button" class="btn btn-danger" onclick="showOutputActiveLoans()">Delete</button>
+                        <div class="confirm_delete_button" id="confirmation_active_loans" style="display:none">
+                            <h5>Are you sure?</h5>
+                            <button type="submit" class="btn btn-success" >Yes , Delete!</button>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    function showOutputActiveLoans() {
+                        document.getElementById("confirmation_active_loans").style.display = "flex";
+                    }
+                </script>
+            </form>
+        </div>
+    {% else %}
+        <div class="block_empty_deposits">
+            <h4><b>Active loans</b></h4>
+            <h5>You have no active loans</h5>
+        </div>
+
+    {% endif %}
+
+    {% if loans_in_archive %}
+        <div class="div_form_delete_deposits">
+            <form class="form_for_delete_deposits" method="POST">
+                {% csrf_token %}
+                <div class="block_information_about_deposits">
+
+                    <div class="title_delete_deposits">
+                        <h4><b> Loans in Archive </b></h4>
+                    </div>
+
+                    <div class="block_deposits">
+                        <table class="table_for_delete_deposits">
+                            <tr>
+                                <th>Select</th>
+                                <th>Name of the loan</th>
+                                <th>Sum </th>
+                                <th>Currency</th>
+                                <th>Rate %</th>
+                                <th>Period in months</th>
+                                <th>Start date</th>
+                                <th>End date</th>
+                            </tr>
+                            {% for el in loans_in_archive %}
+                                <tr>
+                                    <td>
+                                        <input class="form-check-input" type="checkbox" name="selected_loans" value={{ el.id }}>
+                                    </td>
+                                    <td>{{ el.name }}</td>
+                                    <td>{{ el.sum }} </td>
+                                    <td>{{ el.currency }} </td>
+                                    <td>{{ el.rate }}</td>
+                                    <td>{{ el.period }}</td>
+                                    <td>{{ el.start_date }} </td>
+                                    <td>{{ el.end_date }} </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                <div class="block_delete_deposits">
+                    <div class="div_msg_h5">
+                        <h5>For delete the selected loan(s), press button </h5>
+                    </div>
+                    <div class="block_delete_deposits_buttons">
+                        <button type="button" class="btn btn-danger" onclick="showOutputArchiveLoans()">Delete</button>
+                        <div class="confirm_delete_button" id="confirmation_archive_loans" style="display:none">
+                            <h5>Are you sure?</h5>
+                            <button type="submit" class="btn btn-success" >Yes , Delete!</button>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    function showOutputArchiveLoans() {
+                        document.getElementById("confirmation_archive_loans").style.display = "flex";
+                    }
+                </script>
+            </form>
+        </div>
+    {% else %}
+        <div class="block_empty_deposits">
+            <h4><b> Loans in archive </b></h4>
+            <h5>You have no Loans in archive </h5>
+        </div>
+
+    {% endif %}
+
+    {% if successful_operation_delete_deposit %}
+        <div class="successful_delete_operation">
+            <h4>{{ successful_operation_delete_loans }}</h4>
+        </div>
+    {% else %}
+        <div class="error_delete_deposit">
+            <h4>{{ error_delete_loans }}</h4>
+        </div>
+    {% endif %}
+
+{% endblock %}

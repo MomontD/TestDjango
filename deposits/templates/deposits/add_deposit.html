@@ -1,0 +1,86 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} ADD Deposit {% endblock %}
+
+{% block content %}
+
+    <div class="main_add_deposit">
+        <div class="title">
+            <h1><b> ADD Deposit </b></h1>
+        </div>
+        <div>
+            <form method="post" name="add_depositForm">
+                {% csrf_token %}
+                <div class="block_create_deposit">
+                    <div class="base_form_information_deposit">
+                        <h3><b>Base options</b></h3>
+                        <h5> Name of Bank     {{ form.bank     }} </h5>
+                        <h5> Name of Deposit  {{ form.name     }} </h5>
+                        <h5> Sum of Deposit   {{ form.sum      }} </h5>
+                        <h5> Deposit currency {{ form.currency }} </h5>
+                        <h5> Deposit rate     {{ form.rate     }} </h5>
+                        <h5> Deposit period   {{ form.period   }} </h5>
+                        <h5> Start date of Deposit {{ form.start_date }} </h5>
+                        <h5> End date of Deposit   {{ form.end_date   }} </h5>
+                        <input type="hidden" name="add_depositForm" value="1">
+                        <span> <h5>{{ error }}</h5></span> <br>
+                    </div>
+                    <div class="additional_form_options_deposit">
+                        <h3><b>Additional options</b></h3>
+                        <h5> Top up deposit </h5>
+                        <h6> (the ability to replenish your deposit) </h6>
+                        <h5> {{ form.add_deposit }} </h5>
+                        <h5> Automatic capitalization % </h5>
+                        <h6> (for deposits with automatic capitalization % per month) </h6>
+                        <h5> {{ form.auto_capitalization }} </h5>
+                        <h5> Terminate the deposit </h5>
+                        <h6> (the deposit can be terminated early?) </h6>
+                        <h5> {{ form.terminate_deposit }} </h5>
+                        <input type="hidden" name="add_depositForm" value="1">
+                    </div>
+                </div>
+                <div class="button_add_deposit">
+                    <button type="submit" name="submit_btn" class="btn btn-primary btn-lg btn-add-deposit"> Add Deposit </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {#    <div class="title">#}
+{#        <h1><b> ADD Deposit </b></h1>#}
+{#    </div>#}
+{#    <div class="block_create_deposit">#}
+{#        <div class="base_form_information_deposit">#}
+{#            <h3><b>Base options</b></h3>#}
+{#            <form class="options_deposit" method="post">#}
+{#                {% csrf_token %}#}
+{#                <h5> Name of Bank     {{ form.bank     }} </h5>#}
+{#                <h5> Name of Deposit  {{ form.name     }} </h5>#}
+{#                <h5> Sum of Deposit   {{ form.sum      }} </h5>#}
+{#                <h5> Deposit currency {{ form.currency }} </h5>#}
+{#                <h5> Deposit rate     {{ form.rate     }} </h5>#}
+{#                <h5> Deposit period   {{ form.period   }} </h5>#}
+{#                <h5> Start date of Deposit {{ form.start_date }} </h5>#}
+{#                <h5> End date of Deposit   {{ form.end_date   }} </h5>#}
+{#                <input type="hidden" name="form1" value="1">#}
+{#                <span> <h5>{{ error }}</h5></span> <br>#}
+{#            </form>#}
+{#        </div>#}
+{#        <div class="additional_form_options_deposit">#}
+{#            <h3><b>Additional options</b></h3>#}
+{#            <form class="options_deposit" method="post">#}
+{#                {% csrf_token %}#}
+{#                <h5> Top up deposit </h5>#}
+{#                <h6> (the ability to replenish your deposit) </h6>#}
+{#                <h5> {{ form.add_deposit }} </h5>#}
+{#                <h5> Automatic capitalization % </h5>#}
+{#                <h6> (for deposits with automatic capitalization % per month) </h6>#}
+{#                <h5> {{ form.auto_capitalization }} </h5>#}
+{#                <input type="hidden" name="form2" value="1">#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="button_add_deposit">#}
+{#        <button type="submit" name="submit_btn" class="btn btn-primary btn-lg btn-add-deposit" form="form1 form2"> Add Deposit </button>#}
+{#    </div>#}
+
+{% endblock %}

@@ -1,0 +1,45 @@
+form {
+    /*margin-left: 30%;*/
+    width: 100%;
+    margin-top: 10px;
+}
+
+.line_form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.btn-add-deposit {              /* ADD Deposit */
+    width: 67%;
+    margin-left: 235px;
+}
+
+.block_create_deposit{
+    display: flex;
+    justify-content: center ;
+    /*align-items: center;*/
+    column-gap: 10%;
+    margin-top: 10px;
+}
+
+.base_form_information_deposit{
+    width: 28%;
+}
+
+.additional_form_options_deposit{
+    width: 28%;
+}
+.button_add_deposit{
+    display: flex;
+    align-items: center;
+}
+
+.options_deposit{
+    margin-top: 30px;
+}
+
+.main_add_deposit {
+    display: flex;
+    flex-direction: column
+}

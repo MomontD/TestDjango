@@ -1,0 +1,72 @@
+.main_div_currency{
+    display: flex;
+    flex-direction: column;
+}
+
+.actual_date h5 {
+    margin-left: 31%;
+    color: yellow;
+}
+
+.source_information {
+    margin-top: 7%;
+    margin-left: 15%;
+}
+.title_currency h1{
+    margin-top: 10px;
+    margin-left: 30%;
+}
+
+.div_title_table_currency{
+    display: flex;
+    flex-direction: row;
+    margin-top: 5%;
+    margin-left: 13%;
+}
+
+.div_title_table_currency div:first-child {
+  margin-left: 13%;
+}
+
+.div_title_table_currency div:nth-child(2) {
+  margin-left: 19%;
+}
+
+.div_table_currensys{
+    display: flex;
+    flex-direction: row;
+    margin-left: 15%;
+}
+
+
+.table_for_currency_bank {
+    table-layout: fixed;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 30%;
+    /*border-collapse: collapse;*/
+    border: 2px solid #666666;
+}
+.table_for_currency_bank td {
+    text-align: center;
+    letter-spacing: 1px;
+}
+.table_for_currency_bank th {
+    text-align: center;
+    border: #666666;
+    border-bottom: 2px solid #666666;
+}
+
+.table_for_currency_bank td:nth-child(1) {
+    width: 18%
+}
+.table_for_currency_bank td:nth-child(2) {
+    width: 18%
+}
+.table_for_currency_bank td:nth-child(3) {
+    width: 9%
+}
+.table_for_currency_bank td:nth-child(4) {
+    width: 7%
+}

@@ -1,0 +1,151 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Information about Loans {% endblock %}
+
+{% block content %}
+    {% if grouped_active_loans != 'list is empty' %}
+         <div class="title">
+            <h1><b> Information about Loans </b></h1>
+         </div>
+        <div class="block_information_about_deposits">
+
+            <div class="title_active_deposits">
+                <h4><b> Active loans </b></h4>
+            </div>
+
+            <div class="block_active_deposits">
+                <table class="table_for_deposits">
+                    <tr>
+                        <th scope="col">Name of loan</th>
+                        <th>Sum </th>
+                        <th>Currency</th>
+                        <th>Rate %</th>
+                        <th>Period,months</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                    </tr>
+                    {% for group in grouped_active_loans %}
+                        {% if group %}
+                            {% for loan in group %}
+                                <tr>
+                                    <td>{{ loan.name }}</td>
+                                    <td>{{ loan.sum }} </td>
+                                    <td>{{ loan.currency }} </td>
+                                    <td>{{ loan.rate }}</td>
+                                    <td>{{ loan.period }}</td>
+                                    <td>{{ loan.start_date }} </td>
+                                    <td>{{ loan.end_date }} </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <div class="block_empty_deposits">
+            <h4><b>Active loans</b></h4>
+            <h5>You have no active loans</h5>
+        </div>
+
+    {% endif %}
+
+    <div class="block_deposits_report">
+
+        {% if report_active_loans != 'list is empty' %}
+            <div class="title_deposits_report">
+                <h4><b> Loans report </b></h4>
+            </div>
+            <div class="block_table_deposits_report">
+                <table class="table_deposits_report">
+                    <tr>
+                        <th> Currency </th>
+                        <th> Sum of loans </th>
+                        <th> Average rate % </th>
+                        <th> Monthly profit </th>
+                        <th> Total profit </th>
+                    </tr>
+                    {% for indicator in report_active_loans %}
+                        <tr>
+                            <td> {{ indicator.currency }}</td>
+                            <td> {{ indicator.calc_sum }}</td>
+                            <td> {{ indicator.average_rate }}</td>
+                            <td> {{ indicator.monthly_profit }}</td>
+                            <td> {{ indicator.total_profit }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+{#        {% else %}#}
+{#            <h5> No data to calculate report </h5>#}
+        {% endif %}
+    </div>
+
+    <div class="block_deposits_in_archive">
+        <h4><b>Loans in archive</b></h4>
+        {% if grouped_archive_loans != 'list is empty' %}
+            <div class="block_active_deposits">
+                <table class="table_for_deposits">
+                    <tr>
+                        <th scope="col">Name of loan</th>
+                        <th>Sum </th>
+                        <th>Currency</th>
+                        <th>Rate %</th>
+                        <th>Period,months</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                    </tr>
+                    {% for group in grouped_archive_loans %}
+                        {% if group %}
+                            {% for loan in group %}
+                                <tr>
+                                    <td>{{ loan.name }}</td>
+                                    <td>{{ loan.sum }} </td>
+                                    <td>{{ loan.currency }} </td>
+                                    <td>{{ loan.rate }}</td>
+                                    <td>{{ loan.period }}</td>
+                                    <td>{{ loan.start_date }} </td>
+                                    <td>{{ loan.end_date }} </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+        {% else %}
+            <h5> Archive is empty </h5>
+        {% endif %}
+
+    </div>
+    <div class="block_deposits_report">
+        {% if report_archive_loans != 'list is empty' %}
+            <div class="title_deposits_report">
+                <h4><b> Loans report </b></h4>
+            </div>
+            <div class="block_table_deposits_report">
+                <table class="table_deposits_report">
+                    <tr>
+                        <th> Currency </th>
+                        <th> Sum of deposits </th>
+                        <th> Average rate % </th>
+                        <th> Monthly profit </th>
+                        <th> Total profit </th>
+                    </tr>
+                    {% for indicator in report_archive_loans %}
+                        <tr>
+                            <td> {{ indicator.currency }}</td>
+                            <td> {{ indicator.calc_sum }}</td>
+                            <td> {{ indicator.average_rate }}</td>
+                            <td> {{ indicator.monthly_profit }}</td>
+                            <td> {{ indicator.total_profit }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+{#        {% else %}#}
+{#            <h5> No data to calculate report </h5>#}
+        {% endif %}
+    </div>
+
+
+{% endblock %}

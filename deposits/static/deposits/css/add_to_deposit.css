@@ -1,0 +1,67 @@
+.main_div_add_to_deposit{
+    display: flex;
+    flex-direction: column;
+}
+
+.button_add_to_deposit{
+    display: flex;
+}
+
+.error_add_to_deposit{
+    margin-left: 10px;
+    margin-top: 40px;
+    color: red;
+}
+
+.successful_operation{
+    margin-left: 10px;
+    margin-top: 40px;
+    color: springgreen;
+}
+
+.form_for_add_to_deposit{
+    display: flex;
+    justify-content: center;
+}
+
+.form_for_add_to_deposit input {
+    color: white;
+}
+
+.table_deposits_to_add {
+    table-layout: fixed;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    width: auto;
+    /*border-collapse: collapse;*/
+    border: 2px solid #666666;
+}
+.table_deposits_to_add td {
+    text-align: center;
+    letter-spacing: 1px;
+}
+.table_deposits_to_add th {
+    text-align: center;
+    border: #666666;
+    border-bottom: 2px solid #666666;
+}
+
+.table_deposits_to_add td:nth-child(1) {
+    width: 5%
+}
+.table_deposits_to_add td:nth-child(2) {
+    width: 15%
+}
+.table_deposits_to_add td:nth-child(3) {
+    width: 15%
+}
+.table_deposits_to_add td:nth-child(4) {
+    width: 10%
+}
+.table_deposits_to_add td:nth-child(5) {
+    width: 10%
+}
+.table_deposits_to_add td:nth-child(6) {
+    width: auto
+}

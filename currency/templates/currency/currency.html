@@ -1,0 +1,110 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Investments {% endblock %}
+
+{% block content %}
+
+    <div class="main_div_currency">
+
+        <div class="title_currency">
+            <h1><b> Курси валют </b></h1>
+        </div>
+
+        <div class="actual_date">
+            <h5> {{ actual_date }} </h5>
+        </div>
+
+        <div class="div_title_table_currency">
+            <div><h4> Міжбанк </h4></div>
+            <div><h4> Готівковий ринок </h4></div>
+        </div>
+
+        <div class="div_table_currensys">
+            <table class="table_for_currency_bank">
+                <tr>
+                    {% for el in data_for_table_bank.headers %}
+                        <th scope="col"> {{ el }}</th>
+                    {% endfor %}
+                </tr>
+                {% for row in data_for_table_bank.currens_data %}
+                    <tr>
+                        {% for el in row %}
+                            <td>{{ el }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+            <table class="table_for_currency_bank">
+                <tr>
+                    {% for el in data_for_table_cash.headers %}
+                        <th scope="col"> {{ el }}</th>
+                    {% endfor %}
+                </tr>
+                {% for row in data_for_table_cash.currens_data %}
+                    <tr>
+                        {% for el in row %}
+                            <td>{{ el }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    <div class="source_information">
+        <h6> * Дані наведено з офіційного сайту міністерства фінансів України :
+            <a href="https://minfin.com.ua/ua/currency/" target="_blank"> https://minfin.com.ua/ua/currency/ </a>
+        </h6>
+    </div>
+
+    </div>
+
+{% endblock %}
+
+{#    Робочий варінт з НБУ #}
+{#    <div class="main_div_currency">#}
+{#        <div class="title_currency">#}
+{#            <h1><b> Currency exchange rates </b></h1>#}
+{#        </div>#}
+{##}
+{#        <div class="title_official_course_nbu">#}
+{#            <h4><b> Official course NBU (buying) </b></h4>#}
+{#            <h6><b> On the date {{ date }} </b></h6>#}
+{#        </div>#}
+{##}
+{#        <div class="div_table_official_currensy">#}
+{##}
+{#            <table class="table_for_deposits">#}
+{#                <tr>#}
+{#                    {% for el in data_for_table.headers %}#}
+{#                        <th scope="col"> {{ el }}</th>#}
+{#                    {% endfor %}#}
+{#                </tr>#}
+{#                {% for row in data_for_table.currens_data %}#}
+{#                    <tr>#}
+{#                        {% for el in row %}#}
+{#                            <td>{{ el }}</td>#}
+{#                        {% endfor %}#}
+{#                    </tr>#}
+{#                {% endfor %}#}
+{#            </table>#}
+{##}
+{##}
+{#        </div>#}
+{##}
+{#    </div>#}
+
+{#<div>#}
+{#        <h5> Дата на курс </h5>#}
+{#        {{ date }}#}
+{#    </div>#}
+{#    <div>#}
+{#        {% for el in data_for_table.headers %}#}
+{#            <div> {{ el }}</div>#}
+{##}
+{#        {% endfor %}#}
+{#        {% for el in data_for_table.currens_data %}#}
+{#            {% for value in el %}#}
+{#                <div> {{ value }}</div>#}
+{#            {% endfor %}#}
+{#        {% endfor %}#}
+{#    </div>#}

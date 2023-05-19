@@ -1,0 +1,38 @@
+body {
+    /*background: #2c2c2c;*/
+    background: linear-gradient(#00363a,#2c2c2c);
+    color: white;
+}
+
+aside {
+    float : left;            /*розташування блоку з ліва*/
+    /*background : #243132FF;   !*колір фону блоку #181818*!*/
+    linear-gradient(#00363a,#2c2c2c);
+    width : 21%;             /*ширина блоку 20%*/
+    padding: 1.5%;           /*відступи 2,5% зі всіх сторін*/
+    height: 120vh;           /*висота блоку 100% висоти екрану*/
+    color: white;            /*колір тексту в блоці*/
+    border-right: 5px solid #4d4d4d; /*виділення правої бокової лінії блоку*/
+}
+
+aside img {            /*розмір картинки*/
+    width: 100%;
+}
+
+aside h3 {             /*відступ заголовку Navigation*/
+    margin-top: 20px;
+}
+aside ul {list-style: none} /*забираємо цяточки в меню*/
+
+aside ul li {
+    margin-top: 20px;   /*відступ між рядками*/
+    color: white;       /*колір тексту*/
+    display : block;    /*ХЗ*/
+    transition: transform .3s ease; /*плавність збфльшення тексту*/
+}
+
+aside ul li:hover, ul a {      /*стилізуємо меню*/
+    color : yellow;            /*колір тексту принаведені мишки*/
+    text-decoration: none;     /*забираємо підкреслення з тегу <а>*/
+    transform: scale(1.05);    /*збільшуємо текст при наведені на 5%*/
+}

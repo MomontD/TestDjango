@@ -1,0 +1,78 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} ADD to Deposit {% endblock %}
+
+{% block content %}
+    <div class="main_div_add_to_deposit">
+        <div class="title">
+            <h1><b> ADD to Deposit </b></h1>
+        </div>
+        {% if deposits_to_add %}
+            <div class="block_information_about_deposits">
+                    <table class="table_deposits_to_add">
+                        <tr>
+                            <th scope="col">ID </th>
+                            <th scope="col">Name of bank</th>
+                            <th scope="col">Type of the deposit</th>
+                            <th>Sum </th>
+                            <th>Currency</th>
+                            <th>Edit menu </th>
+                        </tr>
+                        {% for el in deposits_to_add %}
+                            <tr>
+                                <td>{{ el.id }} </td>
+                                <td>{{ el.bank }}</td>
+                                <td>{{ el.name }}</td>
+                                <td>{{ el.sum }} </td>
+                                <td>{{ el.currency }} </td>
+                                <td>
+                                    <form class="form_for_add_to_deposit" action="{% url 'add_to_deposit' %}?id={{ el.id }}" method="POST">
+                                        {% csrf_token %}
+                                        <div class="form-group mb-2">
+                                            <input type="text" readonly class="form-control-plaintext" value="Enter Sum to ADD Deposit">
+                                        </div>
+                                        <div class="form-group mx-sm-3 mb-2">
+                                            <input class="form-control" name="data" placeholder="Enter Sum">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mb-2">Confirm </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+            </div>
+            {% if successful_operation %}
+                <div class="successful_operation">
+                    <h5>{{ successful_operation }}</h5>
+                </div>
+            {% else %}
+                <div class="error_add_to_deposit">
+                    <h5>{{ error }}</h5>
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="block_empty_deposits">  {# використовується CSS з operations.css#}
+                <h5> You have no deposits to ADD </h5>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{# механізм для натискання кнопки , появляєтться вікно для вводу даних і відправляється в views.py #}
+
+{#                                    <div class="button_add_to_deposit">#}
+{#                                        <button type="button" onclick="showInput()" class="btn btn-primary btn-sm">ADD to Deposit</button>#}
+{#                                        <div id="inputArea" style="display:none">#}
+{#                                            <form class="form-inline" action="{% url 'add_to_deposit' %}?id={{ el.id }}" method="POST">#}
+{#                                                {% csrf_token %}#}
+{#                                                <input type="text" name="data" placeholder="Enter sum to ADD">#}
+{#                                                <button type="submit" class="btn btn-success">Confirm</button>#}
+{#                                            </form>#}
+{#                                        </div>#}
+{##}
+{#                                        <script>#}
+{#                                            function showInput() {#}
+{#                                            document.getElementById("inputArea").style.display = "block";#}
+{#                                            }#}
+{#                                        </script>#}
+{#                                    </div>#}
