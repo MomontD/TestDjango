@@ -15,7 +15,7 @@ class add_governmentForm(ModelForm):
     class Meta:
         model = Governments
         fields = ['name', 'type_gv', 'sum', 'currency', 'coupons', 'rate', 'start_date', 'end_date',
-                  'coupons_nominal_cost', 'coupons_current_cost', 'bonds_expenses']  # 'period'
+                  'coupons_nominal_cost', 'coupons_current_cost', 'bonds_repayment_nominal', 'bonds_expenses']  # 'period'
         widgets = {
             "name": TextInput(attrs={
                 'class': 'form-control',          # Стиль від bootstrap
@@ -60,6 +60,10 @@ class add_governmentForm(ModelForm):
             "coupons_current_cost": TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Current cost'
+            }),
+            "bonds_repayment_nominal": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Nominal repayment'
             }),
             "bonds_expenses": TextInput(attrs={
                 'class': 'form-control',
