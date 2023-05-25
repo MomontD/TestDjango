@@ -1,12 +1,7 @@
 from django.db import models
 from main.models import BaseTableForProducts, BaseTableForIndicators
 
-from utils.governments.gov_func import defining_period
-
-import calendar
-from datetime import date
-
-from utils.general.general_functions import calculate_product_indicators
+from utils.governments.gov_func import defining_period, calc_extends_indicators
 
 # Необхідна для відхоплювання "сигналів" | будемо ловити момент створення нового депозиту і
 from django.db.models.signals import post_save
@@ -53,11 +48,9 @@ class GovernmentExtendedIndicators(models.Model):
         db_table = 'governments_extended_indicators'
 
     current_rate = models.FloatField()            # Фактичний %  = (Загальна сума виплат - суму вкладу ОВДП + дохід/збиток від вартості купону)
-    bonds_nominal_cost = models.FloatField()      # Номінальна вартість ОВДП
     bonds_nominal_profit = models.FloatField()    # Номінальний дохід
     coupons_cost_difference = models.FloatField() # Різниця вартості купонів між номінальною і фактичною.
-    coupons_current_profit = models.FloatField()  # Дохід/Збиток на одному купоні (номінальний/фактичний)
-    bonds_current_profit = models.FloatField()    # Купонний  дохід/збиток
+    coupons_profit = models.FloatField()          # Купонний дохід/збиток
     government = models.ForeignKey(Governments, on_delete=models.CASCADE,
                                    related_name='governments_extended_indicators')
 
@@ -77,13 +70,32 @@ class PaymentSchedule(models.Model):
 
 
 @receiver(post_save, sender=Governments)
-def calculate_and_save_extended_indicators(instance, **kwargs):
-    # Номінальна вартість ОВДП
-    # Номінальний дохід
-    # Різниця вартості купонів між номінальною і фактичною.
-    # Дохід/Збиток на одному купоні (номінальний/фактичний)
-    # Купонний  дохід/збиток
-    # Фактичний %  = (Загальна сума виплат - суму вкладу ОВДП + дохід/збиток від вартості купону)
+def definition_period(instance, **kwargs):
+    # Перевіряємо чи поле period null (щоб не було неконтрольованої рекурсії - зациклення)
+    # Зациклення виникає коли викликається метод save() - зберегти обєкт в БД, тоді знову спрацьовує @receiver,
+    # знову запускає ф-ю з розрахунком періоду і знову метод save() і так по колу ...
+    if instance.period is None:
+        # викликаємо ф-ю defining_period розрахунку періоду з utils.governments.gov_func
+        instance.period = defining_period(instance)
+        instance.save()
+
+
+@receiver(post_save, sender=Governments)
+def calculate_and_save_extended_indicators(instance, created, **kwargs):
+
+    if created :
+
+        indicators_tupple = calc_extends_indicators(instance)
+
+        # Створюємо новий запис у таблиці GovernmentExtendedIndicators
+        extend_indicators = GovernmentExtendedIndicators.objects.create(
+            government=instance,
+            bonds_nominal_profit=round(indicators_tupple[0], 2),
+            coupons_cost_difference=round(indicators_tupple[1], 2),
+            coupons_profit=round(indicators_tupple[2], 2),
+            current_rate=round(indicators_tupple[3], 2))
+            # Зберігаємо новий запис
+        extend_indicators.save()
 
 
 # # ФУНКЦІЯ АВТОМАТИЧНОГО РОЗРАХУНКУ ТА ЗАПИСУ ПЕРІОДУ ДІЇ ОВДП (ЗГІДНО ВЕДЕНИХ ДАТ)
