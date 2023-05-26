@@ -49,6 +49,9 @@ class GovernmentExtendedIndicators(models.Model):
 
     current_rate = models.FloatField()            # Фактичний %  = (Загальна сума виплат - суму вкладу ОВДП + дохід/збиток від вартості купону)
     bonds_nominal_profit = models.FloatField()    # Номінальний дохід
+    bonds_income = models.FloatField()            # Фактичний дохід ОВДП (брудний , без витрат і дод. доходу від купонів)
+    bonds_difference_income = models.FloatField() # Різниця між номіналь7ним та фактичним доходами (брудні)
+    bonds_actual_profit = models.FloatField()     # Фактичний ПРИБУТОК!
     coupons_cost_difference = models.FloatField() # Різниця вартості купонів між номінальною і фактичною.
     coupons_profit = models.FloatField()          # Купонний дохід/збиток
     government = models.ForeignKey(Governments, on_delete=models.CASCADE,
@@ -91,9 +94,12 @@ def calculate_and_save_extended_indicators(instance, created, **kwargs):
         extend_indicators = GovernmentExtendedIndicators.objects.create(
             government=instance,
             bonds_nominal_profit=round(indicators_tupple[0], 2),
-            coupons_cost_difference=round(indicators_tupple[1], 2),
-            coupons_profit=round(indicators_tupple[2], 2),
-            current_rate=round(indicators_tupple[3], 2))
+            bonds_income=round(indicators_tupple[1], 2),
+            bonds_difference_income=round(indicators_tupple[2], 2),
+            bonds_actual_profit= round(indicators_tupple[3], 2),
+            coupons_cost_difference=round(indicators_tupple[4], 2),
+            coupons_profit=round(indicators_tupple[5], 2),
+            current_rate=round(indicators_tupple[6], 2))
             # Зберігаємо новий запис
         extend_indicators.save()
 

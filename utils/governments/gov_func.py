@@ -15,16 +15,22 @@ def defining_period(instance):
 def calc_extends_indicators (instance):
 
     # Номінальний дохід
-    nominal_profit = instance.bonds_repayment_nominal - instance.sum
+    nominal_profit = instance.bonds_repayment_nominal - (instance.coupons_nominal_cost * instance.coupons)
     # Різниця вартості купонів між номінальною і фактичною
     coupons_difference = instance.coupons_nominal_cost - instance.coupons_current_cost
     # Купонний дохід/збиток
     all_coupons_profit = coupons_difference * instance.coupons
-    # Фактичний %  = (Загальна сума виплат - суму вкладу ОВДП + дохід/збиток від вартості купону)
-    bonds_profit = nominal_profit + all_coupons_profit  # Загальний дохід
-    bonds_year_profit = (bonds_profit / instance.period) * 12  # Річний дохід
-    # % - (річний дохід / суму вкладу)* 100
+    #  Фактичний дохід (Загальна сума виплат по облігаціям - фактичну суму вкладу ОВДП)
+    bonds_income = instance.bonds_repayment_nominal - instance.sum
+    #  Фактичний ПРИБУТОК !!! (Загальна сума виплат - суму вкладу ОВДП - видатки + дохід/збиток від вартості купону)
+    actual_profit = (bonds_income - instance.bonds_expenses) + all_coupons_profit
+    # Різниця доходів ( номінальний/фактичний)
+    difference_income = bonds_income - nominal_profit
+    # Фактичний %
+    bonds_year_profit = (actual_profit / instance.period) * 12  # Річний дохід
+    # визначення річного % - (річний дохід / суму вкладу)* 100
     bonds_rate = ((bonds_year_profit - instance.bonds_expenses) / instance.sum) * 100
-    print(nominal_profit, coupons_difference, all_coupons_profit, bonds_rate)
+    print(nominal_profit, actual_profit, coupons_difference, all_coupons_profit, bonds_rate)
 
-    return nominal_profit, coupons_difference, all_coupons_profit, bonds_rate
+    return nominal_profit, bonds_income, difference_income, actual_profit, \
+        coupons_difference, all_coupons_profit, bonds_rate
