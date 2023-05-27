@@ -1,0 +1,108 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Information about Bonds {% endblock %}
+
+{% block content %}
+
+    <div class="title">
+            <h1><b> Information about Bonds </b></h1>
+    </div>
+
+    {% if active_governments %}
+        {% for bond in active_governments %}
+            <div class="block_information_about_deposits">
+                <div class="block_active_deposits">
+                    <table class="table_for_deposits">
+                        <tr>
+                            <th> Bonds Code </th>
+                            <th> Type </th>
+                            <th> Sum </th>
+                            <th> Currency </th>
+                            <th> Rate % </th>
+                            <th> Period month </th>
+                            <th> Start date </th>
+                            <th> End Date </th>
+                        </tr>
+                        <tr>
+                            <td>{{ bond.name }}</td>
+                            <td>{{ bond.type_gv }}</td>
+                            <td>{{ bond.sum }} </td>
+                            <td>{{ bond.currency }} </td>
+                            <td>{{ bond.rate }} </td>
+                            <td>{{ bond.period }} </td>
+                            <td>{{ bond.start_date }} </td>
+                            <td>{{ bond.end_date }} </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="title_deposits_report">
+                    <h4><b> Bond report </b></h4>
+                </div>
+                <div class="block_deposits_report">
+                    <table class="table_deposits_report">
+                        <tr>
+                            <th> Coupons </th>
+                            <th> Nominal cost </th>
+                            <th> Current cost </th>
+                            <th> Coupons cost difference </th>
+                            <th> Coupons profit </th>
+                        </tr>
+                        <tr>
+                            <td>{{ bond.coupons }}</td>
+                            <td>{{ bond.coupons_nominal_cost }}</td>
+                            <td>{{ bond.coupons_current_cost }} </td>
+                            {% for extend_indicator in bond.governments_extended_indicators.all %}
+                                <td>{{ extend_indicator.coupons_cost_difference }}</td>
+                                <td>{{ extend_indicator.coupons_profit }}</td>
+                            {% endfor %}
+                        </tr>
+                    </table>
+                </div>
+                <div class="block_table_deposits_report">
+                    <table class="table_deposits_report">
+                        <tr>
+                            <th> Currency </th>
+                            <th> Sum of deposits </th>
+                            <th> Average rate % </th>
+                            <th> Dayily profit </th>
+                            <th> Monthly profit </th>
+                            <th> Year profit </th>
+                            <th> Total profit </th>
+                        </tr>
+                        {% for indicator in bond.governments_indicators.all %}
+                            <tr>
+                                <td> {{ indicator.currency }}</td>
+                                <td> {{ indicator.calc_sum }}</td>
+                                <td> {{ indicator.average_rate }}</td>
+                                <td> {{ indicator.dayily_profit }}</td>
+                                <td> {{ indicator.monthly_profit }}</td>
+                                <td> {{ indicator.year_profit }}</td>
+                                <td> {{ indicator.total_profit }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div>
+                    {% for indicator in bond.governments_extended_indicators.all %}
+                        <table class="table_deposits_report">
+                            <tr>
+                                <th> Bonds nominal profit </th>
+                                <th> Bonds expenses </th>
+                                <th> Bonds current profit </th>
+                                <th> Bonds repayment </th>
+                                <th> Current rate </th>
+                            </tr>
+                            <tr>
+                                <td>{{ indicator.bonds_nominal_profit }} </td>
+                                <td>{{ bond.bonds_expenses }} </td>
+                                <td>{{ indicator.bonds_income }} </td>
+                                <td>{{ bond.bonds_repayment_nominal }} </td>
+                                <td>{{ indicator.current_rate }} </td>
+                            </tr>
+                        </table>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

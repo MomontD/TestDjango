@@ -60,9 +60,11 @@
                 <table class="table_deposits_report">
                     <tr>
                         <th> Currency </th>
-                        <th> Sum of loans </th>
+                        <th> Sum of deposits </th>
                         <th> Average rate % </th>
+                        <th> Dayily profit </th>
                         <th> Monthly profit </th>
+                        <th> Year profit </th>
                         <th> Total profit </th>
                     </tr>
                     {% for indicator in report_active_loans %}
@@ -70,7 +72,9 @@
                             <td> {{ indicator.currency }}</td>
                             <td> {{ indicator.calc_sum }}</td>
                             <td> {{ indicator.average_rate }}</td>
+                            <td> {{ indicator.dayily_profit }}</td>
                             <td> {{ indicator.monthly_profit }}</td>
+                            <td> {{ indicator.year_profit }}</td>
                             <td> {{ indicator.total_profit }}</td>
                         </tr>
                     {% endfor %}
@@ -128,7 +132,9 @@
                         <th> Currency </th>
                         <th> Sum of deposits </th>
                         <th> Average rate % </th>
+                        <th> Dayily profit </th>
                         <th> Monthly profit </th>
+                        <th> Year profit </th>
                         <th> Total profit </th>
                     </tr>
                     {% for indicator in report_archive_loans %}
@@ -136,7 +142,9 @@
                             <td> {{ indicator.currency }}</td>
                             <td> {{ indicator.calc_sum }}</td>
                             <td> {{ indicator.average_rate }}</td>
+                            <td> {{ indicator.dayily_profit }}</td>
                             <td> {{ indicator.monthly_profit }}</td>
+                            <td> {{ indicator.year_profit }}</td>
                             <td> {{ indicator.total_profit }}</td>
                         </tr>
                     {% endfor %}

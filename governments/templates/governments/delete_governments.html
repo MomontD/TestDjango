@@ -1,0 +1,218 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Information about governments {% endblock %}
+
+{% block content %}
+    <div class="title">
+        <h1><b> Information about governments </b></h1>
+    </div>
+    {% if active_governments %}
+        <div class="div_form_delete_deposits">
+            <form class="form_for_delete_deposits" method="POST">
+                {% csrf_token %}
+                <div class="block_information_about_deposits">
+
+                    <div class="title_delete_deposits">
+                        <h4><b> Active governments </b></h4>
+                    </div>
+
+                    <div class="block_deposits">
+                        <table class="table_for_delete_deposits">
+                            <tr>
+                                <th> Select </th>
+                                <th> Code </th>
+                                <th> Type </th>
+                                <th> Sum </th>
+                                <th> Currency </th>
+                                <th> Rate % </th>
+                                <th> Period in months </th>
+                                <th> Start date </th>
+                                <th> End date </th>
+                            </tr>
+                            {% for el in active_governments %}
+                                <tr>
+                                    <td>
+                                        <input class="form-check-input" type="checkbox" name="selected_governments" value={{ el.id }}>
+                                    </td>
+                                    <td>{{ el.name }}</td>
+                                    <td>{{ el.type_gv }}</td>
+                                    <td>{{ el.sum }} </td>
+                                    <td>{{ el.currency }} </td>
+                                    <td>{{ el.rate }}</td>
+                                    <td>{{ el.period }}</td>
+                                    <td>{{ el.start_date }} </td>
+                                    <td>{{ el.end_date }} </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                <div class="block_delete_deposits">
+                    <div class="div_msg_h5">
+                        <h5>For delete the selected government(s), press button </h5>
+                    </div>
+                    <div class="block_delete_deposits_buttons">
+                        <button type="button" class="btn btn-danger" onclick="showOutputActiveGovernments()">Delete</button>
+                        <div class="confirm_delete_button" id="confirmation_active_governments" style="display:none">
+                            <h5>Are you sure?</h5>
+                            <button type="submit" class="btn btn-success" >Yes , Delete!</button>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    function showOutputActiveGovernments() {
+                        document.getElementById("confirmation_active_governments").style.display = "flex";
+                    }
+                </script>
+            </form>
+        </div>
+    {% else %}
+        <div class="block_empty_deposits">
+            <h4><b>Active governments</b></h4>
+            <h5>You have no active governments</h5>
+        </div>
+
+    {% endif %}
+
+    {% if governments_in_archive %}
+        <div class="div_form_delete_deposits">
+            <form class="form_for_delete_deposits" method="POST">
+                {% csrf_token %}
+                <div class="block_information_about_deposits">
+
+                    <div class="title_delete_deposits">
+                        <h4><b> Governments in Archive </b></h4>
+                    </div>
+
+                    <div class="block_deposits">
+                        <table class="table_for_delete_deposits">
+                            <tr>
+                                <th> Select </th>
+                                <th> Code </th>
+                                <th> Type </th>
+                                <th> Sum </th>
+                                <th> Currency </th>
+                                <th> Rate % </th>
+                                <th> Period in months </th>
+                                <th> Start date </th>
+                                <th> End date </th>
+                            </tr>
+                            {% for el in governments_in_archive %}
+                                <tr>
+                                    <td>
+                                        <input class="form-check-input" type="checkbox" name="selected_governments" value={{ el.id }}>
+                                    </td>
+                                    <td>{{ el.name }}</td>
+                                    <td>{{ el.type_gv }}</td>
+                                    <td>{{ el.sum }} </td>
+                                    <td>{{ el.currency }} </td>
+                                    <td>{{ el.rate }}</td>
+                                    <td>{{ el.period }}</td>
+                                    <td>{{ el.start_date }} </td>
+                                    <td>{{ el.end_date }} </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                <div class="block_delete_deposits">
+                    <div class="div_msg_h5">
+                        <h5>For delete the selected government(s), press button </h5>
+                    </div>
+                    <div class="block_delete_deposits_buttons">
+                        <button type="button" class="btn btn-danger" onclick="showOutputArchiveGovernments()">Delete</button>
+                        <div class="confirm_delete_button" id="confirmation_archive_governments" style="display:none">
+                            <h5>Are you sure?</h5>
+                            <button type="submit" class="btn btn-success" >Yes , Delete!</button>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    function showOutputArchiveGovernments() {
+                        document.getElementById("confirmation_archive_governments").style.display = "flex";
+                    }
+                </script>
+            </form>
+        </div>
+    {% else %}
+        <div class="block_empty_deposits">
+            <h4><b> Governments in archive </b></h4>
+            <h5>You have no Governments in archive </h5>
+        </div>
+
+    {% endif %}
+
+    {% if successful_operation_delete_government %}
+        <div class="successful_delete_operation">
+            <h4>{{ successful_operation_delete_government }}</h4>
+        </div>
+    {% else %}
+        <div class="error_delete_deposit">
+            <h4>{{ error_delete_government }}</h4>
+        </div>
+    {% endif %}
+
+
+{#    <div class="block_deposits_in_archive">#}
+{#        <h4><b>Deposits in archive</b></h4>#}
+{#        {% if deposits_in_archive %}#}
+{#            <div class="div_form_delete_deposits">#}
+{#                <form class="form_for_delete_deposits" method="POST">#}
+{#                    {% csrf_token %}#}
+{#                    <div class="block_information_about_deposits">#}
+{#                        <div class="block_active_deposits">#}
+{#                            <table class="table_for_delete_deposits">#}
+{#                                <tr>#}
+{#                                    <th>Select</th>#}
+{#                                    <th>Name of bank</th>#}
+{#                                    <th>Name of the deposit</th>#}
+{#                                    <th>Sum </th>#}
+{#                                    <th>Currency</th>#}
+{#                                    <th>Rate %</th>#}
+{#                                    <th>Period in months</th>#}
+{#                                    <th>Start date</th>#}
+{#                                    <th>End date</th>#}
+{#                                </tr>#}
+{#                                {% for el in deposits_in_archive %}#}
+{#                                    <tr>#}
+{#                                        <td>#}
+{#                                            <input class="form-check-input" type="checkbox" name="selected_deposits" value={{ el.id }}>#}
+{#                                        </td>#}
+{#                                        <td>{{ el.bank }}</td>#}
+{#                                        <td>{{ el.name }}</td>#}
+{#                                        <td>{{ el.sum }} </td>#}
+{#                                        <td>{{ el.currency }} </td>#}
+{#                                        <td>{{ el.rate }}</td>#}
+{#                                        <td>{{ el.period }}</td>#}
+{#                                        <td>{{ el.start_date }} </td>#}
+{#                                        <td>{{ el.end_date }} </td>#}
+{#                                    </tr>#}
+{#                                {% endfor %}#}
+{#                            </table>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="block_delete_deposits111">#}
+{#                        <div class="div_msg_h5111">#}
+{#                            <h5>For delete the selected deposit(s), press button </h5>#}
+{#                        </div>#}
+{#                        <div class="block_delete_deposits_buttons111">#}
+{#                            <button type="button" class="btn btn-danger" onclick="showOutputArchiveDeposits()">Delete</button>#}
+{#                            <div class="confirm_delete_button111" id="confirmation_archive_deposits" style="display:none">#}
+{#                                <h5>Are you sure?</h5>#}
+{#                                <button type="submit" class="btn btn-success" >Yes , Delete!</button>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <script>#}
+{#                        function showOutputArchiveDeposits() {#}
+{#                            document.getElementById("confirmation_archive_deposits").style.display = "flex";#}
+{#                        }#}
+{#                    </script>#}
+{#                </form>#}
+{#            </div>#}
+{#        {% else %}#}
+{#            <h5>Archive is empty</h5>#}
+{#        {% endif %}#}
+{#    </div>#}
+
+{% endblock %}

@@ -21,16 +21,10 @@ def calc_extends_indicators (instance):
     # Купонний дохід/збиток
     all_coupons_profit = coupons_difference * instance.coupons
     #  Фактичний дохід (Загальна сума виплат по облігаціям - фактичну суму вкладу ОВДП)
-    bonds_income = instance.bonds_repayment_nominal - instance.sum
-    #  Фактичний ПРИБУТОК !!! (Загальна сума виплат - суму вкладу ОВДП - видатки + дохід/збиток від вартості купону)
-    actual_profit = (bonds_income - instance.bonds_expenses) + all_coupons_profit
-    # Різниця доходів ( номінальний/фактичний)
-    difference_income = bonds_income - nominal_profit
+    bonds_income = instance.bonds_repayment_nominal - instance.sum - instance.bonds_expenses
     # Фактичний %
-    bonds_year_profit = (actual_profit / instance.period) * 12  # Річний дохід
+    bonds_year_profit = (bonds_income / instance.period) * 12  # Річний дохід
     # визначення річного % - (річний дохід / суму вкладу)* 100
-    bonds_rate = ((bonds_year_profit - instance.bonds_expenses) / instance.sum) * 100
-    print(nominal_profit, actual_profit, coupons_difference, all_coupons_profit, bonds_rate)
+    bonds_rate = (bonds_year_profit / instance.sum) * 100
 
-    return nominal_profit, bonds_income, difference_income, actual_profit, \
-        coupons_difference, all_coupons_profit, bonds_rate
+    return nominal_profit, bonds_income, coupons_difference, all_coupons_profit, bonds_rate
