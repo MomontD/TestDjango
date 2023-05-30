@@ -104,4 +104,6 @@ def calculate_product_indicators(instance, days):
         else:
             year_profit = instance.sum * (instance.rate / 100)
 
+        print (dayily_profit, month_profit, year_profit, total_profit, days, instance.period, instance.rate)
+
         return [dayily_profit, month_profit, year_profit, total_profit]

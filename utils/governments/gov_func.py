@@ -11,6 +11,24 @@ def defining_period(instance):
     return number_of_month
 
 
+def calculate_base_bonds_indicators(instance):
+    # Чистий дохід по ОВДП - сума виплати - суму вкладу - витрати
+    clean_bonds_profit = instance.bonds_repayment_nominal - instance.sum - instance.bonds_expenses
+    difference = instance.end_date - instance.start_date
+    dayily_profit = clean_bonds_profit / difference.days
+    month_profit = clean_bonds_profit / instance.period
+    # total_profit = (instance.sum * (instance.rate / 100)) * (instance.period / 12)
+
+    # Якщо депозит менший за 12 міс. його загальний дохід рахується як річний
+    if instance.period <= 12:
+        year_profit = clean_bonds_profit
+    # Якщо депозит більший за 12 міс. , рахуємо дохід тільки за 12 міс.
+    else:
+        year_profit = (clean_bonds_profit/instance.period) * 12
+
+    return [dayily_profit, month_profit, year_profit, clean_bonds_profit]
+
+
 # ФУНКЦІЯ ДЛЯ РОЗРАХУНКУ РОЗШИРЕНИХ ПОКАЗНИКІВ ОВДП (ДЛЯ ТАБЛИЦІ GovernmentExtendedIndicators)
 def calc_extends_indicators (instance):
 

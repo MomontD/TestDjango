@@ -58,30 +58,6 @@
                         </tr>
                     </table>
                 </div>
-                <div class="block_table_deposits_report">
-                    <table class="table_deposits_report">
-                        <tr>
-                            <th> Currency </th>
-                            <th> Sum of deposits </th>
-                            <th> Average rate % </th>
-                            <th> Dayily profit </th>
-                            <th> Monthly profit </th>
-                            <th> Year profit </th>
-                            <th> Total profit </th>
-                        </tr>
-                        {% for indicator in bond.governments_indicators.all %}
-                            <tr>
-                                <td> {{ indicator.currency }}</td>
-                                <td> {{ indicator.calc_sum }}</td>
-                                <td> {{ indicator.average_rate }}</td>
-                                <td> {{ indicator.dayily_profit }}</td>
-                                <td> {{ indicator.monthly_profit }}</td>
-                                <td> {{ indicator.year_profit }}</td>
-                                <td> {{ indicator.total_profit }}</td>
-                            </tr>
-                        {% endfor %}
-                    </table>
-                </div>
                 <div>
                     {% for indicator in bond.governments_extended_indicators.all %}
                         <table class="table_deposits_report">
@@ -101,6 +77,30 @@
                             </tr>
                         </table>
                     {% endfor %}
+                </div>
+                <div class="block_table_deposits_report">
+                    <table class="table_deposits_report">
+                        <tr>
+                            <th> Dayily profit </th>
+                            <th> Monthly profit </th>
+                            <th> Year profit </th>
+                        </tr>
+                        {% for indicator in bond.governments_indicators.all %}
+                            <tr>
+                                <td> {{ indicator.dayily_profit }}</td>
+                                <td> {{ indicator.month_profit }}</td>
+                                <td> {{ indicator.year_profit }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="block_bonds_payment_schedule">
+                    <h5> You did not specify a payment plan , add payment schedule ? </h5>
+
+                    <button type="button" class="btn btn-primary btn-sm btn-add-schedule"
+                    onclick="window.location.href ='{% url 'add_schedule' %}'"> ADD Schedule
+                    </button>
+
                 </div>
             </div>
         {% endfor %}

@@ -32,8 +32,6 @@ def currency (request) :                                    # Будемо зч�
         div = soup.find('div', {'class': 'sc-1x32wa2-0 dWgyGF bvp3d3-10 bvp3d3-11 kNRLfR cLIHts'})
         table_for_cash = div.find('table', {'class': 'sc-1x32wa2-1 dYkgjk'})
         data_for_table_cash = data_for_currency_table_cash(table_for_cash)
-        print(data_for_table_cash)
-
 
     else:
         return response_minfin.status_code

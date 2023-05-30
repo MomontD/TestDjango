@@ -49,6 +49,11 @@ def general_information_on_governments(request):
                    # 'report_archive_deposits': report_archive_deposits
                    })
 
+def add_schedule(request):
+
+    return render(request, 'governments/add_schedule.html')
+
+
 def delete_governments(request):
     error_delete_government = ''
     successful_operation_delete_government = ''

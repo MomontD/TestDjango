@@ -1,0 +1,19 @@
+.block_bonds_payment_schedule {
+    display: flex; /* Встановлює гнучку модель розташування */
+    flex-direction: column; /* Встановлює стовпчасту напрямок розташування елементів */
+    justify-content: center; /* Вирівнює елементи горизонтально по центру */
+    align-items: center; /* Вирівнює елементи вертикально по центру */
+    border: 2px solid #666666 ;
+    margin-top: 1%;
+    margin-left: 13%;
+    width: 70%;
+}
+
+.block_bonds_payment_schedule h5 {
+    margin-top: 4px;
+}
+
+.btn-add-schedule {
+    margin-bottom: 6px;
+}
+
