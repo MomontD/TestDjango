@@ -10,26 +10,62 @@
         </div>
 
         <div>
-            <form method="post" name="add_payment_schedule">
-                {% csrf_token %}
-                <div class="block_create_schedule">
-                    <div class="base_form_information_schedule">
-                        <h5> Select payment type {{ form.payment_type }} </h5>
-                        <h5> Enter payment date {{ form.payment_date }} </h5>
-                        <h5> Enter sum {{ form.payment_sum }} </h5>
-                        <input type="hidden" name="add_payment_schedule" value="1">
-                        <span> <h5>{{ error }}</h5></span> <br>
-                    </div>
+            {% if data_payment_schedule %}
+                <table class="table_add_schedule">
+                    <tr>
+                        <th scope="col"> ID Government </th>
+                        <th scope="col"> Payment type </th>
+                        <th scope="col"> Payment date</th>
+                        <th> Sum </th>
+                    </tr>
+                    {% for element in data_payment_schedule %}
+                        <tr>
+                            <td>{{ element.id }} </td>
+                            <td>{{ element.payment_type }}</td>
+                            <td>{{ element.payment_date }}</td>
+                            <td>{{ element.payment_sum }} </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <div class="block_empty_deposits">
+{#                    <h4><b>Active deposits</b></h4>#}
+                    <h5>You have no active deposits</h5>
                 </div>
+            {% endif %}
+            <form method="post" class="form_add_payment_schedule" name="add_payment_schedule">
+                {% csrf_token %}
+                <table class="table_add_schedule">
+                    <tr>
+                        <td> {{ government_id }}</td>
+                        <td> {{ form.payment_type }} </td>
+                        <td> {{ form.payment_date }} </td>
+                        <td> {{ form.payment_sum }} </td>
+                        <input type="hidden" name="add_payment_schedule" value="1">
+                    </tr>
+                </table>
+                <button type="submit" name="submit_btn" class="btn btn-success btn-save-schedule"> ADD payment </button>
+            </form>
+                <span> <h5>{{ error }}</h5></span> <br>
                 <div class="div_buttons_add_schedule">
-                    <button type="submit" name="submit_btn" class="btn btn-primary btn-lg btn-save-schedule"> ADD payment and continue </button>
+{#                    <button type="submit" name="submit_btn" class="btn btn-primary btn-lg btn-save-schedule"> ADD payment and continue </button>#}
                     <button type="submit" name="submit_and_redirect" class="btn btn-primary btn-lg btn-save-schedule-back-gov"
                         onclick="window.location.href ='{% url 'general_information_on_governments' %}'"> ADD payment and go to governments
                     </button>
                 </div>
 
-            </form>
+
         </div>
     </div>
 
 {% endblock %}
+
+{#                <div class="block_create_schedule">#}
+{#                    <div class="base_form_information_schedule">#}
+{#                        <h5> Select payment type {{ form.payment_type }} </h5>#}
+{#                        <h5> Enter payment date {{ form.payment_date }} </h5>#}
+{#                        <h5> Enter sum {{ form.payment_sum }} </h5>#}
+{#                        <input type="hidden" name="add_payment_schedule" value="1">#}
+{#                        <span> <h5>{{ error }}</h5></span> <br>#}
+{#                    </div>#}
+{#                </div>#}

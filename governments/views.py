@@ -51,6 +51,7 @@ def general_information_on_governments(request):
 def add_schedule(request, id):
 
     error= ''
+
     if request.method == "POST":
         # Якщо ми нажали кнопку name="submit_btn" зберігаємо дані в БД і повертаємось до повторного введення даних
         if 'submit_btn' in request.POST:
@@ -69,13 +70,15 @@ def add_schedule(request, id):
         elif 'submit_and_redirect' in request.POST:
             return redirect('general_information_on_governments')
 
-
-
+    data_payment_schedule = PaymentSchedule.objects.filter(government_id=id)
     form = AddPaymentSchedule()
     data = {
         'form': form,
+        'government_id': id,
+        'data_payment_schedule': data_payment_schedule,
         'error': error
     }
+
     return render(request, 'governments/add_schedule.html', data)
 
 
