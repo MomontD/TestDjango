@@ -1,0 +1,33 @@
+.content_add_schedule {
+    display: flex;
+    flex-direction: column;
+}
+
+.block_create_schedule{
+    display: flex;
+    /*justify-content: left ;*/
+    /*align-items: center;*/
+    column-gap: 10%;
+    margin-top: 10px;
+    margin-left: 5%;
+}
+
+.base_form_information_schedule{
+    width: 28%;
+}
+
+.btn-save-schedule {
+    margin-left: 5%;
+    width: 27%;
+}
+
+.btn-save-schedule-back-gov {
+    margin-left: 5%;
+    width: 27%;
+    margin-top: 1%;
+}
+
+.div_buttons_add_schedule {
+    display: flex;
+    flex-direction: column;
+}

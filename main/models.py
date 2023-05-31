@@ -24,7 +24,7 @@ class BaseTableForProducts(models.Model):
 
     name = models.CharField(max_length=30)    # Назва продукту
     sum = models.FloatField()                 # Сума
-    currency = models.CharField(max_length=30, blank="Enter your choice", choices=select_currency)    # Вибір валюти
+    currency = models.CharField(max_length=30, blank=False, choices=select_currency)    # Вибір валюти
     rate = models.FloatField()                # Відсоткова ставка
     period = models.IntegerField(null=True, blank=True) # Період в міс.
     start_date = models.DateField()           # Дата початку

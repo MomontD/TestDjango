@@ -4,12 +4,32 @@
 
 {% block content %}
 
-    <div class="title">
-            <h1><b> ADD payment schedule </b></h1>
-    </div>
+    <div class="content_add_schedule">
+        <div class="title">
+                <h1><b> ADD payment schedule </b></h1>
+        </div>
 
-    <div>
-        Enter the number of bond payments <input>  </input>
+        <div>
+            <form method="post" name="add_payment_schedule">
+                {% csrf_token %}
+                <div class="block_create_schedule">
+                    <div class="base_form_information_schedule">
+                        <h5> Select payment type {{ form.payment_type }} </h5>
+                        <h5> Enter payment date {{ form.payment_date }} </h5>
+                        <h5> Enter sum {{ form.payment_sum }} </h5>
+                        <input type="hidden" name="add_payment_schedule" value="1">
+                        <span> <h5>{{ error }}</h5></span> <br>
+                    </div>
+                </div>
+                <div class="div_buttons_add_schedule">
+                    <button type="submit" name="submit_btn" class="btn btn-primary btn-lg btn-save-schedule"> ADD payment and continue </button>
+                    <button type="submit" name="submit_and_redirect" class="btn btn-primary btn-lg btn-save-schedule-back-gov"
+                        onclick="window.location.href ='{% url 'general_information_on_governments' %}'"> ADD payment and go to governments
+                    </button>
+                </div>
+
+            </form>
+        </div>
     </div>
 
 {% endblock %}

@@ -33,9 +33,9 @@ class Deposits(BaseTableForProducts):
         db_table = 'deposits'
 
     bank = models.CharField(max_length=30)  # Назва банку
-    add_deposit = models.CharField(max_length=30, choices=select_confirm)
-    auto_capitalization = models.IntegerField(choices=select_auto_capitalization)
-    terminate_deposit = models.CharField(max_length=30, choices=select_confirm)
+    add_deposit = models.CharField(null=False, blank=False, max_length=30, choices=select_confirm)
+    auto_capitalization = models.IntegerField(null=False, blank=False, choices=select_auto_capitalization)
+    terminate_deposit = models.CharField(null=False, blank=False, max_length=30, choices=select_confirm)
 
 
 class DepositsIndicators(BaseTableForIndicators):

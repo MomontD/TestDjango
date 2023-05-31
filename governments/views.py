@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect
 
-from governments.forms import add_governmentForm
-
-from datetime import date, datetime
+from governments.forms import add_governmentForm, AddPaymentSchedule
 
 from governments.models import *
 
@@ -49,9 +47,36 @@ def general_information_on_governments(request):
                    # 'report_archive_deposits': report_archive_deposits
                    })
 
-def add_schedule(request):
 
-    return render(request, 'governments/add_schedule.html')
+def add_schedule(request, id):
+
+    error= ''
+    if request.method == "POST":
+        # Якщо ми нажали кнопку name="submit_btn" зберігаємо дані в БД і повертаємось до повторного введення даних
+        if 'submit_btn' in request.POST:
+            form = AddPaymentSchedule(request.POST)
+            if form.is_valid():
+                # Присвоюємо формі ID ОВДП до якого будем додавати графік виплат
+                form.instance.government_id = id
+                # Зберігаємо форму
+                form.save()
+
+                return redirect('add_schedule', id=id)
+
+            else:
+                error = 'Data not accepted! Invalid data in form!'
+        # # Якщо ми нажали кнопку name="submit_and_redirect" повертаємось на сторінку з відобрж. ОВДП
+        elif 'submit_and_redirect' in request.POST:
+            return redirect('general_information_on_governments')
+
+
+
+    form = AddPaymentSchedule()
+    data = {
+        'form': form,
+        'error': error
+    }
+    return render(request, 'governments/add_schedule.html', data)
 
 
 def delete_governments(request):

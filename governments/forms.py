@@ -1,13 +1,29 @@
-# from deposits.models import Deposits, select_confirm, select_auto_capitalization
-# from main.models import select_currency
-# from main.models import deposit,loan,expenses   #шмпортуємо всі моделі таблиць щоб повязати їх з флормами і БД
-# from django.forms import ModelForm, TextInput, DateInput, Select
-
 from main.models import select_currency
 
-from governments.models import Governments, select_type_gv, select_type_payment
+from governments.models import Governments, PaymentSchedule, select_type_gv, select_type_payment
 
 from django.forms import ModelForm, TextInput, DateInput, Select
+
+
+class AddPaymentSchedule(ModelForm):
+
+    class Meta:
+        model = PaymentSchedule
+        fields = ['payment_type', 'payment_date', 'payment_sum']
+        widgets = {
+            "payment_type": Select(choices=select_type_payment, attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter your choice'
+            }),
+            "payment_date": DateInput(attrs={
+                    'class': 'form-control',          # Стиль від bootstrap
+                    'placeholder': 'Payment date (YYYY-MM-DD format)'
+                }),
+            "payment_sum": TextInput(attrs={
+                'class': 'form-control',  # Стиль від bootstrap
+                'placeholder': 'Government sum'
+            }),
+    }
 
 
 class add_governmentForm(ModelForm):

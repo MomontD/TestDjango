@@ -29,7 +29,7 @@ class Governments(BaseTableForProducts):
     class Meta:
         db_table = 'governments'
 
-    type_gv = models.CharField(max_length=3, blank="Enter your choice", choices=select_type_gv)    # Тип ОВДП = YTM/SIM
+    type_gv = models.CharField(null=False, max_length=3, blank=False, choices=select_type_gv)    # Тип ОВДП = YTM/SIM
     coupons = models.IntegerField()               # Кількість придбаних купонів
     coupons_nominal_cost = models.FloatField()    # Номінальна вартість купона
     coupons_current_cost = models.FloatField()    # Фактична(по якій придбав) купон
@@ -67,7 +67,7 @@ class PaymentSchedule(models.Model):
         db_table = 'payments_schedule'
 
     # Вид виплат - купонний дохід або погашення ОВДП
-    payment_type = models.CharField(max_length=30, blank="Enter your choice", choices=select_type_payment)
+    payment_type = models.CharField(null=False, max_length=30, blank=False, choices=select_type_payment)
     payment_date = models.DateField()  # Дата виплати
     payment_sum = models.FloatField()  # Сума виплати
     government = models.ForeignKey(Governments, on_delete=models.CASCADE, related_name='payments_schedule')
@@ -86,11 +86,6 @@ def definition_period(instance, **kwargs):
 
 # Розрахунок та заповнення таблиці : GovernmentIndicators
 def calculate_and_save_product_indicators(sender, instance, created, **kwargs):
-
-    # перевіряємо чи рік високосний (високосний-366днів)
-    is_leap_year = calendar.isleap(instance.end_date.year)
-    # контрольна дата 28 Лютого (високосний рік 29 Лютого)
-    control_date = date(instance.end_date.year, 2, 28)
 
     product_values = calculate_base_bonds_indicators(instance)
 
