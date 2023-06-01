@@ -39,14 +39,17 @@ def general_information_on_governments(request):
     return render(request, 'governments/general_information_on_governments.html',
                   {'active_governments': active_governments,
                    'archive_governments': governments_in_archive,
-                   # # Дані для таблиці з активними депозитами
-                   # 'report_active_deposits': report_active_deposits,
-                   # # Дані для таблиці з архівними депозитами
-                   # 'report_archive_deposits': report_archive_deposits
                    })
 
 
-def add_schedule(request, id):
+def government_details(request, government_id):
+
+    government = Governments.objects.get(id=government_id)
+
+    return render(request, 'governments/government_details.html', {'government': government})
+
+
+def add_schedule(request, government_id):
 
     if request.method == "POST":
         # Якщо ми нажали кнопку name="submit_btn" зберігаємо дані в БД і повертаємось до повторного введення даних
@@ -54,16 +57,16 @@ def add_schedule(request, id):
             form = AddPaymentSchedule(request.POST)
             if form.is_valid():
                 # Присвоюємо формі ID ОВДП до якого будем додавати графік виплат
-                form.instance.government_id = id
+                form.instance.government_id = government_id
                 # Зберігаємо форму
                 form.save()
-                return redirect('add_schedule', id=id)
+                return redirect('add_schedule', government_id=government_id)
 
         # # Якщо ми нажали кнопку name="submit_and_redirect" повертаємось на сторінку з відобрж. ОВДП
         elif 'submit_and_redirect' in request.POST:
             return redirect('general_information_on_governments')
 
-    data_payment_schedule = PaymentSchedule.objects.filter(government_id=id)
+    data_payment_schedule = PaymentSchedule.objects.filter(government_id=government_id)
     form = AddPaymentSchedule()
     data = {
         'form': form,

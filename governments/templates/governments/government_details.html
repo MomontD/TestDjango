@@ -1,0 +1,115 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Information about Bonds {% endblock %}
+
+{% block content %}
+    <div class="block_information_about_deposits">
+        <div class="title">
+                <h1><b> Government Details </b></h1>
+        </div>
+
+        {% if government %}
+
+            <div class="block_deposits_report">
+                <div class="title_details_governments">
+                    <h4><b>  Coupons information </b></h4>
+                </div>
+                <table class="table_deposits_report">
+                    <tr>
+                        <th> Coupons </th>
+                        <th> Nominal cost </th>
+                        <th> Current cost </th>
+                        <th> Coupons cost difference </th>
+                        <th> Coupons profit </th>
+                    </tr>
+                    <tr>
+                        <td>{{ government.coupons }}</td>
+                        <td>{{ government.coupons_nominal_cost }}</td>
+                        <td>{{ government.coupons_current_cost }} </td>
+                        {% for extend_indicator in government.governments_extended_indicators.all %}
+                            <td>{{ extend_indicator.coupons_cost_difference }}</td>
+                            <td>{{ extend_indicator.coupons_profit }}</td>
+                        {% endfor %}
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <div class="title_details_governments">
+                    <h4><b>  Government profit </b></h4>
+                </div>
+                {% for indicator in government.governments_extended_indicators.all %}
+                    <table class="table_deposits_report">
+                        <tr>
+                            <th> Bonds nominal profit </th>
+                            <th> Bonds expenses </th>
+                            <th> Bonds current profit </th>
+                            <th> Bonds repayment </th>
+                            <th> Current rate </th>
+                        </tr>
+                        <tr>
+                            <td>{{ indicator.bonds_nominal_profit }} </td>
+                            <td>{{ government.bonds_expenses }} </td>
+                            <td>{{ indicator.bonds_income }} </td>
+                            <td>{{ government.bonds_repayment_nominal }} </td>
+                            <td>{{ indicator.current_rate }} </td>
+                        </tr>
+                    </table>
+                {% endfor %}
+            </div>
+            <div class="block_table_deposits_report">
+                <div class="title_details_governments">
+                    <h4><b>  Details Profit </b></h4>
+                </div>
+                <table class="table_deposits_report">
+                    <tr>
+                        <th> Dayily profit </th>
+                        <th> Monthly profit </th>
+                        <th> Year profit </th>
+                    </tr>
+                    {% for indicator in government.governments_indicators.all %}
+                        <tr>
+                            <td> {{ indicator.dayily_profit }}</td>
+                            <td> {{ indicator.month_profit }}</td>
+                            <td> {{ indicator.year_profit }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            {% if government.payments_schedule.all %}
+                <div class="block_table_deposits_report">
+                    <div class="title_details_governments">
+                        <h4><b>  Payment Schedule </b></h4>
+                    </div>
+                    <table class="table_deposits_report">
+                        <tr>
+                            <th scope="col"> Payment type </th>
+                            <th scope="col"> Payment date</th>
+                            <th> Sum </th>
+                        </tr>
+                        {% for element in government.payments_schedule.all %}
+                            <tr>
+                                <td>{{ element.payment_type }}</td>
+                                <td>{{ element.payment_date }}</td>
+                                <td>{{ element.payment_sum }} </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+            {% else %}
+                <div class="title_details_governments">
+                    <h4><b>  Payment Schedule </b></h4>
+                </div>
+                <div class="block_bonds_payment_schedule">
+                    <h5> You did not specify a payment plan , add payment schedule ? </h5>
+
+                    <button type="button" class="btn btn-primary btn-sm btn-add-schedule"
+                            onclick="window.location.href ='{% url 'add_schedule' government_id=government.id %}'"> ADD Schedule
+                    </button>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+
+{% endblock %}
