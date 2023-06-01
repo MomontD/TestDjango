@@ -12,15 +12,15 @@ class AddPaymentSchedule(ModelForm):
         fields = ['payment_type', 'payment_date', 'payment_sum']
         widgets = {
             "payment_type": Select(choices=select_type_payment, attrs={
-                'class': 'form-control',
+                'class': 'form-control-sm',
                 'placeholder': 'Enter your choice'
             }),
             "payment_date": DateInput(attrs={
-                    'class': 'form-control',          # Стиль від bootstrap
-                    'placeholder': 'Payment date (YYYY-MM-DD format)'
+                    'class': 'form-control-sm',          # Стиль від bootstrap
+                    'placeholder': 'Payment date (YYYY-MM-DD)'
                 }),
             "payment_sum": TextInput(attrs={
-                'class': 'form-control',  # Стиль від bootstrap
+                'class': 'form-control-sm',  # Стиль від bootstrap
                 'placeholder': 'Government sum'
             }),
     }

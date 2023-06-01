@@ -31,7 +31,6 @@ def general_information_on_governments(request):
 
     # Вибираємо з бази ВСІ активні ОВДП та групуємо їх по валюті
     active_governments = Governments.objects.filter(end_date__gt=date.today())
-    extended_indicators = GovernmentExtendedIndicators.objects.all()
 
     # Вибираємо з бази ВСІ ОВДП в архіві та групуємо їх по валюті
     governments_in_archive = Governments.objects.filter(end_date__lt=date.today())
@@ -39,7 +38,6 @@ def general_information_on_governments(request):
 
     return render(request, 'governments/general_information_on_governments.html',
                   {'active_governments': active_governments,
-                   'extended_indicators': extended_indicators,
                    'archive_governments': governments_in_archive,
                    # # Дані для таблиці з активними депозитами
                    # 'report_active_deposits': report_active_deposits,
@@ -50,8 +48,6 @@ def general_information_on_governments(request):
 
 def add_schedule(request, id):
 
-    error= ''
-
     if request.method == "POST":
         # Якщо ми нажали кнопку name="submit_btn" зберігаємо дані в БД і повертаємось до повторного введення даних
         if 'submit_btn' in request.POST:
@@ -61,11 +57,8 @@ def add_schedule(request, id):
                 form.instance.government_id = id
                 # Зберігаємо форму
                 form.save()
-
                 return redirect('add_schedule', id=id)
 
-            else:
-                error = 'Data not accepted! Invalid data in form!'
         # # Якщо ми нажали кнопку name="submit_and_redirect" повертаємось на сторінку з відобрж. ОВДП
         elif 'submit_and_redirect' in request.POST:
             return redirect('general_information_on_governments')
@@ -76,7 +69,6 @@ def add_schedule(request, id):
         'form': form,
         'government_id': id,
         'data_payment_schedule': data_payment_schedule,
-        'error': error
     }
 
     return render(request, 'governments/add_schedule.html', data)

@@ -20,7 +20,7 @@
                     </tr>
                     {% for element in data_payment_schedule %}
                         <tr>
-                            <td>{{ element.id }} </td>
+                            <td>{{ government_id }} </td>
                             <td>{{ element.payment_type }}</td>
                             <td>{{ element.payment_date }}</td>
                             <td>{{ element.payment_sum }} </td>
@@ -28,9 +28,9 @@
                     {% endfor %}
                 </table>
             {% else %}
-                <div class="block_empty_deposits">
+                <div class="block_empty_payment_scgedule">
 {#                    <h4><b>Active deposits</b></h4>#}
-                    <h5>You have no active deposits</h5>
+                    <h5> List is empty. Please enter payment TYPE , DATE and SUM of governments </h5>
                 </div>
             {% endif %}
             <form method="post" class="form_add_payment_schedule" name="add_payment_schedule">
@@ -46,11 +46,10 @@
                 </table>
                 <button type="submit" name="submit_btn" class="btn btn-success btn-save-schedule"> ADD payment </button>
             </form>
-                <span> <h5>{{ error }}</h5></span> <br>
+
                 <div class="div_buttons_add_schedule">
-{#                    <button type="submit" name="submit_btn" class="btn btn-primary btn-lg btn-save-schedule"> ADD payment and continue </button>#}
-                    <button type="submit" name="submit_and_redirect" class="btn btn-primary btn-lg btn-save-schedule-back-gov"
-                        onclick="window.location.href ='{% url 'general_information_on_governments' %}'"> ADD payment and go to governments
+                    <button type="submit" name="submit_and_redirect" class="btn btn-primary btn-lg btn-schedule-back-gov"
+                        onclick="window.location.href ='{% url 'general_information_on_governments' %}'"> Back to the governments
                     </button>
                 </div>
 

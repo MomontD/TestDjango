@@ -5,25 +5,38 @@
 
 .block_create_schedule{
     display: flex;
-    /*justify-content: left ;*/
-    /*align-items: center;*/
     column-gap: 10%;
     margin-top: 10px;
     margin-left: 5%;
 }
 
+.block_empty_payment_scgedule {
+    border: 2px solid #666666;
+    margin-top: 3%;
+    margin-left: 10px;
+    width: 60%;
+}
+
+.block_empty_payment_scgedule h5 {
+    text-align: center;
+    margin-top: 7px;
+
+}
+
+
 .base_form_information_schedule{
     width: 28%;
 }
 
-/*.btn-save-schedule {*/
-/*    width: 12%;*/
-/*    height: 3%;*/
-/*}*/
+.btn-save-schedule {
+    width: 12%;
+    height: 3%;
+    margin-top: 45px;
+}
 
-.btn-save-schedule-back-gov {
-    margin-left: 5%;
-    width: 27%;
+.btn-schedule-back-gov {
+    margin-left: 10px;
+    width: 60%;
     margin-top: 1%;
 }
 
@@ -40,12 +53,14 @@
 .form_add_payment_schedule input {
     margin-top: 3%;
     margin-bottom: 3%;
+    margin-left: 7px;
 }
+
 
 .table_add_schedule {
     table-layout: fixed;
     margin-left: 10px;
-    margin-top: 10px;
+    margin-top: 3%;
     margin-right: 10px;
     width: 60%;
     /*border-collapse: collapse;*/
@@ -54,7 +69,8 @@
 .table_add_schedule td {
     text-align: center;
     letter-spacing: 1px;
-    box-sizing: border-box;
+    /*box-sizing: border-box;*/
+    height: 10%;
 }
 .table_add_schedule th {
     text-align: center;
