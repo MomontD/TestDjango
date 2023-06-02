@@ -4,12 +4,12 @@
 
 {% block content %}
     <div class="block_information_about_deposits">
+
         <div class="title">
-                <h1><b> Government Details </b></h1>
+                <h1><b> {{ government.name }} Government Details </b></h1>
         </div>
 
         {% if government %}
-
             <div class="block_deposits_report">
                 <div class="title_details_governments">
                     <h4><b>  Coupons information </b></h4>
@@ -42,7 +42,7 @@
                         <tr>
                             <th> Bonds nominal profit </th>
                             <th> Bonds expenses </th>
-                            <th> Bonds current profit </th>
+                            <th> Bonds clean profit </th>
                             <th> Bonds repayment </th>
                             <th> Current rate </th>
                         </tr>
@@ -104,12 +104,19 @@
                 <div class="block_bonds_payment_schedule">
                     <h5> You did not specify a payment plan , add payment schedule ? </h5>
 
-                    <button type="button" class="btn btn-primary btn-sm btn-add-schedule"
+                    <button type="button" name="submit_btn" class="btn btn-success btn-sm btn-add-schedule"
                             onclick="window.location.href ='{% url 'add_schedule' government_id=government.id %}'"> ADD Schedule
                     </button>
                 </div>
             {% endif %}
         {% endif %}
+
+        <div class="div_buttons_add_schedule">
+            <button type="submit" name="submit_and_redirect" class="btn btn-primary btn-lg btn-schedule-back-gov"
+                    onclick="window.location.href ='{% url 'general_information_on_governments' %}'"> Back to the governments
+            </button>
+        </div>
+
     </div>
 
 {% endblock %}

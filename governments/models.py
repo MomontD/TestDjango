@@ -51,9 +51,11 @@ class GovernmentExtendedIndicators(models.Model):
     class Meta:
         db_table = 'governments_extended_indicators'
 
-    current_rate = models.FloatField()            # Фактичний %  = (Загальна сума виплат - суму вкладу ОВДП + дохід/збиток від вартості купону)
+    # Фактичний %  = (Загальна сума виплат - суму вкладу ОВДП + дохід/збиток від вартості купону)
+    current_rate = models.FloatField()
     bonds_nominal_profit = models.FloatField()    # Номінальний дохід
-    bonds_income = models.FloatField()            # Фактичний дохід ОВДП (брудний , без витрат і дод. доходу від купонів)
+    # Прибуток(чистий) = (Загальна сума виплат - суму вкладу ОВДП - витрати + дохід/збиток від вартості купону)
+    bonds_income = models.FloatField()
     coupons_cost_difference = models.FloatField() # Різниця вартості купонів між номінальною і фактичною.
     coupons_profit = models.FloatField()          # Купонний дохід/збиток
     government = models.ForeignKey(Governments, on_delete=models.CASCADE,

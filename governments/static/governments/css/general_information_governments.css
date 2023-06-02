@@ -13,7 +13,14 @@
     margin-top: 4px;
 }
 
-.btn-add-schedule {
-    margin-bottom: 6px;
+.block_active_governments {
+    display: flex;
+    flex-direction: row;
 }
 
+.btn-show-details {
+    /*width: 2%;*/
+    /*height: 3%;*/
+    margin-top: 3px;
+    margin-bottom: 3px;
+}

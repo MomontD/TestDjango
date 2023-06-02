@@ -15,7 +15,7 @@ def add_government(request):
         form = add_governmentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('operations')
+            return redirect('general_information_on_governments')
         else:
             error = 'Data not accepted! Invalid data in form!'
 
@@ -62,15 +62,22 @@ def add_schedule(request, government_id):
                 form.save()
                 return redirect('add_schedule', government_id=government_id)
 
-        # # Якщо ми нажали кнопку name="submit_and_redirect" повертаємось на сторінку з відобрж. ОВДП
-        elif 'submit_and_redirect' in request.POST:
-            return redirect('general_information_on_governments')
+        # Відміна видалення графіку оплат
+        if 'cencel-delete-payments-schedule' in request.POST:
+            return redirect('add_schedule', government_id=government_id)
+
+        # Видалення графіку оплат конкретного ОВДП
+        if 'btn-confirm-delete-payments-schedule' in request.POST:
+            # government_payments = PaymentSchedule.objects.filter(government_id=government_id)
+            # government_payments.delete()
+            PaymentSchedule.objects.filter(government_id=government_id).delete()
 
     data_payment_schedule = PaymentSchedule.objects.filter(government_id=government_id)
+    government = Governments.objects.get(id=government_id)
     form = AddPaymentSchedule()
     data = {
         'form': form,
-        'government_id': id,
+        'government': government,
         'data_payment_schedule': data_payment_schedule,
     }
 

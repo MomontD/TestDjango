@@ -14,38 +14,46 @@
         </div>
 
         {% if active_governments %}
-            {% for bond in active_governments %}
-                <div class="block_active_deposits">
-                    <table class="table_for_deposits">
+            <div class="block_active_governments">
+                <table class="table_for_deposits">
+                    <tr>
+                        <th> Bonds Code </th>
+                        <th> Type </th>
+                        <th> Sum </th>
+                        <th> Currency </th>
+                        <th> Rate % </th>
+                        <th> Profit(clean) </th>
+                        <th> Repayment </th>
+                        <th> Period month </th>
+                        <th> Start date </th>
+                        <th> End Date </th>
+                        <th> Details </th>
+                    </tr>
+                    {% for bond in active_governments %}
                         <tr>
-                            <th> Bonds Code </th>
-                            <th> Type </th>
-                            <th> Sum </th>
-                            <th> Currency </th>
-                            <th> Rate % </th>
-                            <th> Period month </th>
-                            <th> Start date </th>
-                            <th> End Date </th>
-                        </tr>
-                        <tr>
-                            <td>{{ bond.name }}</td>
-                            <td>{{ bond.type_gv }}</td>
-                            <td>{{ bond.sum }} </td>
-                            <td>{{ bond.currency }} </td>
-                            <td>{{ bond.rate }} </td>
-                            <td>{{ bond.period }} </td>
-                            <td>{{ bond.start_date }} </td>
-                            <td>{{ bond.end_date }} </td>
-                        </tr>
-                    </table>
-                </div>
-                <div>
-                    <button type="button" class="btn btn-primary btn-sm btn-show-details"
-                        onclick="window.location.href ='{% url 'government_details' government_id=bond.id %}'"> Show government details
-                    </button>
-                </div>
+                            <td> {{ bond.name }}    </td>
+                            <td> {{ bond.type_gv }} </td>
+                            <td> {{ bond.sum }}     </td>
+                            <td> {{ bond.currency }} </td>
+                            <td> {{ bond.rate }}     </td>
+                            {% for indicator in bond.governments_extended_indicators.all %}
+                                <td> {{ indicator.bonds_income }}   </td>
+                            {% endfor %}
+                            <td> {{ bond.bonds_repayment_nominal }} </td>
+                            <td> {{ bond.period }}     </td>
+                            <td> {{ bond.start_date }} </td>
+                            <td> {{ bond.end_date }}   </td>
+                            <td> <button type="button" class="btn btn-primary btn-sm btn-show-details"
+                                         onclick="window.location.href =
+                                                 '{% url 'government_details' government_id=bond.id %}'"> Show details
+                                  </button>
+                            </td>
 
-            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
         {% else %}
             <div class="block_empty_deposits">
                 <h4><b> Active Governments </b></h4>
@@ -53,10 +61,15 @@
             </div>
         {% endif %}
 
+        <div class="div_buttons_add_schedule">
+            <button type="submit" name="submit_and_redirect" class="btn btn-primary btn-lg btn-schedule-back-gov"
+                    onclick="window.location.href ='{% url 'operations' %}'"> Back to "Operation MENU"
+            </button>
+        </div>
 
         {% if archive_governments %}
             {% for bond in archive_governments %}
-                <div class="block_information_about_deposits">
+                <div class="block_information_about_governments">
                     <div class="block_active_deposits">
                         <table class="table_for_deposits">
                             <tr>
