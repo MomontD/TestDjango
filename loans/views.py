@@ -15,11 +15,11 @@ def loans(request):
 def general_information_on_loans(request):
 
     # Вибираємо з бази ВСІ активні позики та групуємо їх по валюті
-    active_loans = Loans.objects.filter(end_date__gt=date.today())
+    active_loans = Loans.objects.filter(end_date__gt=date.today()).order_by('start_date')
     grouped_active_loans = grouping(active_loans)
 
     # Вибираємо з бази ВСІ позики в архіві та групуємо їх по валюті
-    loans_in_archive = Loans.objects.filter(end_date__lt=date.today())
+    loans_in_archive = Loans.objects.filter(end_date__lt=date.today()).order_by('end_date')
     grouped_archive_loans = grouping(loans_in_archive)
 
     if grouped_active_loans != 'list is empty':

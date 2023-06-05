@@ -43,12 +43,11 @@
                             <td> {{ bond.period }}     </td>
                             <td> {{ bond.start_date }} </td>
                             <td> {{ bond.end_date }}   </td>
-                            <td> <button type="button" class="btn btn-primary btn-sm btn-show-details"
+                            <td> <button type="button" class="btn btn-secondary btn-sm btn-show-details"
                                          onclick="window.location.href =
                                                  '{% url 'government_details' government_id=bond.id %}'"> Show details
                                   </button>
                             </td>
-
                         </tr>
                     {% endfor %}
                 </table>
@@ -56,46 +55,94 @@
 
         {% else %}
             <div class="block_empty_deposits">
-                <h4><b> Active Governments </b></h4>
                 <h5> You have no active Governments </h5>
             </div>
         {% endif %}
 
-        <div class="div_buttons_add_schedule">
+        <div class="block_deposits_report">
+            {% if report_active_governments != 'list is empty' %}
+                <div class="title_deposits_report">
+                    <h4><b> Governments report </b></h4>
+                </div>
+                <div class="block_table_deposits_report">
+                    <table class="table_deposits_report">
+                        <tr>
+                            <th> Currency </th>
+                            <th> Sum of Bonds </th>
+                            <th> Average rate % </th>
+                            <th> Current rate % </th>
+                            <th> Dayily profit </th>
+                            <th> Monthly profit </th>
+                            <th> Year profit </th>
+                            <th> Total profit </th>
+                        </tr>
+                        {% for indicator in report_active_governments %}
+                            <tr>
+                                <td> {{ indicator.currency }}</td>
+                                <td> {{ indicator.calc_sum }}</td>
+                                <td> {{ indicator.average_rate }}</td>
+                                <td> {{ indicator.current_rate }}</td>
+                                <td> {{ indicator.dayily_profit }}</td>
+                                <td> {{ indicator.monthly_profit }}</td>
+                                <td> {{ indicator.year_profit }}</td>
+                                <td> {{ indicator.total_profit }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="div_buttons_block">
             <button type="submit" name="submit_and_redirect" class="btn btn-primary btn-lg btn-schedule-back-gov"
                     onclick="window.location.href ='{% url 'operations' %}'"> Back to "Operation MENU"
             </button>
         </div>
 
         {% if archive_governments %}
-            {% for bond in archive_governments %}
-                <div class="block_information_about_governments">
-                    <div class="block_active_deposits">
-                        <table class="table_for_deposits">
-                            <tr>
-                                <th> Bonds Code </th>
-                                <th> Type </th>
-                                <th> Sum </th>
-                                <th> Currency </th>
-                                <th> Rate % </th>
-                                <th> Period month </th>
-                                <th> Start date </th>
-                                <th> End Date </th>
-                            </tr>
-                            <tr>
-                                <td>{{ bond.name }}</td>
-                                <td>{{ bond.type_gv }}</td>
-                                <td>{{ bond.sum }} </td>
-                                <td>{{ bond.currency }} </td>
-                                <td>{{ bond.rate }} </td>
-                                <td>{{ bond.period }} </td>
-                                <td>{{ bond.start_date }} </td>
-                                <td>{{ bond.end_date }} </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            {% endfor %}
+
+            <div class="title_active_deposits">
+                <h4><b> Governments in Archive </b></h4>
+            </div>
+
+            <div class="block_active_governments">
+                <table class="table_for_deposits">
+                    <tr>
+                        <th> Bonds Code </th>
+                        <th> Type </th>
+                        <th> Sum </th>
+                        <th> Currency </th>
+                        <th> Rate % </th>
+                        <th> Profit(clean) </th>
+                        <th> Repayment </th>
+                        <th> Period month </th>
+                        <th> Start date </th>
+                        <th> End Date </th>
+                        <th> Details </th>
+                    </tr>
+                    {% for bond in archive_governments %}
+                        <tr>
+                            <td> {{ bond.name }}    </td>
+                            <td> {{ bond.type_gv }} </td>
+                            <td> {{ bond.sum }}     </td>
+                            <td> {{ bond.currency }} </td>
+                            <td> {{ bond.rate }}     </td>
+                            {% for indicator in bond.governments_extended_indicators.all %}
+                                <td> {{ indicator.bonds_income }}   </td>
+                            {% endfor %}
+                            <td> {{ bond.bonds_repayment_nominal }} </td>
+                            <td> {{ bond.period }}     </td>
+                            <td> {{ bond.start_date }} </td>
+                            <td> {{ bond.end_date }}   </td>
+                            <td> <button type="button" class="btn btn-secondary btn-sm btn-show-details"
+                                         onclick="window.location.href =
+                                                 '{% url 'government_details' government_id=bond.id %}'"> Show details
+                                  </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
         {% else %}
             <div class="block_empty_deposits">
                 <h4><b> Archive Governments </b></h4>
@@ -103,5 +150,40 @@
             </div>
 
         {% endif %}
+
+        <div class="block_deposits_report">
+            {% if report_archive_governments != 'list is empty' %}
+                <div class="title_deposits_report">
+                    <h4><b> Governments report </b></h4>
+                </div>
+                <div class="block_table_deposits_report">
+                    <table class="table_deposits_report">
+                        <tr>
+                            <th> Currency </th>
+                            <th> Sum of Bonds </th>
+                            <th> Average rate % </th>
+                            <th> Current rate % </th>
+                            <th> Dayily profit </th>
+                            <th> Monthly profit </th>
+                            <th> Year profit </th>
+                            <th> Total profit </th>
+                        </tr>
+                        {% for indicator in report_archive_governments %}
+                            <tr>
+                                <td> {{ indicator.currency }}</td>
+                                <td> {{ indicator.calc_sum }}</td>
+                                <td> {{ indicator.average_rate }}</td>
+                                <td> {{ indicator.current_rate }}</td>
+                                <td> {{ indicator.dayily_profit }}</td>
+                                <td> {{ indicator.monthly_profit }}</td>
+                                <td> {{ indicator.year_profit }}</td>
+                                <td> {{ indicator.total_profit }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+
     </div>
 {% endblock %}

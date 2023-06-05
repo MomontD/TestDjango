@@ -4,6 +4,8 @@ from governments.forms import add_governmentForm, AddPaymentSchedule
 
 from governments.models import *
 
+from utils.general.general_functions import grouping, calculate_indicators
+
 
 def governments(request):
     return render(request, '')
@@ -30,15 +32,38 @@ def add_government(request):
 def general_information_on_governments(request):
 
     # Вибираємо з бази ВСІ активні ОВДП та групуємо їх по валюті
-    active_governments = Governments.objects.filter(end_date__gt=date.today())
+    active_governments = Governments.objects.filter(end_date__gt=date.today()).order_by('start_date')
+    grouped_active_governments = grouping(active_governments)
 
     # Вибираємо з бази ВСІ ОВДП в архіві та групуємо їх по валюті
-    governments_in_archive = Governments.objects.filter(end_date__lt=date.today())
+    governments_in_archive = Governments.objects.filter(end_date__lt=date.today()).order_by('end_date')
+    grouped_archive_governments = grouping(governments_in_archive)
+
+    if grouped_active_governments != 'list is empty':
+        # передаємо дод. параметр 'governments' щоб ф-я знала з яким обєктом працює і яку таблицю з індикаторами витягувати
+        report_active_governments = calculate_indicators('governments', grouped_active_governments)
+    else:
+        report_active_deposits = grouped_active_governments  # поверне 'list is empty'
+
+    if grouped_archive_governments != 'list is empty':
+        # передаємо дод. параметр 'governments' щоб ф-я знала з яким обєктом працює і яку таблицю з індикаторами витягувати
+        report_archive_governments = calculate_indicators('governments', grouped_archive_governments)
+    else:
+        report_archive_governments = grouped_archive_governments  # поверне 'list is empty'
+
+    # payments_schedule = PaymentSchedule.objects.order_by('payment_date')
+    # for el in payments_schedule:
+    #     print(el.payment_date)
+
 
 
     return render(request, 'governments/general_information_on_governments.html',
                   {'active_governments': active_governments,
                    'archive_governments': governments_in_archive,
+                   # Дані для таблиці з активними депозитами
+                   'report_active_governments': report_active_governments,
+                   # Дані для таблиці з архівними депозитами
+                   'report_archive_governments': report_archive_governments
                    })
 
 

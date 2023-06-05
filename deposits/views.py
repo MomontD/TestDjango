@@ -16,11 +16,11 @@ def deposits(request):
 def general_information_on_deposits(request):
 
     # Вибираємо з бази ВСІ активні депозити та групуємо їх по валюті
-    active_deposits = Deposits.objects.filter(end_date__gt=date.today())
+    active_deposits = Deposits.objects.filter(end_date__gt=date.today()).order_by('start_date')
     grouped_active_deposits = grouping(active_deposits)
 
     # Вибираємо з бази ВСІ депозити в архіві та групуємо їх по валюті
-    deposits_in_archive = Deposits.objects.filter(end_date__lt=date.today())
+    deposits_in_archive = Deposits.objects.filter(end_date__lt=date.today()).order_by('end_date')
     grouped_archive_deposits = grouping(deposits_in_archive)
 
     if grouped_active_deposits != 'list is empty':

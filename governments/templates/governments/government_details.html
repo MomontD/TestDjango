@@ -89,9 +89,9 @@
                         </tr>
                         {% for element in government.payments_schedule.all %}
                             <tr>
-                                <td>{{ element.payment_type }}</td>
-                                <td>{{ element.payment_date }}</td>
-                                <td>{{ element.payment_sum }} </td>
+                                <td class="government-type-cell">{{ element.payment_type }}</td>
+                                <td class="government-date-cell">{{ element.payment_date }}</td>
+                                <td class="government-payment-cell">{{ element.payment_sum }} </td>
                             </tr>
                         {% endfor %}
                     </table>

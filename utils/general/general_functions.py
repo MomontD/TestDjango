@@ -1,7 +1,7 @@
 
 # МОДЕЛЬ ІНДИКАТОРІВ ПРОДУКТІВ (ДЕННИЙ,МІСЯЧНИЙ,РІЧНИЙ,ЗАГАЛЬНИЙ ДОХОДИ)
 class ListOfValues:
-    def __init__(self, currency, calc_sum, average_rate, dayily_profit, monthly_profit, year_profit, total_profit):
+    def __init__(self, currency, calc_sum, average_rate, dayily_profit, monthly_profit, year_profit, total_profit, current_rate):
         self.currency = currency
         self.calc_sum = calc_sum
         self.average_rate = average_rate
@@ -9,6 +9,7 @@ class ListOfValues:
         self.monthly_profit = monthly_profit
         self.year_profit = year_profit
         self.total_profit = total_profit
+        self.current_rate = current_rate  # Для ОВДП / середній фактичний %
 
 
 # ФУНКЦІЯ ГРУПУВАННЯ ДЕПОЗИТІВ ПО ВАЛЮТАМ
@@ -62,6 +63,8 @@ def calculate_indicators(name_instance,grouped_data):
         year_profit = 0
         # Середній відсоток по депозитам , позикам
         average_rate = 0
+        # Фактичний відсоток по ОВДП
+        current_rate = 0
         # Загальний дохід з депозитам , позикам
         total_profit = 0
 
@@ -77,15 +80,25 @@ def calculate_indicators(name_instance,grouped_data):
                     product_indicators = element.loans_indicators.get()  # витягуємо дані з звязвної таблиці loans_indicators
                 if name_instance == 'deposits':
                     product_indicators = element.deposits_indicators.get()
+                if name_instance == 'governments':
+                    product_indicators = element.governments_indicators.get()
+                    # Розраховуємо середній фактичний % для ОВДП
+                    extended_indicators = element.governments_extended_indicators.get()
+                    current_rate_from_table = extended_indicators.current_rate
+                    current_rate += current_rate_from_table
 
-                dayily_profit += round(product_indicators.dayily_profit, 2)
-                monthly_profit += round(product_indicators.month_profit, 2)
-                year_profit += round(product_indicators.year_profit, 2)
-                total_profit += round(product_indicators.total_profit, 2)
+                dayily_profit += product_indicators.dayily_profit
+                monthly_profit += product_indicators.month_profit
+                year_profit += product_indicators.year_profit
+                total_profit += product_indicators.total_profit
                 counter += 1
 
             average_rate = round(average_rate/counter, 2)      # Визначення середнього % по депозитам
-            res_calc = ListOfValues(currency, calc_sum, average_rate, dayily_profit, monthly_profit, year_profit, total_profit)
+            current_rate = round(current_rate/counter, 2)
+            res_calc = ListOfValues(
+                currency, round(calc_sum, 2), round(average_rate, 2), round(dayily_profit, 2),
+                round(monthly_profit, 2), round(year_profit, 2), round(total_profit, 2), round(current_rate, 2)
+                                    )
             values_for_report.append(res_calc)
 
     return values_for_report
@@ -103,7 +116,5 @@ def calculate_product_indicators(instance, days):
         # Якщо депозит більший за 12 міс. , рахуємо дохід тільки за 12 міс.
         else:
             year_profit = instance.sum * (instance.rate / 100)
-
-        print (dayily_profit, month_profit, year_profit, total_profit, days, instance.period, instance.rate)
 
         return [dayily_profit, month_profit, year_profit, total_profit]
