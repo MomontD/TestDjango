@@ -6,6 +6,8 @@ from governments.models import *
 
 from utils.general.general_functions import grouping, calculate_indicators
 
+from utils.governments.gov_func import forming_list_of_years
+
 
 def governments(request):
     return render(request, '')
@@ -43,19 +45,13 @@ def general_information_on_governments(request):
         # передаємо дод. параметр 'governments' щоб ф-я знала з яким обєктом працює і яку таблицю з індикаторами витягувати
         report_active_governments = calculate_indicators('governments', grouped_active_governments)
     else:
-        report_active_deposits = grouped_active_governments  # поверне 'list is empty'
+        report_active_governments = grouped_active_governments  # поверне 'list is empty'
 
     if grouped_archive_governments != 'list is empty':
         # передаємо дод. параметр 'governments' щоб ф-я знала з яким обєктом працює і яку таблицю з індикаторами витягувати
         report_archive_governments = calculate_indicators('governments', grouped_archive_governments)
     else:
         report_archive_governments = grouped_archive_governments  # поверне 'list is empty'
-
-    # payments_schedule = PaymentSchedule.objects.order_by('payment_date')
-    # for el in payments_schedule:
-    #     print(el.payment_date)
-
-
 
     return render(request, 'governments/general_information_on_governments.html',
                   {'active_governments': active_governments,
@@ -66,6 +62,15 @@ def general_information_on_governments(request):
                    'report_archive_governments': report_archive_governments
                    })
 
+def payments_schedule(request):
+    # Витягуємо з таблиці оплат всі оплати + відфіотровуємо по даті (актуальні) + сортуємо по зростанню
+    payments_schedule = PaymentSchedule.objects.filter(payment_date__gt=date.today()).order_by('payment_date')
+    # За допомогою forming_list_of_years отримуємо список років [2022,2023,2024]
+    year_list = forming_list_of_years(payments_schedule)
+
+    return render(request, 'governments/payments_schedule.html',{'year_list': year_list,
+                                                                 'payments_schedule': payments_schedule
+                                                                 })
 
 def government_details(request, government_id):
 

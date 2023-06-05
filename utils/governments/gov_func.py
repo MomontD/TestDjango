@@ -46,3 +46,15 @@ def calc_extends_indicators (instance):
     bonds_rate = (bonds_year_profit / instance.sum) * 100
 
     return nominal_profit, bonds_income, coupons_difference, all_coupons_profit, bonds_rate
+
+
+def forming_list_of_years (date_list):
+
+    list_of_years = []
+    # Витягйємо рік з дати оплати і додаємо його в масив / результат = масив з роками
+    for el in date_list:
+        list_of_years.append(el.payment_date.year)
+    # Забираємо дублікати з масиву років та відсортовуємо унікальнізначення = [2022,2023,2024]
+    list_of_years = sorted(set(list_of_years))
+
+    return list_of_years

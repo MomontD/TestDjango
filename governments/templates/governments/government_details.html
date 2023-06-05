@@ -95,6 +95,10 @@
                             </tr>
                         {% endfor %}
                     </table>
+                    <button type="button" name="submit_btn" class="btn btn-warning btn-sm btn-delete-edit-schedule"
+                            onclick="window.location.href ='{% url 'add_schedule' government_id=government.id %}'">
+                            Delete or edit Schedule
+                    </button>
                 </div>
 
             {% else %}

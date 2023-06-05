@@ -1,0 +1,64 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Information about Bonds {% endblock %}
+
+{% block content %}
+
+    <div class="block_information_about_deposits">
+        <div class="title">
+                <h1><b> Payments Schedule </b></h1>
+        </div>
+
+        {% if payments_schedule %}
+            <div class="block_active_governments">
+                <table class="table_for_deposits">
+                    <tr>
+                        <th> January  </th>
+                        <th> February </th>
+                        <th> March </th>
+                        <th> April </th>
+                        <th> May  </th>
+                        <th> June </th>
+                        <th> July </th>
+                        <th> August </th>
+                        <th> September </th>
+                        <th> October  </th>
+                        <th> November </th>
+                        <th> December </th>
+                    </tr>
+                    {% for bond in active_governments %}
+                        <tr>
+                            <td> {{ bond.name }}    </td>
+                            <td> {{ bond.type_gv }} </td>
+                            <td> {{ bond.sum }}     </td>
+                            <td> {{ bond.currency }} </td>
+                            <td> {{ bond.rate }}     </td>
+                            {% for indicator in bond.governments_extended_indicators.all %}
+                                <td> {{ indicator.bonds_income }}   </td>
+                            {% endfor %}
+                            <td> {{ bond.bonds_repayment_nominal }} </td>
+                            <td> {{ bond.period }}     </td>
+                            <td> {{ bond.start_date }} </td>
+                            <td> {{ bond.end_date }}   </td>
+                            <td> <button type="button" class="btn btn-warning btn-sm btn-show-details"
+                                         onclick="window.location.href =
+                                                 '{% url 'government_details' government_id=bond.id %}'"> Show details
+                                  </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+        {% else %}
+            <div class="title_active_deposits">
+                <h4><b> Payments Schedule </b></h4>
+            </div>
+            <div class="block_empty_deposits">
+                <h5> You have no Payments Schedule </h5>
+            </div>
+        {% endif %}
+
+    </div>
+
+{% endblock %}
