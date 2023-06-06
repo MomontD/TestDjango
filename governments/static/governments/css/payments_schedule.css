@@ -1,0 +1,65 @@
+.table_payments_schedule {
+    table-layout: fixed;
+    margin-left: 10px;
+    margin-top: 13px;
+    margin-right: 10px;
+    width: 97%;
+    /*border-collapse: collapse;*/
+    border: 2px solid #666666;
+}
+.table_payments_schedule td {
+    text-align: center;
+    letter-spacing: 1px;
+}
+.table_payments_schedule th {
+    text-align: center;
+    border: #666666;
+    border-bottom: 2px solid #666666;
+}
+
+/*.table_payments_schedule th:nth-child(1) {*/
+/*    width: 12%*/
+/*}*/
+/*.table_payments_schedule th:nth-child(2) {*/
+/*    width: 16%*/
+/*}*/
+/*.table_payments_schedule th:nth-child(3) {*/
+/*    width: 7%*/
+/*}*/
+/*.table_payments_schedule th:nth-child(4) {*/
+/*    width: 9%*/
+/*}*/
+/*.table_payments_schedule th:nth-child(5) {*/
+/*    width: 5%*/
+/*}*/
+
+/*.table_payments_schedule td:nth-child(1) {*/
+/*    width: 12%*/
+/*}*/
+/*.table_payments_schedule td:nth-child(2) {*/
+/*    width: 16%*/
+/*}*/
+/*.table_payments_schedule td:nth-child(3) {*/
+/*    width: 7%*/
+/*}*/
+/*.table_payments_schedule td:nth-child(4) {*/
+/*    width: 9%*/
+/*}*/
+/*.table_payments_schedule td:nth-child(5) {*/
+/*    width: 5%*/
+/*}*/
+/*.table_payments_schedule td:nth-child(6) {*/
+/*    width: 5%*/
+/*}*/
+/*.table_payments_schedule td:nth-child(7) {*/
+/*    width: 10%*/
+/*}*/
+/*.table_payments_schedule td:nth-child(8) {*/
+/*    width: 10%*/
+/*}*/
+/*.table_payments_schedule td:nth-child(9) {*/
+/*    width: 11%*/
+/*}*/
+/*.table_payments_schedule td:nth-child(10) {*/
+/*    width: 11%;*/
+/*}*/

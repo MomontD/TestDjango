@@ -10,44 +10,53 @@
         </div>
 
         {% if payments_schedule %}
-            <div class="block_active_governments">
-                <table class="table_for_deposits">
-                    <tr>
-                        <th> January  </th>
-                        <th> February </th>
-                        <th> March </th>
-                        <th> April </th>
-                        <th> May  </th>
-                        <th> June </th>
-                        <th> July </th>
-                        <th> August </th>
-                        <th> September </th>
-                        <th> October  </th>
-                        <th> November </th>
-                        <th> December </th>
-                    </tr>
-                    {% for bond in active_governments %}
+            <div class="block_governments_payment_schedule">
+                {% for year in year_list %}
+                    <div class="title_active_deposits"> <h4><b> {{ year }} </b></h4></div>
+                    <table class="table_payments_schedule">
                         <tr>
-                            <td> {{ bond.name }}    </td>
-                            <td> {{ bond.type_gv }} </td>
-                            <td> {{ bond.sum }}     </td>
-                            <td> {{ bond.currency }} </td>
-                            <td> {{ bond.rate }}     </td>
-                            {% for indicator in bond.governments_extended_indicators.all %}
-                                <td> {{ indicator.bonds_income }}   </td>
-                            {% endfor %}
-                            <td> {{ bond.bonds_repayment_nominal }} </td>
-                            <td> {{ bond.period }}     </td>
-                            <td> {{ bond.start_date }} </td>
-                            <td> {{ bond.end_date }}   </td>
-                            <td> <button type="button" class="btn btn-warning btn-sm btn-show-details"
-                                         onclick="window.location.href =
-                                                 '{% url 'government_details' government_id=bond.id %}'"> Show details
-                                  </button>
-                            </td>
+                            <th> January  </th>
+                            <th> February </th>
+                            <th> March </th>
+                            <th> April </th>
+                            <th> May  </th>
+                            <th> June </th>
                         </tr>
-                    {% endfor %}
-                </table>
+                        <tr>
+                            {% for el in month_list %}
+                                <th> Date | Bond code | Sum </th>
+                            {% endfor %}
+                        </tr>
+
+                        <tr>
+                            {% for month in month_list %}
+                                <td>
+                                    {% for payment in payments_schedule %}
+                                        {% if payment.payment_date.year == year and payment.payment_date.month == month%}
+                                            {{ payment.payment_date }}, {{ payment.government.name }}, {{ payment.payment_sum }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                            {% endfor %}
+                        </tr>
+
+                    </table>
+                    <table class="table_payments_schedule">
+                        <tr>
+                            <th> July </th>
+                            <th> August </th>
+                            <th> September </th>
+                            <th> October  </th>
+                            <th> November </th>
+                            <th> December </th>
+                        </tr>
+                        <tr>
+                            {% for el in month_list %}
+                                <th> Date | Bond code | Sum </th>
+                            {% endfor %}
+                        </tr>
+                    </table>
+                {% endfor %}
             </div>
 
         {% else %}

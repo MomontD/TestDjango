@@ -67,8 +67,15 @@ def payments_schedule(request):
     payments_schedule = PaymentSchedule.objects.filter(payment_date__gt=date.today()).order_by('payment_date')
     # За допомогою forming_list_of_years отримуємо список років [2022,2023,2024]
     year_list = forming_list_of_years(payments_schedule)
-
+    month_list = [1, 2, 3, 4, 5, 6]
+                # ['January', 'February', 'March', 'April', 'May', 'June']
+                  # 'July', 'August', 'September', 'October',
+                  # 'November', 'December']
+    print(payments_schedule)
+    for payment in payments_schedule:
+        print(payment.payment_date.month, payment.payment_sum)
     return render(request, 'governments/payments_schedule.html',{'year_list': year_list,
+                                                                 'month_list': month_list,
                                                                  'payments_schedule': payments_schedule
                                                                  })
 
