@@ -3,13 +3,14 @@
     margin-left: 10px;
     margin-top: 13px;
     margin-right: 10px;
-    width: 97%;
+    width: 70%;
     /*border-collapse: collapse;*/
     border: 2px solid #666666;
 }
 .table_payments_schedule td {
     text-align: center;
     letter-spacing: 1px;
+    width: 10%;
 }
 .table_payments_schedule th {
     text-align: center;

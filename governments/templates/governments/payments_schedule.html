@@ -11,50 +11,27 @@
 
         {% if payments_schedule %}
             <div class="block_governments_payment_schedule">
-                {% for year in year_list %}
+                {% for year,months in period_list.items %}
                     <div class="title_active_deposits"> <h4><b> {{ year }} </b></h4></div>
                     <table class="table_payments_schedule">
                         <tr>
-                            <th> January  </th>
-                            <th> February </th>
-                            <th> March </th>
-                            <th> April </th>
-                            <th> May  </th>
-                            <th> June </th>
-                        </tr>
-                        <tr>
-                            {% for el in month_list %}
-                                <th> Date | Bond code | Sum </th>
+                            {% for month in months %}
+                                <th>
+                                    {{ month }}
+                                </th>
                             {% endfor %}
-                        </tr>
-
                         <tr>
-                            {% for month in month_list %}
+                            {% for month in months %}
                                 <td>
                                     {% for payment in payments_schedule %}
-                                        {% if payment.payment_date.year == year and payment.payment_date.month == month%}
-                                            {{ payment.payment_date }}, {{ payment.government.name }}, {{ payment.payment_sum }}
-                                        {% endif %}
+                                       {% if payment.payment_date.year == year and payment.payment_date|date:"F" == month %}
+                                           {{ payment.payment_date }}, {{payment.government.name }}, {{ payment.payment_type }}, {{ payment.payment_sum }}
+                                       {% endif %}
                                     {% endfor %}
                                 </td>
                             {% endfor %}
                         </tr>
 
-                    </table>
-                    <table class="table_payments_schedule">
-                        <tr>
-                            <th> July </th>
-                            <th> August </th>
-                            <th> September </th>
-                            <th> October  </th>
-                            <th> November </th>
-                            <th> December </th>
-                        </tr>
-                        <tr>
-                            {% for el in month_list %}
-                                <th> Date | Bond code | Sum </th>
-                            {% endfor %}
-                        </tr>
                     </table>
                 {% endfor %}
             </div>
@@ -71,3 +48,28 @@
     </div>
 
 {% endblock %}
+
+
+{#{% for year,months in period_list.items %}#}
+{#                    <div class="title_active_deposits"> <h4><b> {{ year }} </b></h4></div>#}
+{#                    <table class="table_payments_schedule">#}
+{#                        <tr>#}
+{#                            {% for month in months %}#}
+{#                                <th>#}
+{#                                    {{ month }}#}
+{#                                </th>#}
+{#                            {% endfor %}#}
+{#                        <tr>#}
+{#                            {% for month in months %}#}
+{#                                <td>#}
+{#                                    {% for payment in payments_schedule %}#}
+{#                                       {% if payment.payment_date.year == year and payment.payment_date|date:"F" == month %}#}
+{#                                           {{ payment.payment_date }}, {{payment.government.name }}, {{ payment.payment_type }}, {{ payment.payment_sum }}#}
+{#                                       {% endif %}#}
+{#                                    {% endfor %}#}
+{#                                </td>#}
+{#                            {% endfor %}#}
+{#                        </tr>#}
+{##}
+{#                    </table>#}
+{#                {% endfor %}#}

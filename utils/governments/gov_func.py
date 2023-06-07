@@ -48,13 +48,18 @@ def calc_extends_indicators (instance):
     return nominal_profit, bonds_income, coupons_difference, all_coupons_profit, bonds_rate
 
 
-def forming_list_of_years (date_list):
+def forming_period_list (date_list):
+    # date_list - отримуємо на вході актуальний+відсортований список(з меншої дати до більшої) з платежами по ОВДП
+    period_list ={}
+    # Проганяємо через цикл кожен елемент списку
+    for date in date_list:
+        # Вибираємо з елементу дату(рік) якщо такого нема в словнику додаємо
+        if date.payment_date.year not in period_list:
+            period_list[date.payment_date.year] = []
+        # Вибираємо місяць з елементу , якщо такого немає в словнику з роком({'2023': ['Jan',...] додаємо до року
+        if date.payment_date.strftime('%B') not in period_list[date.payment_date.year]:
+            period_list[date.payment_date.year].append(date.payment_date.strftime('%B'))
 
-    list_of_years = []
-    # Витягйємо рік з дати оплати і додаємо його в масив / результат = масив з роками
-    for el in date_list:
-        list_of_years.append(el.payment_date.year)
-    # Забираємо дублікати з масиву років та відсортовуємо унікальнізначення = [2022,2023,2024]
-    list_of_years = sorted(set(list_of_years))
+    # Повертає : {2023: ['June', 'August', 'November'], 2024: ['February', 'May', 'August'], 2025: ['February']}
+    return period_list
 
-    return list_of_years
