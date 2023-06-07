@@ -9,30 +9,38 @@
                 <h1><b> Payments Schedule </b></h1>
         </div>
 
-        {% if payments_schedule %}
-            <div class="block_governments_payment_schedule">
-                {% for year,months in period_list.items %}
-                    <div class="title_active_deposits"> <h4><b> {{ year }} </b></h4></div>
-                    <table class="table_payments_schedule">
-                        <tr>
-                            {% for month in months %}
-                                <th>
-                                    {{ month }}
-                                </th>
-                            {% endfor %}
-                        <tr>
-                            {% for month in months %}
-                                <td>
-                                    {% for payment in payments_schedule %}
-                                       {% if payment.payment_date.year == year and payment.payment_date|date:"F" == month %}
-                                           {{ payment.payment_date }}, {{payment.government.name }}, {{ payment.payment_type }}, {{ payment.payment_sum }}
-                                       {% endif %}
-                                    {% endfor %}
-                                </td>
-                            {% endfor %}
-                        </tr>
+        <div class="title_active_deposits">
+            <h3><b> Planned payments </b></h3>
+        </div>
 
-                    </table>
+        {% if payments_schedule_active %}
+            <div class="block_governments_payment_schedule">
+                {% for year,months in period_list_active.items %}
+                    <div class="government_payment_year">
+                        <h4> {{ year }} </h4>
+                    </div>
+                    <div class="government_payment_months">
+                        {% for month in months %}
+                            <div class="payment_block_month_and_date">
+                                <div class="government_payment_month">
+                                    <h5> {{ month }} </h5>
+                                </div>
+                                <div class="government_payment_date">
+                                    {% for payment in payments_schedule_active %}
+                                        {% if payment.payment_date.year == year and payment.payment_date|date:"F" == month  %}
+                                            <div>
+                                                {{ payment.payment_date.month}}/{{ payment.payment_date.day }}
+                                                {{payment.government.name }}, {{ payment.payment_type }},
+                                                {{ payment.payment_sum }}
+                                            </div>
+
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
                 {% endfor %}
             </div>
 
@@ -45,6 +53,48 @@
             </div>
         {% endif %}
 
+    <div class="title_archive_governments">
+        <h3><b> Payments in archive </b></h3>
+    </div>
+        {% if payments_schedule_archive %}
+            <div class="block_governments_payment_schedule">
+                {% for year,months in period_list_archive.items %}
+                    <div class="government_payment_year">
+                        <h4> {{ year }} </h4>
+                    </div>
+                    <div class="government_payment_months">
+                        {% for month in months %}
+                            <div class="payment_block_month_and_date">
+                                <div class="government_payment_month">
+                                    <h5> {{ month }} </h5>
+                                </div>
+                                <div class="government_payment_date">
+                                    {% for payment in payments_schedule_archive %}
+                                        {% if payment.payment_date.year == year and payment.payment_date|date:"F" == month  %}
+                                            <div>
+                                                {{ payment.payment_date.month}}/{{ payment.payment_date.day }}
+                                                {{payment.government.name }}, {{ payment.payment_type }},
+                                                {{ payment.payment_sum }}
+                                            </div>
+
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                {% endfor %}
+            </div>
+
+        {% else %}
+            <div class="title_active_deposits">
+                <h4><b> Payments Schedule </b></h4>
+            </div>
+            <div class="block_empty_deposits">
+                <h5> You have no Payments Schedule </h5>
+            </div>
+        {% endif %}
     </div>
 
 {% endblock %}

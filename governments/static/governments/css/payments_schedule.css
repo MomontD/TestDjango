@@ -1,22 +1,62 @@
-.table_payments_schedule {
-    table-layout: fixed;
+
+.block_governments_payment_schedule {
     margin-left: 10px;
-    margin-top: 13px;
-    margin-right: 10px;
-    width: 70%;
-    /*border-collapse: collapse;*/
+}
+
+.government_payment_months {
+    display: flex;
+    /*flex-direction: row;*/
+    flex-wrap: wrap;
+    column-gap: 1%;
+}
+
+.government_payment_month {
+    text-align: center;
+}
+
+.payment_block_month_and_date {
+    width: 30%; /* Ширина кожного дочірнього елемента - 33.33% для 3 в рядок */
+    box-sizing: border-box;
+    margin-top: 2%;
+    /*border: 2px solid #666666;*/
+}
+
+.government_payment_date {
     border: 2px solid #666666;
 }
-.table_payments_schedule td {
-    text-align: center;
-    letter-spacing: 1px;
-    width: 10%;
+
+.title_archive_governments {
+    margin-left: 10px;
+    margin-top: 4%;
 }
-.table_payments_schedule th {
-    text-align: center;
-    border: #666666;
-    border-bottom: 2px solid #666666;
+
+
+.government_payment_year {
+    margin-top: 2%;
+    /*text-align: center;*/
 }
+
+
+
+/*.table_payments_schedule {*/
+/*    table-layout: fixed;*/
+/*    margin-left: 10px;*/
+/*    margin-top: 13px;*/
+/*    margin-right: 10px;*/
+/*    width: 70%;*/
+/*    !*border-collapse: collapse;*!*/
+/*    border: 2px solid #666666;*/
+/*}*/
+/*.table_payments_schedule td {*/
+/*    text-align: center;*/
+/*    letter-spacing: 1px;*/
+/*    width: 10%;*/
+/*}*/
+/*.table_payments_schedule th {*/
+/*    text-align: center;*/
+/*    border: #666666;*/
+/*    border-bottom: 2px solid #666666;*/
+/*}*/
 
 /*.table_payments_schedule th:nth-child(1) {*/
 /*    width: 12%*/

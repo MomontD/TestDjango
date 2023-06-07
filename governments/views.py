@@ -64,12 +64,18 @@ def general_information_on_governments(request):
 
 def payments_schedule(request):
     # Витягуємо з таблиці оплат всі оплати + відфіотровуємо по даті (актуальні) + сортуємо по зростанню
-    payments_schedule = PaymentSchedule.objects.filter(payment_date__gt=date.today()).order_by('payment_date')
-    # За допомогою forming_list_of_years отримуємо список років [2022,2023,2024]
-    period_list = forming_period_list(payments_schedule)
-    print(period_list)
-    return render(request, 'governments/payments_schedule.html',{'period_list': period_list,
-                                                                 'payments_schedule': payments_schedule
+    payments_schedule_active = PaymentSchedule.objects.filter(payment_date__gt=date.today()).order_by('payment_date')
+    payments_schedule_archive = PaymentSchedule.objects.filter(payment_date__lt=date.today()).order_by('payment_date')
+
+    # За допомогою forming_list_of_years отримуємо список років та місяців в які є оплати
+    # Повертає : {2023: ['June', 'August', 'November'], 2024: ['February', 'May', 'August'], 2025: ['February']}
+    period_list_active = forming_period_list(payments_schedule_active)
+    period_list_archive = forming_period_list(payments_schedule_archive)
+
+    return render(request, 'governments/payments_schedule.html',{'period_list_active': period_list_active,
+                                                                 'period_list_archive': period_list_archive,
+                                                                 'payments_schedule_active': payments_schedule_active,
+                                                                 'payments_schedule_archive': payments_schedule_archive
                                                                  })
 
 def government_details(request, government_id):

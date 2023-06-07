@@ -14,8 +14,8 @@ from django.dispatch import receiver
 
 
 select_type_payment = [
-    ('coupons payment', 'coupons payment'),
-    ('return sum governments', 'return sum governments'),
+    ('Сoupons', 'Сoupons'),
+    ('Government Sum', 'Government Sum'),
 ]
 
 select_type_gv = [
