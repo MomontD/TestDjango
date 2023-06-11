@@ -1,0 +1,82 @@
+{% extends 'main/layout.html' %}{# наслідуємо розмітку сторінки layout#}
+
+{% load humanize %}
+
+{% block title %} General report {% endblock %}   {# вказуємо що має знаходитись в блоках#}
+
+{% block content %}                           {# вказуємо що має знаходитись в блоках#}
+
+    <div class="block_information_about_deposits">
+        <div class="title">
+                <h1><b> GENERAL REPORT </b></h1>
+        </div>
+
+        <div class="title_capital">
+            <h4><b> Capital {{ capital|intcomma }}</b></h4>
+        </div>
+
+        <div class="div_block_indicators">
+            <div class="div_investments_type">
+                <h5> Investment type </h5>
+            </div>
+            {% if deposits_sum %}
+                <div class="div_deposits_title" data-deposits-sum="{{ deposits_sum }}">
+                    <h5> Deposits </h5>
+                </div>
+            {% endif %}
+            {% if governments_sum %}
+                <div class="div_governments_title" data-governments-sum="{{ governments_sum }}">
+                    <h5> Governments </h5>
+                </div>
+            {% endif %}
+            {% if loans_sum %}
+                <div class="div_loans_title" data-loans-sum="{{ loans_sum }}">
+                    <h5> Loans </h5>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="div_block_indicators">
+             <div class="div_investments_type">
+                <h5> Investment sum </h5>
+            </div>
+            <div class="div_deposits_sum" data-deposits-sum="{{ deposits_sum }}">
+                {% if deposits_sum %}
+                    <h5> {{ deposits_sum|intcomma }} </h5>
+                {% endif %}
+            </div>
+            <div class="div_governments_sum" data-governments-sum="{{ governments_sum }}">
+                {% if governments_sum %}
+                    <h5> {{ governments_sum|intcomma }} </h5>
+                {% endif %}
+            </div>
+            <div class="div_loans_sum" data-loans-sum="{{ loans_sum }}">
+                {% if loans_sum %}
+                    <h5> {{ loans_sum|intcomma }} </h5>
+                {% endif %}
+            </div>
+        </div>
+        <div class="div_block_indicators">
+             <div class="div_investments_type">
+                <h5> Capital Rate % </h5>
+            </div>
+            <div class="div_deposits_rate" data-deposits-sum="{{ deposits_sum }}">
+                {% if deposits_sum %}
+                    <h5>  </h5>
+                {% endif %}
+            </div>
+            <div class="div_governments_rate" data-governments-sum="{{ governments_sum }}">
+                {% if governments_sum %}
+                    <h5>  </h5>
+                {% endif %}
+            </div>
+            <div class="div_loans_rate" data-loans-sum="{{ loans_sum }}">
+                {% if loans_sum %}
+                    <h5>  </h5>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

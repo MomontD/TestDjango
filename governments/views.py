@@ -6,7 +6,7 @@ from governments.models import *
 
 from utils.general.general_functions import grouping, calculate_indicators
 
-from utils.governments.gov_func import forming_period_list
+from utils.governments.gov_func import forming_period_list, forming_year_payments_list
 
 
 def governments(request):
@@ -70,10 +70,20 @@ def payments_schedule(request):
     # За допомогою forming_list_of_years отримуємо список років та місяців в які є оплати
     # Повертає : {2023: ['June', 'August', 'November'], 2024: ['February', 'May', 'August'], 2025: ['February']}
     period_list_active = forming_period_list(payments_schedule_active)
+    # За допомогою payments_list_active отримуємо список оплат (купони,повернення ОВДП) підрахованих по рокам
+    # Повертає :
+    # {2023: {'coupons': 100864.85, 'government sum': 911000.0}, 2024: {'coupons': 91517.0, 'governm
+    # ent sum': 180000.0}, 2025: {'coupons': 41263.0, 'government sum': 521000.0}}
+    year_payments_list_active = forming_year_payments_list(period_list_active, payments_schedule_active)
+
+    # Аналогічні дії та функції (такі як для активних ОВДП описані вище) тільки для архівних ОВДП
     period_list_archive = forming_period_list(payments_schedule_archive)
+    year_payments_list_archive = forming_year_payments_list(period_list_archive,payments_schedule_archive)
 
     return render(request, 'governments/payments_schedule.html',{'period_list_active': period_list_active,
                                                                  'period_list_archive': period_list_archive,
+                                                                 'year_payments_list_active' : year_payments_list_active,
+                                                                 'year_payments_list_archive': year_payments_list_archive,
                                                                  'payments_schedule_active': payments_schedule_active,
                                                                  'payments_schedule_archive': payments_schedule_archive
                                                                  })

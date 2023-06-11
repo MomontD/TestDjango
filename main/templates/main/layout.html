@@ -2,6 +2,7 @@
 {# документація https://docs.djangoproject.com/en/4.1/howto/static-files/#}
 {% load static %}
 
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -27,6 +28,7 @@
     <link rel="stylesheet" href="{% static 'governments/css/add_schedule.css' %}">
     <link rel="stylesheet" href="{% static 'governments/css/government_details.css' %}">
     <link rel="stylesheet" href="{% static 'governments/css/payments_schedule.css' %}">
+    <link rel="stylesheet" href="{% static 'generalreport/css/generalreport.css' %}">
     <title>{% block title %} {% endblock %}</title>
 </head>
 <body>
@@ -38,15 +40,20 @@
             <a href="{% url 'operations' %}"> <li> <i class="fa-regular fa-money-bill-1"> </i> Operations  </li></a>
             <a href="{% url 'analitics' %}">  <li> <i class="fa-solid fa-chart-line">     </i> Analitics   </li></a>
             <a href="{% url 'currency' %}">  <li>  <i class="fa-solid fa-dollar-sign">    </i> Currency    </li></a>
-            <a href="{% url 'basereport' %}"> <li> <i class="fa-solid fa-flag">           </i> Base report </li></a>
+            <a href="{% url 'general_report' %}"> <li> <i class="fa-solid fa-flag">           </i> General report </li></a>
         </ul>
 
     </aside>
 
     {% block content %}
 
+{#        {% block scripts %}#}
+{#            <script src="{% static 'governments/script/payments_schedule.js' %}"></script>#}
+{#        {% endblock %}#}
+
     {% endblock %}
     <script src="{% static 'governments/script/government_details.js' %}"></script>
+    <script src="{% static 'generalreport/script/generalreport.js' %}"></script>
 {#    {% include 'main/test.html' %} - підключення окремого файлу#}
 
 </body>

@@ -17,5 +17,5 @@ def analitics(request) :
     return render (request, 'main/analitics.html')
 
 def basereport(request) :
-    return render (request, 'main/basereport.html')
+    return render (request, 'main/../generalreport/templates/generalreport/generalreport.html')
 

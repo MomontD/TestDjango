@@ -1,0 +1,57 @@
+
+.div_block_indicators {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    margin-left: 10px;
+}
+
+.div_investments_type {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3px;
+}
+
+.div_div_deposits_sum,
+.div_governments_sum,
+.div_loans_sum,
+.div_deposits_title,
+.div_governments_title,
+.div_loans_title,
+.div_deposits_rate,
+.div_governments_rate,
+.div_loans_rate {
+    display: flex;
+    border: 3px solid #666666;
+    /*transition: height 0.3s ease;*/
+    height: 45px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1%;
+}
+
+.div_div_deposits_sum h5,
+.div_governments_sum h5,
+.div_loans_sum h5,
+.div_investments_type h5 {
+    margin-bottom: unset;
+}
+
+/*.div_deposits_title,*/
+/*.div_governments_title,*/
+/*.div_loans_title {*/
+/*    margin-top: 1%;*/
+/*    border-bottom: 0px;*/
+/*}*/
+
+.title_capital {
+    margin-top: 3%;
+    margin-left: 10px;
+    width: 70%;
+}
+
+/*.title_capital h4 {*/
+/*    text-align: center;*/
+/*}*/

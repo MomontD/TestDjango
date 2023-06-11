@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'deposits',
     'loans',
     'governments',
+    'generalreport',
+    'django.contrib.humanize',
     'requests', # необхідно для зчитування даних зі сторінок
     'bs4',      # необхідно для зчитування даних зі сторінок
     'django_extensions', # візуалізація/формування діаграм БД

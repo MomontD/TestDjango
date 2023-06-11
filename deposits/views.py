@@ -126,7 +126,7 @@ def delete_deposits(request):
         selected_deposits = request.POST.getlist('selected_deposits')
         if selected_deposits :
             Deposits.objects.filter(id__in=selected_deposits).delete()
-            successful_operation_delete_deposit = 'The deposit has been successfully deleted'
+            successful_operation_delete_deposit = 'The deposit(s) has been successfully deleted'
         else:
             error_delete_deposit = 'You have not selected a deposit!'
 

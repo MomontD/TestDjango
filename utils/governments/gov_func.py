@@ -48,18 +48,41 @@ def calc_extends_indicators (instance):
     return nominal_profit, bonds_income, coupons_difference, all_coupons_profit, bonds_rate
 
 
+# Ф-я яка формує обєкт з роками та місяцями коли присутні платежі по ОВДП
 def forming_period_list (date_list):
-    # date_list - отримуємо на вході актуальний+відсортований список(з меншої дати до більшої) з платежами по ОВДП
-    period_list ={}
+    # date_list - отримуємо на вході актуальний + відсортований список(з меншої дати до більшої) з платежами по ОВДП
+    period_list = {}
     # Проганяємо через цикл кожен елемент списку
     for date in date_list:
         # Вибираємо з елементу дату(рік) якщо такого нема в словнику додаємо
         if date.payment_date.year not in period_list:
             period_list[date.payment_date.year] = []
-        # Вибираємо місяць з елементу , якщо такого немає в словнику з роком({'2023': ['Jan',...] додаємо до року
+        # Вибираємо місяць з елементу, якщо такого немає в словнику з роком({'2023': ['Jan',...] додаємо до року
         if date.payment_date.strftime('%B') not in period_list[date.payment_date.year]:
             period_list[date.payment_date.year].append(date.payment_date.strftime('%B'))
 
-    # Повертає : {2023: ['June', 'August', 'November'], 2024: ['February', 'May', 'August'], 2025: ['February']}
+    # Повертає :
+    # перший : {2023: ['June', 'August', 'November'], 2024: ['February', 'May', 'August'], 2025: ['February']}
     return period_list
+
+
+# Ф-я яка формує обєкт з підсумковими платежами по кожному року (купони та повернення ОВДП)
+def forming_year_payments_list (period_list, payments_list):
+
+    year_payments_list = {}
+
+    for payment in payments_list:
+        for year in period_list:
+            if payment.payment_date.year == year:
+                if payment.payment_date.year not in year_payments_list:
+                    year_payments_list[payment.payment_date.year] = {}
+
+                if payment.payment_type not in year_payments_list[payment.payment_date.year]:
+                    year_payments_list[payment.payment_date.year][payment.payment_type]= 0
+
+                year_payments_list[payment.payment_date.year][payment.payment_type] += payment.payment_sum
+    # Повертає :
+    # {2023: {'coupons': 100864.85, 'government sum': 911000.0}, 2024: {'coupons': 91517.0, 'governm
+    # ent sum': 180000.0}, 2025: {'coupons': 41263.0, 'government sum': 521000.0}}
+    return year_payments_list
 

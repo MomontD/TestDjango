@@ -28,26 +28,35 @@
                                 <div class="government_payment_date">
                                     {% for payment in payments_schedule_active %}
                                         {% if payment.payment_date.year == year and payment.payment_date|date:"F" == month  %}
-                                            <div>
+                                            <div class="government_payments_details">
                                                 {{ payment.payment_date.month}}/{{ payment.payment_date.day }}
                                                 {{payment.government.name }}, {{ payment.payment_type }},
                                                 {{ payment.payment_sum }}
                                             </div>
-
                                         {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
                         {% endfor %}
                     </div>
-
+                    <div class="governments_result_payment_from_year">
+                        {% for payment_year, payment_type in year_payments_list_active.items %}
+                            {% if payment_year == year %}
+                                <div class="coupons_payments_from_year">
+                                    All payments from year
+                                </div>
+                                {% for type, sum in payment_type.items %}
+                                    <div id=coupons_payments_from_year class="coupons_payments_from_year">
+                                        {{ type }} payments : {{ sum }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 {% endfor %}
             </div>
 
         {% else %}
-            <div class="title_active_deposits">
-                <h4><b> Payments Schedule </b></h4>
-            </div>
             <div class="block_empty_deposits">
                 <h5> You have no Payments Schedule </h5>
             </div>
@@ -71,10 +80,12 @@
                                 <div class="government_payment_date">
                                     {% for payment in payments_schedule_archive %}
                                         {% if payment.payment_date.year == year and payment.payment_date|date:"F" == month  %}
-                                            <div>
-                                                {{ payment.payment_date.month}}/{{ payment.payment_date.day }}
-                                                {{payment.government.name }}, {{ payment.payment_type }},
-                                                {{ payment.payment_sum }}
+                                            <div class="government_payments_details">
+                                                <h7>
+                                                    {{ payment.payment_date.month}}/{{ payment.payment_date.day }}
+                                                    {{payment.government.name }}, {{ payment.payment_type }},
+                                                    {{ payment.payment_sum }}
+                                                </h7>
                                             </div>
 
                                         {% endif %}
@@ -83,14 +94,24 @@
                             </div>
                         {% endfor %}
                     </div>
-
+                    <div class="governments_result_payment_from_year">
+                        {% for payment_year, payment_type in year_payments_list_archive.items %}
+                            {% if payment_year == year %}
+                                <div class="coupons_payments_from_year">
+                                    All payments from year
+                                </div>
+                                {% for type, sum in payment_type.items %}
+                                    <div id=coupons_payments_from_year class="coupons_payments_from_year">
+                                        {{ type }} payments : {{ sum }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 {% endfor %}
             </div>
 
         {% else %}
-            <div class="title_active_deposits">
-                <h4><b> Payments Schedule </b></h4>
-            </div>
             <div class="block_empty_deposits">
                 <h5> You have no Payments Schedule </h5>
             </div>
@@ -98,28 +119,3 @@
     </div>
 
 {% endblock %}
-
-
-{#{% for year,months in period_list.items %}#}
-{#                    <div class="title_active_deposits"> <h4><b> {{ year }} </b></h4></div>#}
-{#                    <table class="table_payments_schedule">#}
-{#                        <tr>#}
-{#                            {% for month in months %}#}
-{#                                <th>#}
-{#                                    {{ month }}#}
-{#                                </th>#}
-{#                            {% endfor %}#}
-{#                        <tr>#}
-{#                            {% for month in months %}#}
-{#                                <td>#}
-{#                                    {% for payment in payments_schedule %}#}
-{#                                       {% if payment.payment_date.year == year and payment.payment_date|date:"F" == month %}#}
-{#                                           {{ payment.payment_date }}, {{payment.government.name }}, {{ payment.payment_type }}, {{ payment.payment_sum }}#}
-{#                                       {% endif %}#}
-{#                                    {% endfor %}#}
-{#                                </td>#}
-{#                            {% endfor %}#}
-{#                        </tr>#}
-{##}
-{#                    </table>#}
-{#                {% endfor %}#}
