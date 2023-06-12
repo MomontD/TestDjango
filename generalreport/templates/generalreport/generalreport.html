@@ -11,8 +11,13 @@
                 <h1><b> GENERAL REPORT </b></h1>
         </div>
 
-        <div class="title_capital">
-            <h4><b> Capital {{ capital|intcomma }}</b></h4>
+        <div class="div_block_indicators">
+            <div class="div_investments_type">
+                <h5> Capital </h5>
+            </div>
+            <div class="investment_capital">
+                <h5> {{ capital|intcomma }} </h5>
+            </div>
         </div>
 
         <div class="div_block_indicators">
@@ -56,25 +61,26 @@
                 {% endif %}
             </div>
         </div>
+
         <div class="div_block_indicators">
              <div class="div_investments_type">
-                <h5> Capital Rate % </h5>
+                <h5> Profit </h5>
             </div>
-            <div class="div_deposits_rate" data-deposits-sum="{{ deposits_sum }}">
-                {% if deposits_sum %}
-                    <h5>  </h5>
-                {% endif %}
-            </div>
-            <div class="div_governments_rate" data-governments-sum="{{ governments_sum }}">
-                {% if governments_sum %}
-                    <h5>  </h5>
-                {% endif %}
-            </div>
-            <div class="div_loans_rate" data-loans-sum="{{ loans_sum }}">
-                {% if loans_sum %}
-                    <h5>  </h5>
-                {% endif %}
-            </div>
+            {% if deposits_profit %}
+                <div class="div_deposits_profit" data-deposits-profit="{{ deposits_profit }}">
+                    <h5> {{ deposits_profit }}</h5>
+                </div>
+            {% endif %}
+            {% if governments_profit %}
+                <div class="div_governments_profit" data-governments-profit="{{ governments_profit }}">
+                    <h5> {{ governments_profit }}</h5>
+                </div>
+            {% endif %}
+            {% if loans_profit %}
+                <div class="div_loans_profit" data-loans-profit="{{ loans_profit }}">
+                    <h5> {{ loans_profit }}</h5>
+                </div>
+            {% endif %}
         </div>
 
     </div>
