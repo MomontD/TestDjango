@@ -47,6 +47,7 @@ def calc_investment_profit(investment_list):
             loan_indicators = investment.loans_indicators.get()
             investment_profit += loan_indicators.total_profit
 
+    investment_profit = investment_profit if investment_profit is not None else 0
 
     return round(investment_profit, 2)
 

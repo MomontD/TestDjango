@@ -20,13 +20,18 @@ def general_report(request):
     deposits_profit = calc_investment_profit(Deposits.objects.filter(end_date__gt=date.today()))
     governments_profit = calc_investment_profit(Governments.objects.filter(end_date__gt=date.today()))
     loans_profit = calc_investment_profit(Loans.objects.filter(end_date__gt=date.today()))
+    print(loans_profit)
 
     capital = round((deposits_sum + governments_sum + loans_sum), 2)
+    total_profit = deposits_profit + governments_profit + loans_profit
+    profit_rate = round((total_profit/capital)*100, 2)
 
     return render(request, 'generalreport/generalreport.html', {'deposits_sum': deposits_sum,
                                                                 'governments_sum': governments_sum,
                                                                 'loans_sum': loans_sum,
                                                                 'capital': capital,
+                                                                'total_profit': total_profit,
+                                                                'profit_rate': profit_rate,
                                                                 'deposits_profit': deposits_profit,
                                                                 'governments_profit': governments_profit,
                                                                 'loans_profit': loans_profit})

@@ -103,7 +103,7 @@ def terminate_deposits(request):
             deposit_to_terminate = Deposits.objects.get(id=id)             # витягуємо депозит по id який передаємо по url з форми
             deposit_to_terminate.end_date = terminate_date                 # присвоюємо кінцевій даті депозиту - дату розірвання договору
             deposit_to_terminate.rate = float(terminate_rate)              # при вводі дати має тип str , перетворюємо на float
-            # Ф-я з визначення к-сті місяців, які записуємо в колонку "period", депозиту
+            # Ф-я з визначення к-сті місяців, по яким перераховується дохід та які записуємо в колонку "period", депозиту
             deposit_to_terminate.period = defining_month(deposit_to_terminate,terminate_date)
             deposit_to_terminate.terminate_deposit = 'terminated'
             deposit_to_terminate.save()

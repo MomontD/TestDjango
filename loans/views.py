@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 
 from loans.models import Loans
 from utils.general.general_functions import grouping, calculate_indicators
+from utils.deposits.deposit_func import defining_month
 
 from loans.forms import add_loanForm
 
@@ -65,6 +66,34 @@ def add_loan(request):
     }
     return render(request, 'loans/add_loan.html', data)
 
+
+def terminate_loans(request):
+    error = ''
+    successful_operation = ''
+    if request.method == 'POST':
+        terminate_date = request.POST.get('terminate_date')  # дата розірванням - беремо з input name='terminate_date'
+        terminate_rate = request.POST.get('terminate_rate')  # % розірвання - беремо з input name='terminate_rate'
+        id = request.GET.get('id')          # id позики беремо з форми form ( id передається у форму при формуванні таблиці)
+
+        try:
+            terminate_date = datetime.strptime(terminate_date, '%Y-%m-%d').date() # при вводі дати має тип str , перетворюємо на обєкт дата/ .date - дата без часу
+            loan_to_terminate = Loans.objects.get(id=id)             # витягуємо позику по id який передаємо по url з форми
+            loan_to_terminate.end_date = terminate_date              # присвоюємо кінцевій даті позики - дату розірвання
+            loan_to_terminate.rate = float(terminate_rate)           # при вводі дати має тип str , перетворюємо на float
+
+            # Ф-я з визначення к-сті місяців, по яким перераховується дохід та записуємо в колонку "period", позик
+            loan_to_terminate.period = defining_month(loan_to_terminate,terminate_date)
+            loan_to_terminate.save()
+            successful_operation = 'The loan has been successfully terminated!'
+        except:
+            error = 'Data not accepted! Entered data is not valid ! Please enter a correct data!'
+
+    # Фільтруємо депозити з БД - тільки активні(діючі) і в кого статус з достроковим розірванням = apply
+    loans_to_terminate = Loans.objects.filter(end_date__gt=date.today())
+
+    return render (request, 'loans/terminate_loans.html', {'loans_to_terminate': loans_to_terminate,
+                                                           'error': error,
+                                                           'successful_operation': successful_operation})
 
 def delete_loans(request):
     error_delete = ''

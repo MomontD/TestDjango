@@ -1,9 +1,21 @@
+.block_information_about_indicators {
+    display: flex;
+    flex-direction: column;
+}
+
+.div_block_all_indicators {
+    margin-top: 5%;
+}
+
+.div_title_indicators {
+    margin-left: 49%;
+}
 
 .div_block_indicators {
     display: flex;
     flex-direction: row;
-    width: 85%;
-    margin-left: 10px;
+    width: 80%;
+    /*margin-left: 10px;*/
 }
 
 .investment_capital {
@@ -18,11 +30,11 @@
 }
 
 .div_investments_type {
-    width: 25%;
+    width: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 3px;
+    margin-top: 1%;
 }
 
 .div_deposits_sum,
@@ -35,6 +47,7 @@
 .div_governments_profit,
 .div_loans_profit {
     display: flex;
+    width: 20%;
     border: 3px solid #666666;
     height: 45px;
     justify-content: center;
