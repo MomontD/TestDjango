@@ -53,10 +53,15 @@ span {
 /*---------------"empty_deposits"----------------------------------------*/
 
 .block_empty_deposits {
-    margin-top: 40px;
+    /*margin-top: 40px;*/
     display: flex;
     flex-direction: column;
 }
+
+.block_empty_deposits h4 {
+    margin-top: 40px;
+}
+
 .block_empty_deposits h5 {
     text-align: center;
     border : 2px solid #666666;

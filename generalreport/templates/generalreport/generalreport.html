@@ -88,22 +88,41 @@
                 </div>
                 {% if deposits_profit %}
                     <div class="div_deposits_profit" data-deposits-profit="{{ deposits_profit }}">
-                        <h5> {{ deposits_profit }}</h5>
+                        <h5> {{ deposits_profit|intcomma }}</h5>
                     </div>
                 {% endif %}
                 {% if governments_profit %}
                     <div class="div_governments_profit" data-governments-profit="{{ governments_profit }}">
-                        <h5> {{ governments_profit }}</h5>
+                        <h5> {{ governments_profit|intcomma }}</h5>
                     </div>
                 {% endif %}
                 {% if loans_profit %}
                     <div class="div_loans_profit" data-loans-profit="{{ loans_profit }}">
-                        <h5> {{ loans_profit }}</h5>
+                        <h5> {{ loans_profit|intcomma }}</h5>
                     </div>
                 {% endif %}
             </div>
+{#      Будуємо табличку з сум індикаторів по категоріям інвестицій #}
+{#      ( депозити : сума доходів за день , міс, рік , загальний , і по всім іншим #}
+        {% for category in invetments_indicators_UAH %}
+            {% if category %}
+                <div class="div_block_indicators">
+                    <div class="div_investments_type">
+                        <h5> Dayily </h5>
+                    </div>
+                    <div class="div_deposits_title" data-deposits-sum="{{ deposits_sum }}">
+                        <h5> {{ category }} </h5>
+                    </div>
+                    <div class="div_governments_title" data-governments-sum="{{ governments_sum }}">
+                        <h5> {{ indicator }} </h5>
+                    </div>
+                    <div class="div_loans_title" data-loans-sum="{{ loans_sum }}">
+                        <h5> {{ indicator }} </h5>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
         </div>
-
     </div>
 
 {% endblock %}

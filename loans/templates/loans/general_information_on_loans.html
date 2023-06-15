@@ -3,10 +3,13 @@
 {% block title %} Information about Loans {% endblock %}
 
 {% block content %}
+    <div class="title">
+        <h1><b> Information about Loans </b></h1>
+    </div>
     {% if grouped_active_loans != 'list is empty' %}
-         <div class="title">
-            <h1><b> Information about Loans </b></h1>
-         </div>
+{#        <div class="title">#}
+{#            <h1><b> Information about Loans </b></h1>#}
+{#        </div>#}
         <div class="block_information_about_deposits">
 
             <div class="title_active_deposits">
@@ -47,6 +50,7 @@
             <h4><b>Active loans</b></h4>
             <h5>You have no active loans</h5>
         </div>
+
 
     {% endif %}
 
