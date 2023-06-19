@@ -104,25 +104,39 @@
             </div>
 {#      Будуємо табличку з сум індикаторів по категоріям інвестицій #}
 {#      ( депозити : сума доходів за день , міс, рік , загальний , і по всім іншим #}
-        {% for category in invetments_indicators_UAH %}
-            {% if category %}
-                <div class="div_block_indicators">
-                    <div class="div_investments_type">
-                        <h5> Dayily </h5>
-                    </div>
-                    <div class="div_deposits_title" data-deposits-sum="{{ deposits_sum }}">
-                        <h5> {{ category }} </h5>
-                    </div>
-                    <div class="div_governments_title" data-governments-sum="{{ governments_sum }}">
-                        <h5> {{ indicator }} </h5>
-                    </div>
-                    <div class="div_loans_title" data-loans-sum="{{ loans_sum }}">
-                        <h5> {{ indicator }} </h5>
-                    </div>
+        {% for category,investment in investment_profit_indicators.items %}
+
+            <div class="div_block_indicators">
+                <div class="div_investments_type">
+                    <h5> {{ category }} </h5>
                 </div>
-            {% endif %}
+                {% if investment.deposits %}
+                    <div class="div_deposits_title" data-deposits-sum="{{ deposits_sum }}">
+                        <h5> {{ investment.deposits }} </h5>
+                    </div>
+                {% endif %}
+                {% if investment.governments %}
+                    <div class="div_governments_title" data-governments-sum="{{ governments_sum }}">
+                        <h5> {{ investment.governments }} </h5>
+                    </div>
+                {% endif %}
+                {% if investment.loans %}
+                    <div class="div_loans_title" data-loans-sum="{{ loans_sum }}">
+                        <h5> {{ investment.loans }} </h5>
+                    </div>
+                {% endif %}
+            </div>
+
         {% endfor %}
+        <div>
+            {% if investment_profit_indicators.day_indicators_UAH.deposits %}
+                <div> {{ investment_profit_indicators.day_indicators_UAH.deposits }} </div>
+            {% endif %}
+
         </div>
+
+
+
     </div>
 
 {% endblock %}
