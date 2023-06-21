@@ -1,5 +1,7 @@
 {% extends 'main/layout.html' %}
 
+{% load humanize %}
+
 {% block title %} Information about Bonds {% endblock %}
 
 {% block content %}
@@ -33,13 +35,13 @@
                         <tr>
                             <td> {{ bond.name }}    </td>
                             <td> {{ bond.type_gv }} </td>
-                            <td> {{ bond.sum }}     </td>
+                            <td> {{ bond.sum|intcomma }}     </td>
                             <td> {{ bond.currency }} </td>
                             <td> {{ bond.rate }}     </td>
                             {% for indicator in bond.governments_extended_indicators.all %}
-                                <td> {{ indicator.bonds_income }}   </td>
+                                <td> {{ indicator.bonds_income|intcomma }}   </td>
                             {% endfor %}
-                            <td> {{ bond.bonds_repayment_nominal }} </td>
+                            <td> {{ bond.bonds_repayment_nominal|intcomma }} </td>
                             <td> {{ bond.period }}     </td>
                             <td> {{ bond.start_date }} </td>
                             <td> {{ bond.end_date }}   </td>
@@ -79,13 +81,13 @@
                         {% for indicator in report_active_governments %}
                             <tr>
                                 <td> {{ indicator.currency }}</td>
-                                <td> {{ indicator.calc_sum }}</td>
+                                <td> {{ indicator.calc_sum|intcomma }}</td>
                                 <td> {{ indicator.average_rate }}</td>
                                 <td> {{ indicator.current_rate }}</td>
-                                <td> {{ indicator.dayily_profit }}</td>
-                                <td> {{ indicator.monthly_profit }}</td>
-                                <td> {{ indicator.year_profit }}</td>
-                                <td> {{ indicator.total_profit }}</td>
+                                <td> {{ indicator.dayily_profit|intcomma }}</td>
+                                <td> {{ indicator.monthly_profit|intcomma }}</td>
+                                <td> {{ indicator.year_profit|intcomma }}</td>
+                                <td> {{ indicator.total_profit|intcomma }}</td>
                             </tr>
                         {% endfor %}
                     </table>
@@ -124,13 +126,13 @@
                         <tr>
                             <td> {{ bond.name }}    </td>
                             <td> {{ bond.type_gv }} </td>
-                            <td> {{ bond.sum }}     </td>
+                            <td> {{ bond.sum|intcomma }}     </td>
                             <td> {{ bond.currency }} </td>
                             <td> {{ bond.rate }}     </td>
                             {% for indicator in bond.governments_extended_indicators.all %}
-                                <td> {{ indicator.bonds_income }}   </td>
+                                <td> {{ indicator.bonds_income|intcomma }}   </td>
                             {% endfor %}
-                            <td> {{ bond.bonds_repayment_nominal }} </td>
+                            <td> {{ bond.bonds_repayment_nominal|intcomma }} </td>
                             <td> {{ bond.period }}     </td>
                             <td> {{ bond.start_date }} </td>
                             <td> {{ bond.end_date }}   </td>
@@ -171,13 +173,13 @@
                         {% for indicator in report_archive_governments %}
                             <tr>
                                 <td> {{ indicator.currency }}</td>
-                                <td> {{ indicator.calc_sum }}</td>
+                                <td> {{ indicator.calc_sum|intcomma }}</td>
                                 <td> {{ indicator.average_rate }}</td>
                                 <td> {{ indicator.current_rate }}</td>
-                                <td> {{ indicator.dayily_profit }}</td>
-                                <td> {{ indicator.monthly_profit }}</td>
-                                <td> {{ indicator.year_profit }}</td>
-                                <td> {{ indicator.total_profit }}</td>
+                                <td> {{ indicator.dayily_profit|intcomma }}</td>
+                                <td> {{ indicator.monthly_profit|intcomma }}</td>
+                                <td> {{ indicator.year_profit|intcomma }}</td>
+                                <td> {{ indicator.total_profit|intcomma }}</td>
                             </tr>
                         {% endfor %}
                     </table>

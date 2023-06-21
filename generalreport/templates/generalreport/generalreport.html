@@ -112,31 +112,28 @@
                 </div>
                 {% if investment.deposits %}
                     <div class="div_deposits_title" data-deposits-sum="{{ deposits_sum }}">
-                        <h5> {{ investment.deposits }} </h5>
+                        <h5> {{ investment.deposits|intcomma }} </h5>
                     </div>
                 {% endif %}
                 {% if investment.governments %}
                     <div class="div_governments_title" data-governments-sum="{{ governments_sum }}">
-                        <h5> {{ investment.governments }} </h5>
+                        <h5> {{ investment.governments|intcomma }} </h5>
                     </div>
                 {% endif %}
                 {% if investment.loans %}
-                    <div class="div_loans_title" data-loans-sum="{{ loans_sum }}">
-                        <h5> {{ investment.loans }} </h5>
+                    <div class="div_loans_profit" data-loans-profit="{{ loans_profit }}">
+                        <h5> {{ investment.loans|intcomma }}</h5>
+                    </div>
+                {% endif %}
+                {% if investment.summary_profit %}
+                    <div class="div_summary_period_profit">
+                        <h5> {{ investment.summary_profit|intcomma }} </h5>
                     </div>
                 {% endif %}
             </div>
 
         {% endfor %}
-        <div>
-            {% if investment_profit_indicators.day_indicators_UAH.deposits %}
-                <div> {{ investment_profit_indicators.day_indicators_UAH.deposits }} </div>
-            {% endif %}
-
         </div>
-
-
-
     </div>
 
 {% endblock %}

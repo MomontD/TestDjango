@@ -1,5 +1,7 @@
 {% extends 'main/layout.html' %}
 
+{% load humanize %}
+
 {% block title %} Information about Bonds {% endblock %}
 
 {% block content %}
@@ -24,11 +26,11 @@
                     </tr>
                     <tr>
                         <td>{{ government.coupons }}</td>
-                        <td>{{ government.coupons_nominal_cost }}</td>
-                        <td>{{ government.coupons_current_cost }} </td>
+                        <td>{{ government.coupons_nominal_cost|intcomma }}</td>
+                        <td>{{ government.coupons_current_cost|intcomma }} </td>
                         {% for extend_indicator in government.governments_extended_indicators.all %}
                             <td>{{ extend_indicator.coupons_cost_difference }}</td>
-                            <td>{{ extend_indicator.coupons_profit }}</td>
+                            <td>{{ extend_indicator.coupons_profit|intcomma }}</td>
                         {% endfor %}
                     </tr>
                 </table>
@@ -47,10 +49,10 @@
                             <th> Current rate </th>
                         </tr>
                         <tr>
-                            <td>{{ indicator.bonds_nominal_profit }} </td>
-                            <td>{{ government.bonds_expenses }} </td>
-                            <td>{{ indicator.bonds_income }} </td>
-                            <td>{{ government.bonds_repayment_nominal }} </td>
+                            <td>{{ indicator.bonds_nominal_profit|intcomma }} </td>
+                            <td>{{ government.bonds_expenses|intcomma }} </td>
+                            <td>{{ indicator.bonds_income|intcomma }} </td>
+                            <td>{{ government.bonds_repayment_nominal|intcomma }} </td>
                             <td>{{ indicator.current_rate }} </td>
                         </tr>
                     </table>
@@ -68,9 +70,9 @@
                     </tr>
                     {% for indicator in government.governments_indicators.all %}
                         <tr>
-                            <td> {{ indicator.dayily_profit }}</td>
-                            <td> {{ indicator.month_profit }}</td>
-                            <td> {{ indicator.year_profit }}</td>
+                            <td> {{ indicator.dayily_profit|intcomma }}</td>
+                            <td> {{ indicator.month_profit|intcomma }}</td>
+                            <td> {{ indicator.year_profit|intcomma }}</td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -91,7 +93,7 @@
                             <tr>
                                 <td class="government-type-cell">{{ element.payment_type }}</td>
                                 <td class="government-date-cell">{{ element.payment_date }}</td>
-                                <td class="government-payment-cell">{{ element.payment_sum }} </td>
+                                <td class="government-payment-cell">{{ element.payment_sum|intcomma }} </td>
                             </tr>
                         {% endfor %}
                     </table>

@@ -20,7 +20,7 @@ def general_information_on_deposits(request):
     grouped_active_deposits = grouping(active_deposits)
 
     # Вибираємо з бази ВСІ депозити в архіві та групуємо їх по валюті
-    deposits_in_archive = Deposits.objects.filter(end_date__lt=date.today()).order_by('end_date')
+    deposits_in_archive = Deposits.objects.filter(end_date__lte=date.today()).order_by('end_date')
     grouped_archive_deposits = grouping(deposits_in_archive)
 
     if grouped_active_deposits != 'list is empty':
@@ -131,7 +131,7 @@ def delete_deposits(request):
             error_delete_deposit = 'You have not selected a deposit!'
 
     active_deposits = Deposits.objects.filter(end_date__gt=date.today())
-    deposits_in_archive = Deposits.objects.filter(end_date__lt=date.today())
+    deposits_in_archive = Deposits.objects.filter(end_date__lte=date.today())
 
     return render(request, 'deposits/delete_deposits.html', {'active_deposits'     : active_deposits,
                                                              'deposits_in_archive' : deposits_in_archive,

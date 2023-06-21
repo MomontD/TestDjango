@@ -1,8 +1,6 @@
 from django.db import models
 from main.models import BaseTableForProducts, BaseTableForIndicators
 
-from django.core.exceptions import ValidationError
-
 from utils.general.general_functions import calculate_product_indicators
 
 import calendar
@@ -31,7 +29,7 @@ class LoansIndicators(BaseTableForIndicators):
 
 
 @receiver(post_save, sender=Loans)
-def calculate_and_save_product_indicators(sender, instance, created, **kwargs):
+def calculate_and_save_product_indicators(instance, created, **kwargs):
 
     # перевіряємо чи рік високосний (високосний-366 днів)
     is_leap_year = calendar.isleap(instance.end_date.year)

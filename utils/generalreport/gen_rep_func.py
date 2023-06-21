@@ -120,33 +120,22 @@ def calc_investments_indicators(deposit_data,governments_data,loans_data):
     # [{'dayily_profit': 133.48, 'month_profit': 4059.94, 'year_profit': 48719.32} ,
     #  {'dayily_profit': 133.48, 'month_profit': 4059.94, 'year_profit': 48719.32}]
     data_investments = [investment for investment in [deposits_values, governments_values, loans_values] if investment]
-    # сумуємо індикатори(дений , міс.,річ) по інвестиціям
+    # сумуємо індикатори(дений , міс.,річ) по інвестиціям та додаємо в обєкти
     # {'dayily_profit': 133.48, 'month_profit': 4059.94, 'year_profit': 48719.32}
-    sum_values = {
-        'dayily_profit': round(sum(obj.get('dayily_profit') for obj in data_investments), 2),
-        'month_profit': round(sum(obj.get('month_profit') for obj in data_investments), 2),
-        'year_profit': round(sum(obj.get('year_profit') for obj in data_investments), 2)
-    }
+    day_indicators['summary_profit'] = round(sum(obj.get('dayily_profit') for obj in data_investments), 2)
+    month_indicators['summary_profit'] = round(sum(obj.get('month_profit') for obj in data_investments), 2)
+    year_indicators['summary_profit'] = round(sum(obj.get('year_profit') for obj in data_investments), 2)
+
     # повертаємо список з :
     # 1. Обєктами : day_indicators,month_indicators,year_indicators
     #    на кожен період day,month,year =  {'deposits': 133.48, 'governments': 133.48, 'loans': 0}
     # 2. sum_values - просумовані показники по всім інвестиціям :
     #    {'dayily_profit': 903.54, 'month_profit': 27375.52, 'year_profit': 328506.25}
-    return [day_indicators,month_indicators,year_indicators, sum_values]
+    return [day_indicators,month_indicators,year_indicators]
 
 
-    # keys = ['dayily_profit','month_profit','year_profit']
-    # for key in keys:
-    #     if key not in sum_values:
-    #         sum_values[key] = round(deposits_values[key] + governments_values[key] + loans_values[key], 2)
-    #
-    # dayily_values = [round(deposit_dayily_profit, 2), round(government_dayily_profit, 2), round(loan_dayily_profit, 2)]
-    # month_values = [round(deposit_month_profit, 2), round(government_month_profit, 2), round(loan_month_profit, 2)]
-    # year_values = [round(deposit_year_profit, 2), round(government_year_profit, 2), round(loan_year_profit, 2)]
-    #
-    # # for category in [dayily_values, month_values, year_values]:
-    # #     sum_values.append(round(sum(category), 2))
-    #
-    # sum_values = [round(sum(category), 2) for category in [dayily_values, month_values, year_values]]
-    #
-    # return [dayily_values, month_values, year_values, sum_values]
+# sum_values = {
+    #     'dayily_profit': round(sum(obj.get('dayily_profit') for obj in data_investments), 2),
+    #     'month_profit': round(sum(obj.get('month_profit') for obj in data_investments), 2),
+    #     'year_profit': round(sum(obj.get('year_profit') for obj in data_investments), 2)
+    # }

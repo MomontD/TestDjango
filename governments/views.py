@@ -38,7 +38,7 @@ def general_information_on_governments(request):
     grouped_active_governments = grouping(active_governments)
 
     # Вибираємо з бази ВСІ ОВДП в архіві та групуємо їх по валюті
-    governments_in_archive = Governments.objects.filter(end_date__lt=date.today()).order_by('end_date')
+    governments_in_archive = Governments.objects.filter(end_date__lte=date.today()).order_by('end_date')
     grouped_archive_governments = grouping(governments_in_archive)
 
     if grouped_active_governments != 'list is empty':
@@ -65,7 +65,7 @@ def general_information_on_governments(request):
 def payments_schedule(request):
     # Витягуємо з таблиці оплат всі оплати + відфіотровуємо по даті (актуальні) + сортуємо по зростанню
     payments_schedule_active = PaymentSchedule.objects.filter(payment_date__gt=date.today()).order_by('payment_date')
-    payments_schedule_archive = PaymentSchedule.objects.filter(payment_date__lt=date.today()).order_by('payment_date')
+    payments_schedule_archive = PaymentSchedule.objects.filter(payment_date__lte=date.today()).order_by('payment_date')
 
     # За допомогою forming_list_of_years отримуємо список років та місяців в які є оплати
     # Повертає : {2023: ['June', 'August', 'November'], 2024: ['February', 'May', 'August'], 2025: ['February']}
@@ -142,7 +142,7 @@ def delete_governments(request):
             error_delete_government = 'You have not selected a government(s)!'
 
     active_governments = Governments.objects.filter(end_date__gt=date.today())
-    governments_in_archive = Governments.objects.filter(end_date__lt=date.today())
+    governments_in_archive = Governments.objects.filter(end_date__lte=date.today())
 
     return render(request, 'governments/delete_governments.html',
                                     {'active_governments': active_governments,

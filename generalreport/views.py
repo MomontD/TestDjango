@@ -25,7 +25,7 @@ def general_report(request):
     # Загальна сума всіх інвестицій
     capital = round((deposits_sum + governments_sum + loans_sum), 2)
     # Загальний дохід всіх інвестицій
-    total_profit = deposits_profit + governments_profit + loans_profit
+    total_profit = round((deposits_profit + governments_profit + loans_profit), 2)
     # % дохід/сума
     profit_rate = round((total_profit/capital)*100, 2)
 
@@ -38,7 +38,7 @@ def general_report(request):
     # Поваертається список :
     #    sum=dep/bonds/loans        sum=dep/bonds/loans      sum=dep/bonds/loans
     # [{'dayily_profit': 133.48, 'month_profit': 4059.94, 'year_profit': 48719.32},
-    day_indicators_UAH, month_indicators_UAH, year_indicators_UAH, sum_indicators_UAH = \
+    day_indicators_UAH, month_indicators_UAH, year_indicators_UAH = \
         calc_investments_indicators(deposits_data_UAH, governments_data_UAH, loans_data_UAH)
 
     investment_profit_indicators = {
@@ -48,7 +48,7 @@ def general_report(request):
         # 'sum_indicators_UAH': sum_indicators_UAH
     }
 
-    print(day_indicators_UAH, month_indicators_UAH, year_indicators_UAH, sum_indicators_UAH)
+    print(day_indicators_UAH, month_indicators_UAH, year_indicators_UAH)
 
     return render(request, 'generalreport/generalreport.html', {'deposits_sum': deposits_sum,
                                                                 'governments_sum': governments_sum,

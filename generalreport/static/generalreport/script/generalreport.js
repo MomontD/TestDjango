@@ -21,10 +21,13 @@ document.addEventListener('DOMContentLoaded', function() {
         let computedStyle = getComputedStyle(loanDiv)
         loansWidth = parseInt(computedStyle.width)
     }
-    console.log(depositsWidth,governmentsWidth,loansWidth)
 
     let sumWidth = depositsWidth + governmentsWidth + loansWidth
-    console.log(sumWidth)
+
+    console.log(depositsWidth , governmentsWidth , loansWidth)
+
+    if (sumWidth >= 254 && sumWidth <= 508) {sumWidth = sumWidth + 15}
+    if (sumWidth > 508) {sumWidth= sumWidth + 30 }
 
     let investmentCapitalDivList = document.querySelectorAll('.investment_capital')
     investmentCapitalDivList.forEach(function (investmentCapitalDiv) {

@@ -1,5 +1,7 @@
 {% extends 'main/layout.html' %}
 
+{% load humanize %}
+
 {% block title %} Information about deposits {% endblock %}
 
 {% block content %}
@@ -33,7 +35,7 @@
                                 <tr>
                                     <td>{{ deposit.bank }}</td>
                                     <td>{{ deposit.name }}</td>
-                                    <td>{{ deposit.sum }} </td>
+                                    <td>{{ deposit.sum|intcomma }} </td>
                                     <td>{{ deposit.currency }} </td>
                                     <td>{{ deposit.rate }}</td>
                                     <td>{{ deposit.period }}</td>
@@ -93,12 +95,12 @@
                     {% for indicator in report_active_deposits %}
                         <tr>
                             <td> {{ indicator.currency }}</td>
-                            <td> {{ indicator.calc_sum }}</td>
+                            <td> {{ indicator.calc_sum|intcomma }}</td>
                             <td> {{ indicator.average_rate }}</td>
-                            <td> {{ indicator.dayily_profit }}</td>
-                            <td> {{ indicator.monthly_profit }}</td>
-                            <td> {{ indicator.year_profit }}</td>
-                            <td> {{ indicator.total_profit }}</td>
+                            <td> {{ indicator.dayily_profit|intcomma }}</td>
+                            <td> {{ indicator.monthly_profit|intcomma }}</td>
+                            <td> {{ indicator.year_profit|intcomma }}</td>
+                            <td> {{ indicator.total_profit|intcomma }}</td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -129,7 +131,7 @@
                                 <tr>
                                     <td>{{ deposit.bank }}</td>
                                     <td>{{ deposit.name }}</td>
-                                    <td>{{ deposit.sum }} </td>
+                                    <td>{{ deposit.sum|intcomma }} </td>
                                     <td>{{ deposit.currency }} </td>
                                     <td>{{ deposit.rate }}</td>
                                     <td>{{ deposit.period }}</td>
@@ -185,12 +187,12 @@
                     {% for indicator in report_archive_deposits %}
                         <tr>
                             <td> {{ indicator.currency }}</td>
-                            <td> {{ indicator.calc_sum }}</td>
+                            <td> {{ indicator.calc_sum|intcomma }}</td>
                             <td> {{ indicator.average_rate }}</td>
-                            <td> {{ indicator.dayily_profit }}</td>
-                            <td> {{ indicator.monthly_profit }}</td>
-                            <td> {{ indicator.year_profit }}</td>
-                            <td> {{ indicator.total_profit }}</td>
+                            <td> {{ indicator.dayily_profit|intcomma }}</td>
+                            <td> {{ indicator.monthly_profit|intcomma }}</td>
+                            <td> {{ indicator.year_profit|intcomma }}</td>
+                            <td> {{ indicator.total_profit|intcomma }}</td>
                         </tr>
                     {% endfor %}
                 </table>
