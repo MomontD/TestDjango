@@ -1,4 +1,12 @@
 asgiref==3.6.0
+beautifulsoup4==4.12.2
+certifi==2023.7.22
+charset-normalizer==3.2.0
 Django==4.1.6
+django-extensions==3.2.3
+idna==3.4
+requests==2.31.0
+soupsieve==2.4.1
 sqlparse==0.4.3
 tzdata==2022.7
+urllib3==2.0.4
